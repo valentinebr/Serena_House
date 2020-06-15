@@ -1,0 +1,456 @@
+/*
+Theme Name: Tiny Houses
+Description: Tiny Houses - Theme customised by blindesign.net
+Version: 1.0
+Author: Antoine Roy
+Author URL: https://www.blindesign.net
+Template: enfold
+*/
+
+
+
+/*Add your own styles here:*/
+
+@charset "utf-8";
+/* TEMPLATE CSS Tiny Houses 2020
+Copyright Tiny Houses - 2020
+*********************************************/
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+h1, h2, h3, h4, .main_menu ul li a {
+	/*font-family: 'Roboto Slab', 'Roboto', serif !important;*/
+}
+
+h1, h2, h3, h4, h5, h6, p, li, span, * {
+
+}
+
+br {
+
+}
+.av-masonry-container .av-inner-masonry-content-pos-content .av-masonry-entry-content br {
+
+}
+
+
+
+/**
+ * Fix fonts that render as bold in Firefox
+ *
+ * Put this near the top of your style.css
+ * Before any overriding styles
+ */
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+/**
+ * Firefox specific rule
+ */
+
+@-moz-document url-prefix() {
+  body {
+    font-weight: lighter !important;
+  }
+}
+
+
+
+/* MAIN
+*********************************************/
+body {
+	
+}
+.display-none {
+	display:none !important;
+}
+.padding-right-10 {
+	padding-right:10px !important;
+}
+.flex_column_table.av-equal-height-column-flextable {
+	margin-top:50px;
+}
+
+@media only screen and (max-width: 767px) {
+	.mobile-margin-top-300 {
+		margin-top:300px !important;
+	}
+}
+@media only screen and (min-width: 768px) and (max-width: 989px) {
+	.tablet-height-300 {
+		height:300px !important;
+	}
+}
+.position-relative {
+	position:relative !important;
+	z-index:9999;
+}
+.position-absolute {
+	position:absolute !important;
+}
+@media only screen and (min-width: 1025px) {
+#main {
+  
+  /*min-height: 100vh;*/
+  
+  /* 2 lines 
+  background-image: linear-gradient(90deg, transparent, transparent calc(100% / 3), #f0f0f2 calc((100% / 3) + 1px), transparent calc((100% / 3) + 1px)), linear-gradient(90deg, transparent, transparent calc((100% / 3 * 2) - 1px), #f0f0f2 calc(100% / 3 * 2), transparent calc(100% / 3 * 2));
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);*/
+
+  /* 3 lines
+  background-image: linear-gradient(90deg, transparent, transparent calc(100% / 4), #f0f0f2 calc((100% / 4) + 1px), transparent calc((100% / 4) + 1px)), linear-gradient(90deg, transparent, transparent calc((100% / 4 * 2) - 1px), #f0f0f2 calc(100% / 4 * 2), transparent calc(100% / 4 * 2)), linear-gradient(90deg, transparent, transparent calc((100% / 4 * 3) - 1px), #f0f0f2 calc(100% / 4 * 3), transparent calc(100% / 4 * 3));
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+*/
+
+  /* 4 lines
+  background-image: linear-gradient(90deg, transparent, transparent calc(100% / 5), #f0f0f2 calc((100% / 5) + 1px), transparent calc((100% / 5) + 1px)), linear-gradient(90deg, transparent, transparent calc((100% / 5 * 2) - 1px), #dedee1 calc(100% / 5 * 2), transparent calc(100% / 5 * 2)), linear-gradient(90deg, transparent, transparent calc((100% / 5 * 3) - 1px), #dedee1 calc(100% / 5 * 3), transparent calc(100% / 5 * 3)), linear-gradient(90deg, transparent, transparent calc((100% / 5 * 4) - 1px), #e6e6ea calc(100% / 5 * 4), transparent calc(100% / 5 * 4));
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);*/
+
+  /* 4 lines
+  background-image: linear-gradient(90deg, transparent, transparent calc(100% / 5), #e6e6ea calc((100% / 5) + 1px), transparent calc((100% / 5) + 1px)), linear-gradient(90deg, transparent, transparent calc((100% / 5 * 2) - 1px), #f0f0f2 calc(100% / 5 * 2), transparent calc(100% / 5 * 2)), linear-gradient(90deg, transparent, transparent calc((100% / 5 * 3) - 1px), #dedee1 calc(100% / 5 * 3), transparent calc(100% / 5 * 3)), linear-gradient(90deg, transparent, transparent calc((100% / 5 * 4) - 1px), #e6e6ea calc(100% / 5 * 4), transparent calc(100% / 5 * 4));
+  background-repeat:no-repeat !important;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);*/
+		  
+}
+}
+@media only screen and (max-width: 1024px) {
+	#main {
+  /* 3 lines
+  background-image: linear-gradient(90deg, transparent, transparent calc(100% / 4), #e6e6ea calc((100% / 4) + 1px), transparent calc((100% / 4) + 1px)), linear-gradient(90deg, transparent, transparent calc((100% / 4 * 2) - 1px), #f0f0f2 calc(100% / 4 * 2), transparent calc(100% / 4 * 2)), linear-gradient(90deg, transparent, transparent calc((100% / 4 * 3) - 1px), #f0f0f2 calc(100% / 4 * 3), transparent calc(100% / 4 * 3));
+  background-repeat:no-repeat !important;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);*/
+	}
+
+}
+/*.avia-section {
+	background-color:transparent !important;
+}*/
+
+
+@media only screen and (min-width: 1024px) {
+	.responsive .avia-section.border-30 .container {
+		max-width: 100%;
+		padding: 0px 30px;
+		border-left: 30px solid #fff;
+		border-right: 30px solid #fff;
+	}
+	.responsive .avia-section.bottom-30 .container {
+		border-bottom: 30px solid #ffffff;
+	}
+	.margintop-item {
+		margin-top:-100px !important;
+	}
+}
+@media only screen and (max-width: 989px) {
+	.responsive #top #wrap_all .flex_column.av-break-at-tablet.margin-bottom-0 {
+		margin-bottom: 0px !important;
+	}
+	/*.flex_column {
+		padding: 6% !important;
+	}*/
+	.display-none-mobile {
+		display:none !important;
+	}
+	.min-height-mobile {
+		min-height:300px !important;
+	}
+}
+
+/* TABLES
+*********************************************/
+.avia-table, .avia-table * {
+	border:none !important;
+}
+@media only screen and (max-width: 768px) {
+	div .avia-table {
+		margin:0 !important;
+	}
+}
+
+.main_color tr:nth-child(odd) {
+	background: #f7f7f8 !important;
+}
+.main_color tr:nth-child(even) {
+	color: inherit !important;
+}
+
+
+
+
+/* SECTIONS
+*********************************************/
+
+
+/* TITLES
+*********************************************/
+.avia-breadcrumbs, .avia-breadcrumbs a {
+
+}
+.avia-breadcrumbs a:hover, .avia-breadcrumbs a:focus {
+	
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+
+}
+
+.av-subheading.av-subheading_above   {
+
+}
+.av-subheading.av-subheading_above::first-letter {
+
+}
+
+.av-subheading.av-subheading_below   {
+
+}
+.av-seperator-icon {
+
+}
+
+
+
+/* UL LI TXT
+*********************************************/
+.flex_column .av-special-heading:not(.modern-centered) .av-subheading p, .av_textblock_section p, .portfolio-preview-content p {
+	/*text-align:justify;*/
+}
+
+.av-portfolio-grid-sorting-container {
+	z-index:999 !important;
+}
+.avia-fullwidth-portfolio {
+	z-index:99 !important;
+}
+
+
+p {
+
+}
+.main_color strong {
+	color:inherit !important;
+}
+
+.special_amp {
+	font-family: inherit;
+	font-style: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font-weight: inherit;
+	color: inherit!important;
+}
+
+.avia-icon-list .iconlist_title {
+
+}
+.iconlist-timeline {
+
+}
+
+/* BUTTONS
+*********************************************/
+
+
+body div .avia-button, .avia_ajax_form p input[type="submit"] {
+
+}
+
+/* ANIMATED NUMBERS
+*********************************************/
+.avia-single-number {
+
+}
+
+/* ICONS
+*********************************************/
+.avia_transform .av_font_icon, .avia_transform .avia_start_delayed_animation.av_font_icon, 
+.avia_transform .avia-timeline-vertical .milestone_icon {
+opacity: 1 !important;
+-moz-transform: scale(1 !important);
+-webkit-transform: scale(1) !important;
+-ms-transform: scale(1) !important;
+transform: scale(1) !important;
+-webkit-animation: none;
+-moz-animation: none;
+-msanimation: none;
+animation: none;
+}
+
+
+/*.avia_start_delayed_animation.av_font_icon {
+	background-color:#fff;
+}*/
+.avia-icon-pos-left {
+	margin-right:0 !important;
+}
+
+
+.av_font_icon.av-icon-style-border .av-icon-char {
+	/*border:none !important;*/
+}
+
+.av_icon_caption {
+
+}
+
+@media only screen and (max-width: 768px) {
+	img[src*="svg"] {
+		width:100% !important;
+		/*filter: sepia(25%);*/
+		opacity: 0.8;
+		margin:auto;
+	}
+}
+@media only screen and (min-width: 769px) {
+	img[src*="svg"] {
+		width:50% !important;
+		/*filter: sepia(25%);*/
+		opacity: 0.8;
+		margin:auto;
+	}
+}
+
+.avia-image-container, .avia-image-container-inner, .avia-image-overlay-wrap, .avia_image, .lazy-loaded {
+	background-color:transparent !important;
+}
+
+
+
+
+/* HEADER
+*********************************************/
+@media only screen and (min-width: 768px) {
+	/*
+	#top div .logo {
+		float: none;
+		position: absolute;
+		left: 50%;
+		z-index: 1;
+		transform: translate3d(-50%, 0, 0);
+	}*/
+}
+#header {
+	z-index: 99999 !important;
+}
+#header_main {
+    border-bottom-width: 0 !important;
+}
+
+/* MENU
+*********************************************/
+/*@media only screen and (min-width: 1940px) {
+	#top #header .av-main-nav > li > a {
+		
+	}
+}*/
+.avia-menu-fx {
+	/*display:none !important;*/
+}
+
+/* MENU MOBILE
+*********************************************/
+.html_av-overlay-side #top #wrap_all .av-burger-overlay-scroll #av-burger-menu-ul a {
+   
+}
+#top #av-burger-menu-ul {
+	/*vertical-align:top !important;
+	padding: 125px 0 !important;*/
+}
+
+
+.html_av-overlay-side #top .av-burger-overlay-scroll {
+	
+}
+
+/* SUB-MENU
+*********************************************/
+
+
+/* SEARCH RESULTS PAGE
+*********************************************/
+
+
+
+
+
+
+/* IMAGE
+*********************************************/
+
+
+/* BACKGROUND IMAGES
+*********************************************/
+
+
+/* HOME PAGE
+********************************************/
+
+
+/* RESPONSIVE PAGES
+*********************************************/
+@media only screen and (max-width: 1024px) {
+
+}
+@media only screen and (width: 1024px) {
+
+}
+@media only screen and (max-width: 767px) {
+
+}
+
+
+
+@media only screen and (max-width: 767px) {
+
+}
+
+/* BLOG GRID
+*********************************************/
+.avia-content-slider .slide-image, .avia-content-slider .slide-image img {
+	border-radius:0 !important;
+}
+.avia-content-slider .image-overlay, .avia-content-slider  .slide-meta,
+.avia_image .image-overlay {
+display: none !important;
+}
+
+
+/* PORTFOLIO
+*********************************************/
+
+
+
+
+
+/* PORTFOLIO ITEM
+*********************************************/
+
+
+/* OTHER PAGES
+*********************************************/
+
+
+
+/* CONTACT PAGE / FORMS
+*********************************************/
+
+
+/* FOOTER
+*********************************************/
+#footer .image-overlay {
+	/*display:none !important;*/
+}
+
+/* SOCKET
+*********************************************/
