@@ -41,7 +41,7 @@ ob_start();
 <?php } ?>
 </table>
 
-    <div id="show">
+    <div id="show" style="display:none;">
         <form action="?ctrl=Service&amp;action=insertService" method="post">
             <input type="text" name="service">
             <input type="text" name="reference">
