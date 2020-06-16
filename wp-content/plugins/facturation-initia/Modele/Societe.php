@@ -28,13 +28,13 @@ class Societe extends ModeleDeDonnees
             'telephone_ste'     =>      $values[4],
             'numero_ste'        =>      $values[5],
             'tiny_house_ste'    =>      $values[6],
-            'id_users'          =>      1 //get_currentuser_id()
         );
+        $where = array('id_users' => 1); //get_currentuser_id()
         $format = array('%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
 
         echo $table;
 
-        return $this->executerUpdate($table, $datas, $format);
+        return $this->executerUpdate($table, $datas, $where, $format);
 
     }
 
