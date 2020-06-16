@@ -44,7 +44,6 @@
                 <td><input type="text" name="tiny_house_ste" id="tiny_house_ste" value="<?php echo $societe[0]->tiny_house_ste; ?>"></td>
             </tr>
         </table>
-        <?php
-        submit_button();
-        ?>
+
+        <input type="submit" name="modifier" value="Enregistrer les modifications">
     </form>
