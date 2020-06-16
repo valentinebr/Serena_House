@@ -10,9 +10,8 @@
     <a href="?ctrl=Service">Services</a>
     <a href="?ctrl=Societe">Société</a>
 </nav>
-<?php echo $contenu ?>
+<?php echo $contenu; ?>
 
-
-<script src="/wp-content/plugins/facturation-initia/JS/app.js"></script>
+<script type="text/javascript" src="/wp-content/plugins/facturation-initia/JS/app.js"></script>
 </body>
 </html>

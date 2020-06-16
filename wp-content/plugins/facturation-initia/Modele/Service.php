@@ -21,7 +21,7 @@ class Service extends ModeleDeDonnees
 
     function insertTarifService ($values) {
         global $wpdb;
-        $table = "{wpdb->prefix}fact_tarif_service";
+        $table = $wpdb->prefix . "fact_tarif_service";
         $datas = array(
             'nom_tsrv'          =>      $values[0],
             'reference_tsrv'    =>      $values[1],
