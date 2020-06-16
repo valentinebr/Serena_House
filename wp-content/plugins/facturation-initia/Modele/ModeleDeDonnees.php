@@ -24,7 +24,7 @@ class ModeleDeDonnees
     protected function executerUpdate($sql, $datas, $where, $format){
         global $wpdb;
 
-        $wpdb->update($sql, $datas, $format);
+        $wpdb->update($sql, $datas, $where, $format);
 
         return $wpdb->update_id;
 
