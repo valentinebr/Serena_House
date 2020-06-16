@@ -87,3 +87,36 @@ class Facturation
 }
 
 new Facturation();
+
+//MENU PLUGIN
+function facturation_initia_menu(){
+    add_menu_page(  'Facturation Initia',
+        'Facturation Initia',
+        'manage_options',
+        'menu-principal',
+        'facturation_initia_page',
+        'dashicons-building',
+        '3'
+    );
+    add_submenu_page(   'menu-principal',
+        'Accueil',
+        'Accueil',
+        'manage_options',
+        'menu-principal'
+    );
+    add_submenu_page(   'menu-principal',
+        'Société',
+        'Société',
+        'manage_options',
+        'menu-societe',
+        'index'
+    );
+}
+
+add_action('admin_menu', 'facturation_initia_menu');
+require_once (__ROOT__.'/facturation-initia/Modele/Societe.php');
+
+
+function facturation_initia_page(){
+    echo '<h1>'.get_admin_page_title().'</h1>';
+}

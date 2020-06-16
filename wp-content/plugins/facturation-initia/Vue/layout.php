@@ -8,6 +8,7 @@
 <nav>
     <a href="?ctrl=Accueil">Accueil</a>
     <a href="?ctrl=Service">Services</a>
+    <a href="?ctrl=Societe">Société</a>
 </nav>
 <?php echo $contenu ?>
 
