@@ -21,5 +21,14 @@ class ModeleDeDonnees
 
     }
 
+    protected function executerUpdate($sql, $datas, $format){
+        global $wpdb;
+
+        $wpdb->update($sql, $datas, $format);
+
+        return $wpdb->update_id;
+
+    }
+
 
 }
