@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 ?>
     <h1>Gestion de la société</h1>
 
@@ -36,7 +36,7 @@
 
             <tr>
                 <th><label for="telephone_ste">Téléphone</label></th>
-                <td><input type="text" name="telephone_ste" id="telephone_ste" value="<?php echo $societe[0]->telephone_ste; ?>"></td>
+                <td><input type="tel" name="telephone_ste" id="telephone_ste" value="<?php echo $societe[0]->telephone_ste; ?>"></td>
             </tr>
 
             <tr>
@@ -82,7 +82,7 @@
 
             <tr>
                 <th><label for="telephone_ste">Téléphone</label></th>
-                <td><input type="text" name="telephone_ste" id="telephone_ste"></td>
+                <td><input type="tel" name="telephone_ste" id="telephone_ste"></td>
             </tr>
 
             <tr>

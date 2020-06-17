@@ -7,7 +7,7 @@ class ModeleDeDonnees
     protected function executerInsert ($table, $datas, $format) {
         global $wpdb;
 
-        $wpdb->insert( $table, $datas, $format);
+        $wpdb->insert($table, $datas, $format);
 
         return $wpdb->insert_id;
     }
