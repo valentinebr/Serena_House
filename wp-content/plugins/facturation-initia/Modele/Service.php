@@ -33,7 +33,7 @@ class Service extends ModeleDeDonnees
 
         echo $table;
 
-        return $this->executerInsert($table, $datas, $format);
+        return $this->executerInsert($table, $datas);
     }
 
 }

@@ -33,7 +33,8 @@ class Facturation
                                                                                 code_postal_ste CHAR(5) NOT NULL,
                                                                                 ville_ste VARCHAR(20) NOT NULL,
                                                                                 telephone_ste CHAR(10) NOT NULL,
-                                                                                numero_ste CHAR(14));");
+                                                                                numero_ste CHAR(14) NOT NULL,
+                                                                                tiny_house_ste VARCHAR(30) NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_facture (id_fact INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_fact VARCHAR(100) NOT NULL,
                                                                                  date_fact DATETIME NOT NULL,
@@ -62,6 +63,10 @@ class Facturation
                         FOREIGN KEY (id_fact) REFERENCES {$wpdb->prefix}fact_facture(id_fact));");
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_facture 
+                        ADD (id_user INT NOT NULL,
+                        FOREIGN KEY (id_user) REFERENCES {$wpdb->prefix}users(id));");
+
+        $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_societe 
                         ADD (id_user INT NOT NULL,
                         FOREIGN KEY (id_user) REFERENCES {$wpdb->prefix}users(id));");
 

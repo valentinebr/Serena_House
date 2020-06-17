@@ -48,13 +48,11 @@ class Societe extends ModeleDeDonnees
             'telephone_ste'     =>      $values[4],
             'numero_ste'        =>      $values[5],
             'tiny_house_ste'    =>      $values[6],
-            'id_user'           =>      2
+            'id_user'           =>      3
         );
         $format = array('%s', '%s', '%c', '%s', '%c', '%c', '%d', '%d');
 
-        echo $table;
-
-        return $this->executerInsert($table, $datas, $format);
+        return $this->executerInsert($table, $datas);
     }
 
 }
