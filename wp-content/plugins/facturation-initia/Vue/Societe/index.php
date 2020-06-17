@@ -1,7 +1,12 @@
 <?php
+require_once __ROOT__.'/facturation-initia/Controller/CtrlSociete.php';
 
+$titre = 'Ma société';
+
+ob_start();
 ?>
-    <h1>Gestion de la société</h1>
+
+<h1>Gestion de la société</h1>
 
     <h2>Informations</h2>
 
@@ -82,7 +87,7 @@
 
             <tr>
                 <th><label for="telephone_ste">Téléphone</label></th>
-                <td><input type="text" name="telephone_ste" id="telephone_ste"></td>
+                <td><input type="tel" name="telephone_ste" id="telephone_ste"></td>
             </tr>
 
             <tr>
