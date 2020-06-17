@@ -1,5 +1,4 @@
 <?php
-
 require_once (__ROOT__.'/facturation-initia/Modele/ModeleDeDonnees.php');
 require_once (__ROOT__.'/../../wp-config.php');
 
@@ -27,7 +26,7 @@ class Societe extends ModeleDeDonnees
             'ville_ste'         =>      $values[3],
             'telephone_ste'     =>      $values[4],
             'numero_ste'        =>      $values[5],
-            'tiny_house_ste'    =>      $values[6],
+            'tiny_house_ste'    =>      $values[6]
         );
         $where = array('id_users' => 1); //get_currentuser_id()
         $format = array('%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
@@ -36,6 +35,26 @@ class Societe extends ModeleDeDonnees
 
         return $this->executerUpdate($table, $datas, $where, $format);
 
+    }
+
+    function insertNewSociete($values){
+        global $wpdb;
+        $table = $wpdb->prefix . "fact_societe";
+        $datas = array(
+            'nom_ste'           =>      $values[0],
+            'adresse_ste'       =>      $values[1],
+            'code_postal_ste'   =>      $values[2],
+            'ville_ste'         =>      $values[3],
+            'telephone_ste'     =>      $values[4],
+            'numero_ste'        =>      $values[5],
+            'tiny_house_ste'    =>      $values[6],
+            'id_users'          =>      2
+        );
+        $format = array('%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
+
+        echo $table;
+
+        return $this->executerInsert($table, $datas, $format);
     }
 
 }

@@ -27,4 +27,17 @@ class CtrlSociete extends Controleur
         $societe->updateFieldSociete($values);
 
     }
+
+    public function insertSociete()
+    {
+        $societe = new Societe();
+
+        $values = array($_POST['nom_ste'], $_POST['adresse_societe'], $_POST['code_postal_ste'], $_POST['ville_ste'], $_POST['telephone_ste'],
+            $_POST['numero_ste'], $_POST['tiny_house_ste']);
+
+        echo 'Inséré !';
+
+        $societe->insertNewSociete($values);
+
+    }
 }
