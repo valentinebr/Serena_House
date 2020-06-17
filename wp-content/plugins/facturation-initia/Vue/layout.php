@@ -12,6 +12,6 @@
 </nav>
 <?php echo $contenu; ?>
 
-<script type="text/javascript" src="/wp-content/plugins/facturation-initia/JS/app.js"></script>
+<script type="text/javascript" src="http://localhost/Serena_House/wp-content/plugins/facturation-initia/JS/app.js"></script>
 </body>
 </html>
