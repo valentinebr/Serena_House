@@ -1,18 +1,9 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ajouter une facture</title>
-</head>
-<body>
-
 <?php
-require_once 'Fonctions.php';
-$req = new Fonctions();
-$services = $req->afficherServices();
+require_once __ROOT__.'/facturation-initia/Controller/CtrlFacture.php';
+
+$titre = 'Mes factures';
+
+ob_start();
 ?>
 
 <h1>Ajouter une facture</h1>

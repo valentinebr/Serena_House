@@ -71,7 +71,7 @@ ob_start();
                 <?php } ?>
             </select>
             <input type="submit" value="Ajouter" name="ajouter">
-            <button type="reset" name="annuler">Annuler</button>
+            <button type="reset" name="annuler" onclick="show('lien', 'show'); return false;">Annuler</button>
         </form>
     </div>
 

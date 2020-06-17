@@ -10,6 +10,7 @@
     <a href="?ctrl=Service">Services</a>
     <a href="?ctrl=Societe">Société</a>
     <a href="?ctrl=CarteVoyage">Carte Voyage</a>
+    <a href="?ctrl=Facture">Factures</a>
 </nav>
 <?php echo $contenu; ?>
 
