@@ -10,7 +10,7 @@ class Societe extends ModeleDeDonnees
 
         $id = 1;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_societe WHERE id_users = %d";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_societe WHERE id_user = %d";
         $datas = array($id);
 
         return $this->executerGetResults($sql, $datas);
@@ -28,8 +28,8 @@ class Societe extends ModeleDeDonnees
             'numero_ste'        =>      $values[5],
             'tiny_house_ste'    =>      $values[6]
         );
-        $where = array('id_users' => 1); //get_currentuser_id()
-        $format = array('%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
+        $where = array('id_user' => 1); //get_currentuser_id()
+        $format = array('%s', '%s', '%c', '%s', '%c', '%c', '%d', '%d');
 
         echo $table;
 
@@ -48,9 +48,9 @@ class Societe extends ModeleDeDonnees
             'telephone_ste'     =>      $values[4],
             'numero_ste'        =>      $values[5],
             'tiny_house_ste'    =>      $values[6],
-            'id_users'          =>      2
+            'id_user'           =>      2
         );
-        $format = array('%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
+        $format = array('%s', '%s', '%c', '%s', '%c', '%c', '%d', '%d');
 
         echo $table;
 
