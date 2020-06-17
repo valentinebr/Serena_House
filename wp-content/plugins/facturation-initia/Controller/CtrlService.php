@@ -17,7 +17,7 @@ class CtrlService extends Controleur
         return ['services' => $services, 'taxes' => $taxes];
     }
 
-    public function insertService()
+    public function insertTService()
     {
         $service = new Service();
 
@@ -28,5 +28,21 @@ class CtrlService extends Controleur
 
         $service->insertTarifService($values);
 
+    }
+
+    public function updateTService() {
+        $service = new Service();
+
+        $values = array($_POST['service'], $_POST['reference'],
+            $_POST['prix-ht'], $_POST['taxe']);
+
+        $service->updateTarifService($_POST['id']);
+        $service->insertTarifService($values);
+    }
+
+    public function deleteTService() {
+        $service = new Service();
+
+        $service->updateTarifService($_GET['id']);
     }
 }

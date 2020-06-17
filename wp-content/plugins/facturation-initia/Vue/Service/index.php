@@ -18,31 +18,50 @@ ob_start();
 
 <!-- Foreach pour afficher tous les services liés à un utilisateur -->
 
-<?php foreach ($services as $s) { ?>
-    <tr id="<?php echo $s->id_tsrv ?>">
-        <td><?php echo $s->nom_tsrv ?></td>
-        <td><?php echo $s->reference_tsrv ?></td>
-        <td><?php echo $s->prix_ht_tsrv . ' €' ?></td>
-        <td><?php echo $s->libelle_taxe ?></td>
-        <td><a href="#" onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>)">Modifier</a></td>
-        <td><a href="#">Supprimer</a></td>
-    </tr>
+<?php
+    foreach ($services as $s) {
+        if ($s->archive == 0) {
+            ?>
+            <tr id="<?php echo $s->id_tsrv ?>">
+                <td><?php echo $s->nom_tsrv ?></td>
+                <td><?php echo $s->reference_tsrv ?></td>
+                <td><?php echo $s->prix_ht_tsrv . ' €' ?></td>
+                <td><?php echo $s->libelle_taxe ?></td>
+                <td><a href="#"
+                       onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>)">Modifier</a></td>
+                <td><a href="?ctrl=Service&amp;action=deleteTService&amp;id=<?php echo $s->id_tsrv ?>">Supprimer</a></td>
+            </tr>
 
-    <div id="modifier-<?php echo $s->id_tsrv ?>" style="display: none">
-        <form>
-            <input type="text" value="<?php echo $s->nom_tsrv ?>">
-            <input type="text" value="<?php echo $s->reference_tsrv ?>">
-            <input type="text" value="<?php echo $s->prix_ht_tsrv ?>">
-            <input type="text" value="<?php echo $s->libelle_taxe ?>">
-            <a href="#">Valider</a></td>
-            <a href="#" onclick="show(<?php echo $s->id_tsrv ?>, 'modifier-<?php echo $s->id_tsrv ?>')">Annuler</a>
-        </form>
-    </div>
-<?php } ?>
+            <div id="modifier-<?php echo $s->id_tsrv ?>" style="display: none">
+                <form action="?ctrl=Service&amp;action=updateTService" method="post">
+                    <input type="hidden" name="id" value="<?php echo $s->id_tsrv ?>">
+                    <input type="text" name="service" value="<?php echo $s->nom_tsrv ?>">
+                    <input type="text" name="reference" value="<?php echo $s->reference_tsrv ?>">
+                    <input type="text" name="prix-ht" value="<?php echo $s->prix_ht_tsrv ?>">
+                    <select name="taxe">
+                        <?php foreach ($taxes as $t) { ?>
+                            <option value="<?php echo $t->id_taxe ?>"
+                                <?php if ($t->id_taxe == $s->id_taxe) {
+                                    echo 'selected';
+                                } ?>
+                            >
+                                <?php echo $t->libelle_taxe ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                    <input type="submit" value="Valider">
+                    <a href="#"
+                       onclick="show(<?php echo $s->id_tsrv ?>, 'modifier-<?php echo $s->id_tsrv ?>')">Annuler</a>
+                </form>
+            </div>
+        <?php
+        }
+    }
+    ?>
 </table>
 
     <div id="show" style="display:none;">
-        <form action="?ctrl=Service&amp;action=insertService" method="post">
+        <form action="?ctrl=Service&amp;action=insertTService" method="post">
             <input type="text" name="service">
             <input type="text" name="reference">
             <input type="number" name="prix-ht">

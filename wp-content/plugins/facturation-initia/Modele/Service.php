@@ -29,11 +29,18 @@ class Service extends ModeleDeDonnees
             'archive_tsrv'      =>      0,
             'id_taxe'           =>      $values[3],
             'id_user'           =>      3); //A remplacer par get_current_user
-        $format = array('%s', '%s', '%f', '%d', '%d', '%d');
 
-        echo $table;
+        $this->executerInsert($table, $datas);
+    }
 
-        return $this->executerInsert($table, $datas);
+    function updateTarifService ($id) {
+        global $wpdb;
+
+        $table = $wpdb->prefix."fact_tarif_service";
+        $datas = array('archive_tsrv' => 1);
+        $where = array('id_tsrv' => $id);
+
+        $this->executerUpdate($table, $datas, $where);
     }
 
 }

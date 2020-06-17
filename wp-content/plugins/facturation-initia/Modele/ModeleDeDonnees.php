@@ -21,10 +21,10 @@ class ModeleDeDonnees
 
     }
 
-    protected function executerUpdate($sql, $datas, $where){
+    protected function executerUpdate($table, $datas, $where){
         global $wpdb;
 
-        $wpdb->update($sql, $datas, $where);
+        $wpdb->update($table, $datas, $where);
 
         return $wpdb->update_id;
 
