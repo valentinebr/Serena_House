@@ -52,7 +52,7 @@ class Societe extends ModeleDeDonnees
         );
         $format = array('%s', '%s', '%c', '%s', '%c', '%c', '%d', '%d');
 
-        return $this->executerInsert($table, $datas, $format);
+        return $this->executerInsert($table, $datas);
     }
 
 }

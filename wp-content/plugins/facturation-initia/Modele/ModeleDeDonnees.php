@@ -4,10 +4,10 @@
 class ModeleDeDonnees
 {
 
-    protected function executerInsert ($table, $datas, $format) {
+    protected function executerInsert ($table, $datas) {
         global $wpdb;
 
-        $wpdb->insert( $table, $datas, $format);
+        $wpdb->insert( $table, $datas);
 
         return $wpdb->insert_id;
     }
