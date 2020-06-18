@@ -16,4 +16,17 @@ class CarteVoyage extends ModeleDeDonnees
         return $this->executerGetResults($sql, $datas);
     }
 
+
+    function insertNewCarteVoyage($values){
+        global $wpdb;
+        $table = $wpdb->prefix . 'dopbsp_coupons';
+        $datas = array(
+            'price'         =>      $values[0],
+            'code'          =>      $values[1],
+            'start_date'    =>      $values[2]
+        );
+
+        return $this->executerInsert($table, $datas);
+    }
+
 }
