@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://localhost/Serena_House/wp-content/plugins/facturation-initia/CSS/app.css">
     <title><?php echo $titre ?></title>
 </head>
 <body>

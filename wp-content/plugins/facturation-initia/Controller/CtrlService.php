@@ -24,8 +24,8 @@ class CtrlService extends Controleur
         $values = array($_POST['service'], $_POST['reference'],
             $_POST['prix-ht'], $_POST['taxe']);
 
-        $this->index();
         $service->insertTarifService($values);
+        $this->executer('index');
 
 
     }
@@ -38,13 +38,13 @@ class CtrlService extends Controleur
 
         $service->updateTarifService($_POST['id']);
         $service->insertTarifService($values);
-        $this->index();
+        $this->executer('index');
     }
 
     public function deleteTService() {
         $service = new Service();
 
         $service->updateTarifService($_GET['id']);
-        $this->index();
+        $this->executer('index');
     }
 }
