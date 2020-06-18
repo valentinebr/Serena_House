@@ -43,4 +43,15 @@ class Service extends ModeleDeDonnees
         $this->executerUpdate($table, $datas, $where);
     }
 
+    function insertService ($values) {
+        global $wpdb;
+        $table = $wpdb->prefix . "fact_service";
+        $datas = array(
+            'nombre_srv'    =>      $values[0],
+            'id_tsrv'       =>      $values[1],
+            'id_fact'       =>      $values[2]);
+
+        $this->executerInsert($table, $datas);
+    }
+
 }

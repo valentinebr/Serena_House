@@ -7,15 +7,16 @@ ob_start();
 ?>
 
 <h1>Ajouter une facture</h1>
-<h2>Nom tiny house - 29/05/2020</h2>
+<h2>Nom tiny house - <?php echo date("d/m/Y") ?></h2>
 
-<form>
-    <!-- Faire un foreach en php avec tous les services -->
+<h3>Les services</h3>
+
+<form method="post" action="?ctrl=Facture&amp;action=insertService">
 
     <?php foreach ($services as $s) {?>
 
-    <label for="<?php $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
-    <input type="number" id="<?php $s->id_tsrv ?>"><br>
+        <label for="<?php echo $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
+        <input type="number" min="0" id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
 
     <?php } ?>
     <!-- Fin du foreach -->

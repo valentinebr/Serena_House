@@ -6,7 +6,9 @@ Version: 1.0
 Author: Valentine Brunet & Fabien Monnet
  */
 
-class   Facturation
+define('__ROOT__', dirname(dirname(__FILE__)));
+
+class Facturation
 {
     /**
      * Facturation constructor.
@@ -46,10 +48,6 @@ class   Facturation
                                                                                 reference_tsrv VARCHAR(10) NOT NULL,
                                                                                 prix_ht_tsrv FLOAT NOT NULL,
                                                                                 archive_tsrv BOOLEAN NOT NULL);");
-        $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_carte_voyage (id_tcv INT AUTO_INCREMENT PRIMARY KEY,
-                                                                                                tarif_tcv FLOAT NOT NULL, 
-                                                                                                archive_tcv BOOLEAN NOT NULL);");
-
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_tarif_service 
                         ADD (id_taxe INT NOT NULL,
                         FOREIGN KEY (id_taxe) REFERENCES {$wpdb->prefix}fact_taxe(id_taxe));");
@@ -90,7 +88,6 @@ class   Facturation
         $wpdb->query("ALTER TABLE {$wpdb->prefix}dopbsp_coupons DROP COLUMN id_taxe");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_taxe;");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_societe");
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_carte_voyage");
 
     }
 
