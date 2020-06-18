@@ -16,9 +16,10 @@ class CtrlFacture extends Controleur
     public function ajouterFacture() {
         $services = new Service;
         $services = $services->AfficherServices();
+        $societe = new Societe();
+        $societe = $societe->AfficherSociete();
 
-
-        return ['services' => $services];
+        return ['services' => $services, 'societe' => $societe];
     }
 
     public function insertService () {
@@ -26,7 +27,8 @@ class CtrlFacture extends Controleur
         $service = new Service();
         $services = $service->AfficherServices();
 
-        $idFact = $facture->insertFacture();
+        $nomFact = $_POST['nom-fact'];
+        $idFact = $facture->insertFacture($nomFact);
 
         foreach ($services as $s) {
             $values = array($_POST['nb-service-'.$s->id_tsrv], $s->id_tsrv, $idFact);

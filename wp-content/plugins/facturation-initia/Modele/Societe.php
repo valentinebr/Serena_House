@@ -8,7 +8,7 @@ class Societe extends ModeleDeDonnees
     function AfficherSociete(){
         global $wpdb;
 
-        $id = 2;
+        $id = 3;
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_societe WHERE id_user = %d";
         $datas = array($id);

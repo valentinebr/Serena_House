@@ -7,11 +7,13 @@ ob_start();
 ?>
 
 <h1>Ajouter une facture</h1>
-<h2>Nom tiny house - <?php echo date("d/m/Y") ?></h2>
+<h2><?php echo $societe[0]->tiny_house_ste . '-'. date("d/m/Y") ?></h2>
 
 <h3>Les services</h3>
 
 <form method="post" action="?ctrl=Facture&amp;action=insertService">
+
+    <input type="hidden" name="nom-fact" value="<?php echo $societe[0]->tiny_house_ste . '-'. date("d/m/Y") ?>">
 
     <?php foreach ($services as $s) {?>
 
