@@ -13,15 +13,16 @@ ob_start();
             <th>Référence</th>
             <th>Date de la vente</th>
         </tr>
-        <!-- if le + ou le valider est cliqué -->
 
-        <?php foreach($carteVoyage as $cv){ ?>
+        <!-- if le + ou le valider est cliqué -->
         <tr>
-            <td><?php echo $cv->price ?></td>
-            <td><?php echo $cv->code ?></td>
-            <td><?php echo $cv->start_date ?></td>
+            <?php foreach($carteVoyage as $cv){ ?>
+                <td><?php echo $cv->price ?></td>
+                <td><?php echo $cv->code ?></td>
+                <td><?php echo $cv->start_date ?></td>
+            <?php } ?>
         </tr>
-        <?php } ?>
+
     </table>
 
     <!-- if le lien est cliqué -->
