@@ -28,8 +28,7 @@ class Societe extends ModeleDeDonnees
             'numero_ste'        =>      $values[5],
             'tiny_house_ste'    =>      $values[6]
         );
-        $where = array('id_user' => 2); //get_currentuser_id()
-        $format = array('%s', '%s', '%c', '%s', '%c', '%c', '%d', '%d');
+        $where = array('id_user' => 3); //get_currentuser_id()
 
         return $this->executerUpdate($table, $datas, $where);
 
@@ -46,9 +45,8 @@ class Societe extends ModeleDeDonnees
             'telephone_ste'     =>      $values[4],
             'numero_ste'        =>      $values[5],
             'tiny_house_ste'    =>      $values[6],
-            'id_user'           =>      2
+            'id_user'           =>      3
         );
-        $format = array('%s', '%s', '%c', '%s', '%c', '%c', '%d', '%d');
 
         return $this->executerInsert($table, $datas);
     }
