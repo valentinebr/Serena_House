@@ -15,13 +15,15 @@ ob_start();
         </tr>
 
         <!-- if le + ou le valider est cliqué -->
-        <tr>
-            <?php foreach($carteVoyage as $cv){ ?>
+
+        <?php foreach($carteVoyage as $cv){ ?>
+            <tr>
                 <td><?php echo $cv->price ?></td>
                 <td><?php echo $cv->code ?></td>
                 <td><?php echo $cv->start_date ?></td>
-            <?php } ?>
-        </tr>
+            </tr>
+        <?php } ?>
+
 
     </table>
 
@@ -40,8 +42,10 @@ ob_start();
                     <input type="text" name="reference">
                 </td>
                 <td><input type="date" name="start_date"></td>
-                <td><a href="#">+</a></td>
+                <td><a href="#" id="plus" onclick="show('show', 'plus');">+</a></td>
+                <!--                <td><a href="#">+</a></td>-->
             </tr>
+
 
             <input type="submit" value="Valider">
             <button name="annluer" onclick="show('lien', 'show'); return false;">Annuler</button>

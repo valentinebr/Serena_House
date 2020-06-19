@@ -26,6 +26,6 @@ class CtrlCarteVoyage extends Controleur
         echo 'Update !';
 
         $carteVoyage->insertNewCarteVoyage($values);
-
+        $this->executer('index');
     }
 }
