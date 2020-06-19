@@ -42,10 +42,8 @@ ob_start();
                     <input type="text" name="reference">
                 </td>
                 <td><input type="date" name="start_date"></td>
-                <td><a href="#" id="plus" onclick="show('show', 'plus');">+</a></td>
-                <!--                <td><a href="#">+</a></td>-->
+                <td><a href="#" id="plus" onclick="addLigne('show');">+</a></td>
             </tr>
-
 
             <input type="submit" value="Valider">
             <button name="annluer" onclick="show('lien', 'show'); return false;">Annuler</button>
