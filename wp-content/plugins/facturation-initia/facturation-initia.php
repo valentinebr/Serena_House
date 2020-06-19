@@ -39,7 +39,7 @@ class Facturation
                                                                                 CONSTRAINT societe_unique UNIQUE (numero_ste));");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tiny_house (id_tiny INT AUTO_INCREMENT PRIMARY KEY,
                                                                                 nom_tiny VARCHAR(50) NOT NULL,
-                                                                                nombre_places_tiny INT NOT NULL
+                                                                                nombre_places_tiny INT NOT NULL,
                                                                                 CONSTRAINT tiny_house_unique UNIQUE (nom_tiny))");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_facture (id_fact INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_fact VARCHAR(100) NOT NULL,
@@ -69,11 +69,11 @@ class Facturation
                         FOREIGN KEY (id_user) REFERENCES {$wpdb->prefix}users(id));");
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_service 
-                        ADD (id_tsrv INT NOT NULL,
+                        ADD (id_tsrv INT,
                         FOREIGN KEY (id_tsrv) REFERENCES {$wpdb->prefix}fact_tarif_service(id_tsrv));");
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_service 
-                        ADD (id_tiny INT NOT NULL,
+                        ADD (id_nuitees INT,
                         FOREIGN KEY (id_nuitees) REFERENCES {$wpdb->prefix}fact_tarif_nuitees(id_nuitees));");
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_service 
