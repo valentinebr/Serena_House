@@ -29,7 +29,7 @@ ob_start();
 
     <!-- if le lien est cliqué -->
     <div id="show" style="display:none;">
-        <form action="?ctrl=CarteVoyage&amp;action=insertCarteVoyage" method="post">
+        <form action="" method="post">
             <tr>
                 <td>
                     <select name="price">
@@ -42,7 +42,7 @@ ob_start();
                     <input type="text" name="reference">
                 </td>
                 <td><input type="date" name="start_date"></td>
-                <td><a href="#" id="plus" onclick="addLigne('show');">+</a></td>
+                <td><a href="#" id="plus" onclick="addLigne('show', <?php echo json_encode($tarifCarteVoyage); ?>)">+</a></td>
             </tr>
 
             <input type="submit" value="Valider">

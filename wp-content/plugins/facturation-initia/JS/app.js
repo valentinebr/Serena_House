@@ -18,7 +18,7 @@ function showFlex(indice, indice2)
         document.getElementById(indice).style.display="none";		//On la rend invisible
 }
 
-function addLigne(idChamp)
+function addLigne(idChamp, tarifCarteVoyage)
 {
     var conteneur = document.getElementById(idChamp);
 
@@ -28,6 +28,7 @@ function addLigne(idChamp)
 
     var price = document.createElement('select');
         price.setAttribute('name', 'price');
+        tarifCarteVoyage.forEach(tcv => price.innerHTML = '<option>tcv[tarif_tcv]</option>');
 
     var reference = document.createElement('input');
         reference.setAttribute('type', 'text');
@@ -35,7 +36,7 @@ function addLigne(idChamp)
 
     var date = document.createElement('input');
         date.setAttribute('type', 'date');
-        date.setAttribute('name', 'date');
+        date.setAttribute('name', 'start_date');
 
     var plus = document.createElement('a');
         plus.textContent = '+';
@@ -43,9 +44,21 @@ function addLigne(idChamp)
         plus.setAttribute('id', 'plus');
         plus.setAttribute('onClick', 'addLigne(show);')
 
+
     ligne.appendChild(price);
     ligne.appendChild(reference);
     ligne.appendChild(date);
     ligne.appendChild(plus);
     conteneur.appendChild(ligne);
+
+    // $.ajax({
+    //     type:'POST',
+    //     data: {
+    //         'action' : 'test'
+    //     },
+    //     url: 'Vue/CarteVoyage/index.php',
+    //     success: function(data){
+    //         $(price).append(data);
+    //     }
+    // })
 }
