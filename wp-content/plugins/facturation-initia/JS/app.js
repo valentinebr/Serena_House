@@ -28,7 +28,11 @@ function addLigne(idChamp, tarifCarteVoyage)
 
     var price = document.createElement('select');
         price.setAttribute('name', 'price');
-        tarifCarteVoyage.forEach(tcv => price.innerHTML = '<option>tcv[tarif_tcv]</option>');
+        for (i=0; i<tarifCarteVoyage.length; i++) {
+            option = document.createElement('option');
+            option.text = tarifCarteVoyage[i]['tarif_tcv'];
+            price.add(option);
+        }
 
     var reference = document.createElement('input');
         reference.setAttribute('type', 'text');

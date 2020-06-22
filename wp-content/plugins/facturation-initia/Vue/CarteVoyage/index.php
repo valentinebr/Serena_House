@@ -42,7 +42,7 @@ ob_start();
                     <input type="text" name="reference">
                 </td>
                 <td><input type="date" name="start_date"></td>
-                <td><a href="#" id="plus" onclick="addLigne('show', <?php echo json_encode($tarifCarteVoyage); ?>)">+</a></td>
+                <td><a href="#" id="plus" onclick="addLigne('show', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage)); ?>);">+</a></td>
             </tr>
 
             <input type="submit" value="Valider">
