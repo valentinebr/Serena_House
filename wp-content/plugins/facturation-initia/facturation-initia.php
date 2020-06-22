@@ -35,8 +35,7 @@ class Facturation
                                                                                 code_postal_ste CHAR(5) NOT NULL,
                                                                                 ville_ste VARCHAR(20) NOT NULL,
                                                                                 telephone_ste CHAR(10) NOT NULL,
-                                                                                numero_ste CHAR(14) NOT NULL,
-                                                                                CONSTRAINT societe_unique UNIQUE (numero_ste));");
+                                                                                numero_ste CHAR(14) NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tiny_house (id_tiny INT AUTO_INCREMENT PRIMARY KEY,
                                                                                 nom_tiny VARCHAR(50) NOT NULL,
                                                                                 nombre_places_tiny INT NOT NULL,
@@ -86,6 +85,7 @@ class Facturation
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_societe 
                         ADD (id_user INT NOT NULL,
+                        CONSTRAINT societe_unique UNIQUE (id_user, numero_ste),
                         FOREIGN KEY (id_user) REFERENCES {$wpdb->prefix}users(id));");
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_societe 
@@ -95,6 +95,10 @@ class Facturation
         $wpdb->query("ALTER TABLE {$wpdb->prefix}dopbsp_coupons 
                         ADD (id_taxe INT NOT NULL,
                         CONSTRAINT fk_coupons_taxe FOREIGN KEY (id_taxe) REFERENCES {$wpdb->prefix}fact_taxe(id_taxe));");
+
+        $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_tarif_nuitee
+                        ADD (id_taxe INT NOT NULL,
+                        FOREIGN KEY (id_taxe) REFERENCES {$wpdb->prefix}fact_taxe(id_taxe));");
     }
 
     //////////SUPPRESSION DES TABLES A LA SUPPRESSION DU PLUGIN//////////

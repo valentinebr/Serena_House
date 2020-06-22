@@ -2,6 +2,7 @@
 
 require_once (__ROOT__.'/facturation-initia/Controller/Controleur.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Societe.php');
+require_once (__ROOT__.'/facturation-initia/Modele/TinyHouse.php');
 
 class CtrlSociete extends Controleur
 {
@@ -10,8 +11,10 @@ class CtrlSociete extends Controleur
     {
         $societe = new Societe();
         $societe = $societe->AfficherSociete();
+        $tinyHouse = new TinyHouse();
+        $tinyHouse = $tinyHouse->afficherTinyHouse();
 
-        return ['societe' => $societe];
+        return ['societe' => $societe, 'tinyHouse' => $tinyHouse];
 
     }
 
@@ -22,9 +25,8 @@ class CtrlSociete extends Controleur
         $values = array($_POST['nom_ste'], $_POST['adresse_societe'], $_POST['code_postal_ste'], $_POST['ville_ste'], $_POST['telephone_ste'],
             $_POST['numero_ste'], $_POST['tiny_house_ste']);
 
-        echo 'Update !';
-
         $societe->updateFieldSociete($values);
+        $this->executer('index');
 
     }
 
@@ -35,8 +37,7 @@ class CtrlSociete extends Controleur
         $values = array($_POST['nom_ste'], $_POST['adresse_societe'], $_POST['code_postal_ste'], $_POST['ville_ste'], $_POST['telephone_ste'],
             $_POST['numero_ste'], $_POST['tiny_house_ste']);
 
-        echo 'Inséré !';
-
         $societe->insertNewSociete($values);
+        $this->executer('index');
     }
 }

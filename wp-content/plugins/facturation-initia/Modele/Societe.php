@@ -10,10 +10,12 @@ class Societe extends ModeleDeDonnees
 
         $id = 3;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_societe WHERE id_user = %d";
-        $datas = array($id);
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_societe s
+                INNER JOIN {$wpdb->prefix}fact_tiny_house t ON s.id_tiny=t.id_tiny
+                WHERE id_user = %d";
+        $datas = $id;
 
-        return $this->executerGetResults($sql, $datas);
+        return $this->executerGetResults($sql,$datas);
     }
 
     function updateFieldSociete($values){
@@ -26,7 +28,7 @@ class Societe extends ModeleDeDonnees
             'ville_ste'         =>      $values[3],
             'telephone_ste'     =>      $values[4],
             'numero_ste'        =>      $values[5],
-            'tiny_house_ste'    =>      $values[6]
+            'id_tiny'           =>      $values[6]
         );
         $where = array('id_user' => 3); //get_currentuser_id()
 
@@ -44,7 +46,7 @@ class Societe extends ModeleDeDonnees
             'ville_ste'         =>      $values[3],
             'telephone_ste'     =>      $values[4],
             'numero_ste'        =>      $values[5],
-            'tiny_house_ste'    =>      $values[6],
+            'id_tiny'           =>      $values[6],
             'id_user'           =>      3
         );
 

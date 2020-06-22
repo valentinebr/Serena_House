@@ -13,11 +13,20 @@ class ModeleDeDonnees
     }
 
     protected function executerGetResults ($sql, $datas) {
+    global $wpdb;
+
+    $req = $wpdb->prepare($sql, $datas);
+
+    return $wpdb->get_results($req);
+
+}
+
+    protected function executerGetRow ($sql, $datas, $id) {
         global $wpdb;
 
-        $req = $wpdb->prepare($sql, $datas);
+        $req = $wpdb->prepare($sql, $datas, $id);
 
-        return $wpdb->get_results($req);
+        return $wpdb->get_row($req);
 
     }
 
