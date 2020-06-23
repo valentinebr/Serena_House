@@ -13,6 +13,7 @@
     <a href="?ctrl=CarteVoyage">Carte Voyage</a>
     <a href="?ctrl=Facture">Factures</a>
     <a href="?ctrl=Taxe">Taxes</a>
+    <a href="?ctrl=TinyHouse">Tiny houses</a>
 </nav>
 <?php echo $contenu; ?>
 

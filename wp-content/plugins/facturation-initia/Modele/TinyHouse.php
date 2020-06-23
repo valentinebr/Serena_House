@@ -1,5 +1,7 @@
 <?php
 
+require_once (__ROOT__.'/facturation-initia/Modele/ModeleDeDonnees.php');
+
 
 class TinyHouse extends ModeleDeDonnees
 {
@@ -11,7 +13,8 @@ class TinyHouse extends ModeleDeDonnees
 
         $datas = array(
             'nom_tiny'              =>      $values[0],
-            'nombre_places_tiny'    =>      $values[1]
+            'nombre_places_tiny'    =>      $values[1],
+            'archive_tiny'          =>      0
         );
 
         $this->executerInsert($table, $datas);
@@ -20,8 +23,8 @@ class TinyHouse extends ModeleDeDonnees
     public function afficherTinyHouse () {
         global $wpdb;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house WHERE archive_tiny=%d";
 
-        return $this->executerGetResults($sql, null);
+        return $this->executerGetResults($sql, 0);
     }
 }
