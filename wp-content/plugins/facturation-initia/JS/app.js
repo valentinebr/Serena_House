@@ -18,6 +18,8 @@ function showFlex(indice, indice2)
         document.getElementById(indice).style.display="none";		//On la rend invisible
 }
 
+
+
 function addLigne(idChamp, tarifCarteVoyage)
 {
     var conteneur = document.getElementById(idChamp);
@@ -44,25 +46,37 @@ function addLigne(idChamp, tarifCarteVoyage)
 
     var plus = document.createElement('a');
         plus.textContent = '+';
-        plus.setAttribute('href', '#')
+        plus.setAttribute('href', '#');
         plus.setAttribute('id', 'plus');
-        plus.setAttribute('onClick', 'addLigne(show);')
+        plus.setAttribute('style', 'display:inline-block;');
+        plus.setAttribute('onClick', 'addLigne(\'show\', \'tarifCarteVoyage\');');
+
+        console.log(plus);
+
+    var annuler = document.createElement('button');
+        annuler.setAttribute('name', 'annuler');
+        annuler.setAttribute('class', 'annuler');
+        annuler.innerHTML = 'Annuler';
+        annuler.setAttribute('onClick', 'show(\'lien\', \'show\'); return false;');
 
 
     ligne.appendChild(price);
     ligne.appendChild(reference);
     ligne.appendChild(date);
     ligne.appendChild(plus);
+    ligne.appendChild(annuler);
     conteneur.appendChild(ligne);
+    $.each($("#plus"), function () {
+        $(this).hide();
+    })
 
-    // $.ajax({
-    //     type:'POST',
-    //     data: {
-    //         'action' : 'test'
-    //     },
-    //     url: 'Vue/CarteVoyage/index.php',
-    //     success: function(data){
-    //         $(price).append(data);
-    //     }
-    // })
+}
+
+function hide(indice)
+{
+    if (document.getElementById(indice).style.display==="inline-block") {
+        document.getElementById(indice).style.display = "none";
+    }
+
+
 }

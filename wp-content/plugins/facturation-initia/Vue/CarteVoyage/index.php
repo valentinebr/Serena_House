@@ -42,11 +42,11 @@ ob_start();
                     <input type="text" name="reference">
                 </td>
                 <td><input type="date" name="start_date"></td>
-                <td><a href="#" id="plus" onclick="addLigne('show', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage)); ?>);">+</a></td>
+                <td><a href="#" id="plus" style="display:inline-block;" onclick="addLigne('show', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage)); ?>);">+</a></td>
             </tr>
 
             <input type="submit" value="Valider">
-            <button name="annluer" onclick="show('lien', 'show'); return false;">Annuler</button>
+            <button name="annluer" class="annuler" onclick="show('lien', 'show'); return false;">Annuler</button>
         </form>
     </div>
 
