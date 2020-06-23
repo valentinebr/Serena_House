@@ -9,10 +9,10 @@ class CtrlCarteVoyage extends Controleur
     public function index()
     {
         $carteVoyage = new CarteVoyage();
-        $carteVoyage = $carteVoyage->AfficherCarteVoyage();
+        $carteVoyage = $carteVoyage->afficherCarteVoyage();
 
         $tarifCarteVoyage = new TarifCarteVoyage();
-        $tarifCarteVoyage = $tarifCarteVoyage->AfficherTarifCarteVoyage();
+        $tarifCarteVoyage = $tarifCarteVoyage->afficherTarifCarteVoyage();
 
         return ['carteVoyage' => $carteVoyage, 'tarifCarteVoyage' => $tarifCarteVoyage];
     }

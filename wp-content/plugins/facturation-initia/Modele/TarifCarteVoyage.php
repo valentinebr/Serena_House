@@ -5,7 +5,7 @@ require_once (__ROOT__.'/../../wp-config.php');
 class TarifCarteVoyage extends ModeleDeDonnees
 {
 
-    function AfficherTarifCarteVoyage(){
+    function afficherTarifCarteVoyage(){
         global $wpdb;
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_carte_voyage WHERE archive_tcv = %d";

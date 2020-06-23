@@ -7,32 +7,32 @@ ob_start();
 ?>
 
 <h1>Ajouter une facture</h1>
-<h2><?php echo $societe->nom_tiny . '-'. date("d/m/Y") ?></h2>
+<h2><?php echo $societe[0]->nom_tiny . '-'. date("d/m/Y") ?></h2>
 
 <h3>Les services</h3>
 
 <form method="post" action="?ctrl=Facture&amp;action=insertService">
 
-    <?php switch ($societe->nombre_places_tiny) {
+    <?php switch ($societe[0]->nombre_places_tiny) {
         case 2 : ?>
-            <label>Nuitées 2 personnes :</label>
-            <input type="number" min="0" name="nb-nuitees">
+            <label><?php echo $nuitees->nom_nuitee ?> :</label>
+            <input type="number" min="0" name="nb-nuitees-<?php echo $nuitees->id_nuitee ?>"><br>
     <?php break;
         case 4 : ?>
             <label>Nuitées 4 personnes :</label>
-            <input type="number" min="0" name="nb-nuitees">
+            <input type="number" min="0" name="nb-nuitees"><br>
     <?php break;
         case 6 : ?>
             <label>Nuitées 4 personnes :</label>
-            <input type="number" min="0" name="nb-nuitees">
+            <input type="number" min="0" name="nb-nuitees"><br>
             <label>Nuitées 6 personnes :</label>
-            <input type="number" min="0" name="nb-nuitees">
+            <input type="number" min="0" name="nb-nuitees"><br>
     <?php break;
     }
 
     ?>
 
-    <input type="hidden" name="nom-fact" value="<?php echo $societe->tiny_house_ste . '-'. date("d/m/Y") ?>">
+    <input type="hidden" name="nom-fact" value="<?php echo $societe[0]->tiny_house_ste . '-'. date("d/m/Y") ?>">
 
     <?php foreach ($services as $s) {?>
 

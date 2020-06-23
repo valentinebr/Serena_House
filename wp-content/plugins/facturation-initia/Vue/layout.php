@@ -12,6 +12,7 @@
     <a href="?ctrl=Societe">Société</a>
     <a href="?ctrl=CarteVoyage">Carte Voyage</a>
     <a href="?ctrl=Facture">Factures</a>
+    <a href="?ctrl=Taxe">Taxes</a>
 </nav>
 <?php echo $contenu; ?>
 

@@ -10,9 +10,9 @@ class CtrlService extends Controleur
     public function index()
     {
         $services = new Service();
-        $services = $services->AfficherServices();
+        $services = $services->afficherServices();
         $taxes = new Taxe();
-        $taxes = $taxes->AfficherTaxes();
+        $taxes = $taxes->afficherTaxes();
 
         return ['services' => $services, 'taxes' => $taxes];
     }

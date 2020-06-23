@@ -7,7 +7,7 @@ class Service extends ModeleDeDonnees
 {
 
 
-    function AfficherServices() {
+    function afficherServices() {
         global $wpdb;
         $id = 3; //temporaire
 

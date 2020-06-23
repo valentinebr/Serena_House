@@ -57,6 +57,7 @@ class Facturation
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_nuitee (id_nuitee INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_nuitee VARCHAR(100) NOT NULL,
                                                                                 tarif_nuitee FLOAT NOT NULL);");
+        $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_nuitee_tiny_house (id_nth INT AUTO_INCREMENT PRIMARY KEY);");
 
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_tarif_service 
@@ -99,6 +100,14 @@ class Facturation
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_tarif_nuitee
                         ADD (id_taxe INT NOT NULL,
                         FOREIGN KEY (id_taxe) REFERENCES {$wpdb->prefix}fact_taxe(id_taxe));");
+
+        $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_nuitee_tiny_house
+                        ADD (id_nuitee INT NOT NULL,
+                        FOREIGN KEY (id_nuitee) REFERENCES {$wpdb->prefix}fact_tarif_nuitee(id_nuitee));");
+
+        $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_nuitee_tiny_house
+                        ADD (id_tiny INT NOT NULL,
+                        FOREIGN KEY (id_tiny) REFERENCES {$wpdb->prefix}fact_tiny_house(id_tiny));");
     }
 
     //////////SUPPRESSION DES TABLES A LA SUPPRESSION DU PLUGIN//////////
@@ -111,6 +120,7 @@ class Facturation
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_service;");
         $wpdb->query("ALTER TABLE {$wpdb->prefix}dopbsp_coupons DROP COLUMN id_taxe");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_taxe;");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_nuitee_tiny_house;");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tiny_house;");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_societe");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_carte_voyage");

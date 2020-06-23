@@ -5,7 +5,7 @@ require_once (__ROOT__.'/../../wp-config.php');
 class Societe extends ModeleDeDonnees
 {
 
-    function AfficherSociete(){
+    function afficherSociete(){
         global $wpdb;
 
         $id = 3;

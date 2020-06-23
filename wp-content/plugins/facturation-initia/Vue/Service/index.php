@@ -25,7 +25,7 @@ ob_start();
                 <p class="column-1"><?php echo $s->nom_tsrv ?></p>
                 <p class="column-2"><?php echo $s->reference_tsrv ?></p>
                 <p class="column-3"><?php echo $s->prix_ht_tsrv . ' €' ?></p>
-                <p class="column-4"><?php echo $s->libelle_taxe ?></p>
+                <p class="column-4"><?php echo $s->taux_taxe.'%' ?></p>
                 <a class="column-5" href="#"
                        onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>)">Modifier</a>
                 <a class="column-6" href="?ctrl=Service&amp;action=deleteTService&amp;id=<?php echo $s->id_tsrv ?>">Supprimer</a>
@@ -43,7 +43,7 @@ ob_start();
                                     echo 'selected';
                                 } ?>
                             >
-                                <?php echo $t->libelle_taxe ?>
+                                <?php echo $t->taux_taxe ?>
                             </option>
                         <?php } ?>
                     </select>
@@ -62,7 +62,7 @@ ob_start();
             <input class="column-3" type="number" name="prix-ht" required>
             <select class="column-4" name="taxe" required>
                 <?php foreach ($taxes as $t) { ?>
-                <option value="<?php echo $t->id_taxe ?>"><?php echo $t->libelle_taxe?></option>
+                <option value="<?php echo $t->id_taxe ?>"><?php echo $t->taux_taxe?></option>
                 <?php } ?>
             </select>
             <input class="column-5" type="submit" value="Ajouter" name="ajouter">

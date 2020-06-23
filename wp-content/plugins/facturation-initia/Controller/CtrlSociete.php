@@ -10,7 +10,7 @@ class CtrlSociete extends Controleur
     public function index()
     {
         $societe = new Societe();
-        $societe = $societe->AfficherSociete();
+        $societe = $societe->afficherSociete();
         $tinyHouse = new TinyHouse();
         $tinyHouse = $tinyHouse->afficherTinyHouse();
 

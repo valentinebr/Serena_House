@@ -3,6 +3,7 @@
 require_once (__ROOT__.'/facturation-initia/Controller/Controleur.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Service.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Facture.php');
+require_once (__ROOT__.'/facturation-initia/Modele/Nuitee.php');
 
 
 class CtrlFacture extends Controleur
@@ -15,17 +16,19 @@ class CtrlFacture extends Controleur
 
     public function ajouterFacture() {
         $services = new Service;
-        $services = $services->AfficherServices();
+        $services = $services->afficherServices();
         $societe = new Societe();
-        $societe = $societe->AfficherSociete();
+        $societe = $societe->afficherSociete();
+        $nuitees = new Nuitee();
+        $nuitees = $nuitees->afficherNuitees();
 
-        return ['services' => $services, 'societe' => $societe];
+        return ['services' => $services, 'societe' => $societe, 'nuitees' => $nuitees];
     }
 
     public function insertService () {
         $facture = new Facture();
         $service = new Service();
-        $services = $service->AfficherServices();
+        $services = $service->afficherServices();
 
         $nomFact = $_POST['nom-fact'];
         $idFact = $facture->insertFacture($nomFact);

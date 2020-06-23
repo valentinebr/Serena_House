@@ -5,7 +5,7 @@ require_once (__ROOT__.'/../../wp-config.php');
 class CarteVoyage extends ModeleDeDonnees
 {
 
-    function AfficherCarteVoyage(){
+    function afficherCarteVoyage(){
         global $wpdb;
 
         $id = 0;
