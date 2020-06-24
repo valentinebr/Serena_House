@@ -8,7 +8,7 @@ ob_start();
 
 <h1>Tiny houses</h1>
 
-<table>
+<table border="solid">
     <tr>
         <th>Nom</th>
         <th>Tarif / nuitée (HT)</th>
@@ -25,6 +25,9 @@ ob_start();
                 <td rowspan="<?php echo $recurrence[$t->nom_tiny] ?>"><?php echo $t->nom_tiny ?></td>
         <?php } else {
                 $i++;
+                if ($recurrence[$t->nom_tiny] == $i) {
+                    $i=0;
+                }
             }?>
         <?php } else {
             $i=0; ?>
