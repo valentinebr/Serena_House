@@ -10,7 +10,7 @@ class Nuitee extends ModeleDeDonnees
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_nuitee";
 
-        $this->executerGetResults($sql, null);
+        return $this->executerGetResults($sql, null);
     }
 
 }

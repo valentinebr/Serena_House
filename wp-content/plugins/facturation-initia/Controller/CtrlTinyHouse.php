@@ -19,14 +19,38 @@ class CtrlTinyHouse extends Controleur
         $nuitee = new Nuitee();
         $nuitee = $nuitee->afficherNuitees();
 
-        return ['tinyHouse' => $tinyHouse, 'taxe' => $taxe, 'nuitee' => $nuitee];
+        $recurrence = $this->countNomsTiny($tinyHouse);
+
+        return ['tinyHouse' => $tinyHouse, 'taxe' => $taxe, 'nuitee' => $nuitee, 'recurrence' => $recurrence];
     }
 
     function insertTinyHouse() {
         $tinyHouse = new TinyHouse();
+        $nuitee = new Nuitee();
+        $nuitee = $nuitee->afficherNuitees();
 
         $values = array($_POST['nom'], $_POST['nombre-places']);
+        $idTiny = $tinyHouse->insertTinyHouse($values);
 
-        $tinyHouse->insertTinyHouse($values);
+        foreach ($nuitee as $n) {
+            if ($_POST['nuitee-'.$n->id_nuitee]) {
+                $values2 = array ($_POST['nuitee-'.$n->id_nuitee], $idTiny);
+                $tinyHouse->insertNuiteeTinyHouse($values2);
+            }
+        }
+
+        $this->executer('index');
+    }
+
+    private function countNomsTiny ($tinyHouse) {
+        $noms = array();
+
+        foreach ($tinyHouse as $t) {
+            array_push($noms, $t->nom_tiny);
+        }
+
+        $values = array_count_values($noms);
+
+        return $values;
     }
 }

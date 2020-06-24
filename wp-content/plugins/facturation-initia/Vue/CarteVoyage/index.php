@@ -47,7 +47,7 @@ ob_start();
                 </tr>
 
                 <input type="submit" value="Valider">
-                <button name="annluer" class="annuler" onclick="show('lien', 'form-1', 'block'); return false;">Annuler</button>
+                <button name="annuler" class="annuler" onclick="show('lien', 'form-1', 'block'); return false;">Annuler</button>
             </form>
         </div>
     </div>

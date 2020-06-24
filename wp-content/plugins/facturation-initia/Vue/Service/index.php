@@ -27,7 +27,7 @@ ob_start();
                 <p class="column-3"><?php echo $s->prix_ht_tsrv . ' €' ?></p>
                 <p class="column-4"><?php echo $s->taux_taxe.'%' ?></p>
                 <a class="column-5" href="#"
-                       onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>)">Modifier</a>
+                       onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>, 'block')">Modifier</a>
                 <a class="column-6" href="?ctrl=Service&amp;action=deleteTService&amp;id=<?php echo $s->id_tsrv ?>">Supprimer</a>
             </div>
                 <form action="?ctrl=Service&amp;action=updateTService" method="post" class="lignes"
@@ -49,7 +49,7 @@ ob_start();
                     </select>
                     <input class="column-5" type="submit" value="Valider">
                     <a class="column-6" href="#"
-                       onclick="showFlex(<?php echo $s->id_tsrv ?>, 'modifier-<?php echo $s->id_tsrv ?>')">Annuler</a>
+                       onclick="show(<?php echo $s->id_tsrv ?>, 'modifier-<?php echo $s->id_tsrv ?>', 'flex')">Annuler</a>
                 </form>
         <?php
         }
@@ -66,8 +66,8 @@ ob_start();
                 <?php } ?>
             </select>
             <input class="column-5" type="submit" value="Ajouter" name="ajouter">
-            <button  class="column-6" type="reset" name="annuler" onclick="show('lien', 'show'); return false;">Annuler</button>
+            <button  class="column-6" type="reset" name="annuler" onclick="show('lien', 'show', 'block'); return false;">Annuler</button>
         </form>
 
 <!-- fonction JS pour afficher les champs pour ajouter le service -->
-<a href="#" id="lien" onclick="showFlex('show', 'lien'); return false;">Ajouter un service</a>
+<a href="#" id="lien" onclick="show('show', 'lien', 'flex'); return false;">Ajouter un service</a>
