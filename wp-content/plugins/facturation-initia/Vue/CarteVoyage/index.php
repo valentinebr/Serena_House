@@ -43,17 +43,17 @@ ob_start();
                         <input type="text" name="reference">
                     </td>
                     <td><input type="date" name="start_date"></td>
-                    <td><a href="#" id="plus" style="display:inline-block;" onclick="addLigne('form-1', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage)); ?>);">+</a></td>
+                    <td><a href="#" id="plus-1" style="display:inline-block;" onclick="addLigne('form-1', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage));?>); hide('plus-1');">+</a></td>
                 </tr>
 
                 <input type="submit" value="Valider">
-                <button name="annluer" class="annuler" onclick="show('lien', 'form-1'); return false;">Annuler</button>
+                <button name="annluer" class="annuler" onclick="show('lien', 'form-1', 'block'); return false;">Annuler</button>
             </form>
         </div>
     </div>
 
     <div style="display:flex;">
-        <a href="#" id="lien" onclick="show('form-1', 'lien'); return false;">Ajouter une carte voyage</a>
+        <a href="#" id="lien" onclick="show('form-1', 'lien', 'block'); return false;">Ajouter une carte voyage</a>
         <button name="retour">Retour</button>
     </div>
 

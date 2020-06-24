@@ -1,17 +1,13 @@
-function show(indice, indice2)
+function show(indice, indice2, display)
 {
     if (document.getElementById(indice).style.display==="none") {	// Si la zone indiqué par indice est est invisible
-        document.getElementById(indice).style.display = "block"; // On l'affiche
-        document.getElementById(indice2).style.display = "none"; //On efface le lien
-    }
-    else									// Sinon (elle est donc visible)
-        document.getElementById(indice).style.display="none";		//On la rend invisible
-}
-
-function showFlex(indice, indice2)
-{
-    if (document.getElementById(indice).style.display==="none") {	// Si la zone indiqué par indice est est invisible
-        document.getElementById(indice).style.display = "flex"; // On l'affiche
+        if (display === "block") {
+            document.getElementById(indice).style.display = "block"; // On l'affiche
+        } else if (display === "flex") {
+            document.getElementById(indice).style.display = "flex"; // On l'affiche
+        } else if (display === "inline-block") {
+            document.getElementById(indice).style.display = "inline-block"; //On l'affiche
+        }
         document.getElementById(indice2).style.display = "none"; //On efface le lien
     }
     else									// Sinon (elle est donc visible)
@@ -71,17 +67,16 @@ function addLigne(idChamp, tarifCarteVoyage)
     var plus = document.createElement('a');
         plus.textContent = '+';
         plus.setAttribute('href', '#');
-        plus.setAttribute('id', 'plus');
+        plus.setAttribute('id', 'plus-' + num);
         plus.setAttribute('style', 'display:inline-block;');
-        plus.setAttribute('onClick', 'addLigne(\'' + nomDiv + '\', \'' + tarifsString + '\');');
-
+        plus.setAttribute('onClick', 'addLigne(\'' + nomDiv + '\', \'' + tarifsString + '\'); hide(\'plus-' + num +'\')');
         console.log(plus);
 
     var annuler = document.createElement('button');
         annuler.setAttribute('name', 'annuler');
         annuler.setAttribute('class', 'annuler');
         annuler.innerHTML = 'Annuler';
-        annuler.setAttribute('onClick', 'show(\'lien\', \'show\'); return false;');
+        annuler.setAttribute('onClick', 'show(\'plus-' + div[1] +'\',\''+ nomDiv + '\', \'inline-block\'); return false;');
 
 
     ligne.appendChild(price);
@@ -91,9 +86,6 @@ function addLigne(idChamp, tarifCarteVoyage)
     ligne.appendChild(annuler);
     conteneur.appendChild(ligne);
     forms.appendChild(conteneur);
-    $.each($("#plus"), function () {
-        $(this).hide();
-    })
 
 }
 
