@@ -28,30 +28,32 @@ ob_start();
     </table>
 
     <!-- if le lien est cliqué -->
-    <div id="show" style="display:none;">
-        <form action="" method="post">
-            <tr>
-                <td>
-                    <select name="price">
-                        <?php foreach ($tarifCarteVoyage as $tcv){ ?>
-                            <option><?php echo $tcv->tarif_tcv ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    <input type="text" name="reference">
-                </td>
-                <td><input type="date" name="start_date"></td>
-                <td><a href="#" id="plus" style="display:inline-block;" onclick="addLigne('show', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage)); ?>);">+</a></td>
-            </tr>
+    <div id="forms">
+        <div id="form-1" style="display:none;">
+            <form action="" method="post">
+                <tr>
+                    <td>
+                        <select name="price">
+                            <?php foreach ($tarifCarteVoyage as $tcv){ ?>
+                                <option><?php echo $tcv->tarif_tcv ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="reference">
+                    </td>
+                    <td><input type="date" name="start_date"></td>
+                    <td><a href="#" id="plus" style="display:inline-block;" onclick="addLigne('form-1', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage)); ?>);">+</a></td>
+                </tr>
 
-            <input type="submit" value="Valider">
-            <button name="annluer" class="annuler" onclick="show('lien', 'show'); return false;">Annuler</button>
-        </form>
+                <input type="submit" value="Valider">
+                <button name="annluer" class="annuler" onclick="show('lien', 'form-1'); return false;">Annuler</button>
+            </form>
+        </div>
     </div>
 
     <div style="display:flex;">
-        <a href="#" id="lien" onclick="show('show', 'lien'); return false;">Ajouter une carte voyage</a>
+        <a href="#" id="lien" onclick="show('form-1', 'lien'); return false;">Ajouter une carte voyage</a>
         <button name="retour">Retour</button>
     </div>
 

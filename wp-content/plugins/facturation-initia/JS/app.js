@@ -22,7 +22,19 @@ function showFlex(indice, indice2)
 
 function addLigne(idChamp, tarifCarteVoyage)
 {
-    var conteneur = document.getElementById(idChamp);
+    var tarifs;
+    var forms = document.getElementById('forms');
+
+    var div = idChamp.split('-');
+    var num = parseInt(div[1]) + 1;
+    var nomDiv = div[0] + '-' + num;
+
+    if (typeof (tarifCarteVoyage) === "string") {
+        tarifCarteVoyage = tarifCarteVoyage.split(',');
+    }
+
+    var conteneur = document.createElement('div');
+    conteneur.id = nomDiv;
 
     var ligne = document.createElement('form');
         // ligne.setAttribute('action', '?ctrl=CarteVoyage&amp;action=insertCarteVoyage');
@@ -31,8 +43,18 @@ function addLigne(idChamp, tarifCarteVoyage)
     var price = document.createElement('select');
         price.setAttribute('name', 'price');
         for (i=0; i<tarifCarteVoyage.length; i++) {
+            if (div[1] == 1) {
+                if (i === 0) {
+                    tarifs = [tarifCarteVoyage[i]['tarif_tcv']];
+                } else {
+                    tarifs.push(tarifCarteVoyage[i]['tarif_tcv']);
+                }
+            } else {
+                tarifs = tarifCarteVoyage;
+            }
+
             option = document.createElement('option');
-            option.text = tarifCarteVoyage[i]['tarif_tcv'];
+            option.text = tarifs[i];
             price.add(option);
         }
 
@@ -44,12 +66,14 @@ function addLigne(idChamp, tarifCarteVoyage)
         date.setAttribute('type', 'date');
         date.setAttribute('name', 'start_date');
 
+        var tarifsString = tarifs.join();
+
     var plus = document.createElement('a');
         plus.textContent = '+';
         plus.setAttribute('href', '#');
         plus.setAttribute('id', 'plus');
         plus.setAttribute('style', 'display:inline-block;');
-        plus.setAttribute('onClick', 'addLigne(\'show\', \'tarifCarteVoyage\');');
+        plus.setAttribute('onClick', 'addLigne(\'' + nomDiv + '\', \'' + tarifsString + '\');');
 
         console.log(plus);
 
@@ -66,6 +90,7 @@ function addLigne(idChamp, tarifCarteVoyage)
     ligne.appendChild(plus);
     ligne.appendChild(annuler);
     conteneur.appendChild(ligne);
+    forms.appendChild(conteneur);
     $.each($("#plus"), function () {
         $(this).hide();
     })
