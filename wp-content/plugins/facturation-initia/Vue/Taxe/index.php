@@ -10,14 +10,17 @@ ob_start();
 
 <form method="post" action="?ctrl=Taxe&amp;action=updateTaxe">
 <table>
-    <th>Nom</th>
-    <th>Taux</th>
+    <tr style="display: block">
+        <th>Nom</th>
+        <th>Taux</th>
+    </tr>
 
     <?php foreach ($taxes as $t) { ?>
-        <tr id="<?php echo $t->id_taxe ?>">
+        <tr id="<?php echo $t->id_taxe ?>" style="display: block">
             <td><?php echo $t->libelle_taxe ?></td>
             <td><?php echo $t->taux_taxe . '%'?></td>
-            <td><a href="#" onclick="show('modifier-<?php echo $t->id_taxe ?>', <?php echo $t->id_taxe ?>)">Modifier</a></td>
+
+            <td><a href="#" onclick="show('modifier-<?php echo $t->id_taxe ?>', <?php echo $t->id_taxe ?>, 'block')">Modifier</a></td>
             <td><a href="?ctrl=Taxe&amp;action=deleteTaxe&amp;id=<?php echo $t->id_taxe?>">Supprimer</a></td>
         </tr>
         <tr id="modifier-<?php echo $t->id_taxe ?>" style="display: none">
@@ -25,14 +28,14 @@ ob_start();
             <td><input type="text" value="<?php echo $t->libelle_taxe ?>" name="nom-taxe"></td>
             <td><input type="number" value="<?php echo $t->taux_taxe ?>" name="taux-taxe"></td>
             <td><input type="submit" value="Valider"></td>
-            <td><a href="#" onclick="show(<?php echo $t->id_taxe ?>, 'modifier-<?php echo $t->id_taxe ?>')">Annuler</a></td>
+            <td><a href="#" onclick="show(<?php echo $t->id_taxe ?>, 'modifier-<?php echo $t->id_taxe ?>', 'block')">Annuler</a></td>
         </tr>
     <?php
     } ?>
 </table>
 </form>
 
-<a href="#" id="lien" onclick="show('show', 'lien');return false;">Ajouter une taxe</a>
+<a href="#" id="lien" onclick="show('show', 'lien', 'inline-block');return false;">Ajouter une taxe</a>
 
 <div id="show" style="display: none">
     <form method="post" action="?ctrl=Taxe&amp;action=insertTaxe">
@@ -41,6 +44,6 @@ ob_start();
         <label for="taux">Taux :</label>
         <input type="number" min="0" id="taux" name="taux-taxe">
         <input type="submit" value="Valider">
-        <button onclick="show('lien', 'show');return false;">Annuler</button>
+        <button onclick="show('lien', 'show', 'inline-block');return false;">Annuler</button>
     </form>
 </div>

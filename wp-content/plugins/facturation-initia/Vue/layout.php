@@ -14,6 +14,7 @@
     <a href="?ctrl=Facture">Factures</a>
     <a href="?ctrl=Taxe">Taxes</a>
     <a href="?ctrl=TinyHouse">Tiny houses</a>
+    <a href="?ctrl=Nuitee">Nuitées</a>
 </nav>
 <?php echo $contenu; ?>
 
