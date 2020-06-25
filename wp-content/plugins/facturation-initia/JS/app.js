@@ -24,6 +24,7 @@ function addLigne(idChamp, tarifCarteVoyage)
     var div = idChamp.split('-');
     var num = parseInt(div[1]) + 1;
     var nomDiv = div[0] + '-' + num;
+    var showPlus = parseInt(div[1]);
 
     if (typeof (tarifCarteVoyage) === "string") {
         tarifCarteVoyage = tarifCarteVoyage.split(',');
@@ -70,14 +71,18 @@ function addLigne(idChamp, tarifCarteVoyage)
         plus.setAttribute('id', 'plus-' + num);
         plus.setAttribute('style', 'display:inline-block;');
         plus.setAttribute('onClick', 'addLigne(\'' + nomDiv + '\', \'' + tarifsString + '\'); hide(\'plus-' + num +'\')');
-        console.log(plus);
+
 
     var annuler = document.createElement('button');
         annuler.setAttribute('name', 'annuler');
         annuler.setAttribute('class', 'annuler');
         annuler.innerHTML = 'Annuler';
-        annuler.setAttribute('onClick', 'show(\'plus-' + div[1] +'\',\''+ nomDiv + '\', \'inline-block\'); return false;');
+        annuler.setAttribute('onClick', 'deleteLigne(\''+ nomDiv + '\', \'plus-' + showPlus +'\'); return false;');
 
+        console.log(nomDiv);
+        console.log(div);
+        console.log(plus);
+        console.log(annuler);
 
     ligne.appendChild(price);
     ligne.appendChild(reference);
@@ -93,6 +98,16 @@ function hide(indice)
 {
     if (document.getElementById(indice).style.display==="inline-block") {
         document.getElementById(indice).style.display = "none";
+    }
+
+
+}
+
+function deleteLigne(indice, indice2)
+{
+        document.getElementById(indice).remove();
+    if (document.getElementById(indice2).style.display==="none"){
+        document.getElementById(indice2).style.display = "inline-block";
     }
 
 
