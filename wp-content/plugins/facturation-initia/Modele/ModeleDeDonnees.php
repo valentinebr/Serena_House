@@ -21,10 +21,10 @@ class ModeleDeDonnees
 
 }
 
-    protected function executerGetRow ($sql, $datas, $id) {
+    protected function executerGetRow ($sql) {
         global $wpdb;
 
-        $req = $wpdb->prepare($sql, $datas, $id);
+        $req = $wpdb->prepare($sql);
 
         return $wpdb->get_row($req);
 

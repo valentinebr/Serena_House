@@ -109,6 +109,24 @@ function deleteLigne(indice, indice2)
     if (document.getElementById(indice2).style.display==="none"){
         document.getElementById(indice2).style.display = "inline-block";
     }
+}
 
+function modifierTiny(modifier, tiny, tinyHouses) {
+    /* Efface l'attribut checked des checkboxs */
+        var checkboxs = document.getElementsByClassName('tarif');
+        Array.prototype.forEach.call(checkboxs, function(element) {element.checked = false});
+
+    /* Affiche le formulaire modifier */
+        document.getElementById(modifier).style.display = "block";
+
+        /* Donne les valeurs de la ligne à modifier au formulaire */
+        document.getElementById('id-modif').setAttribute('value', tiny['id_tiny']);
+        document.getElementById('nom-modif').setAttribute('value', tiny['nom_tiny']);
+        document.getElementById('nb-places-modif').setAttribute('value', tiny['nombre_places_tiny']);
+        tinyHouses.forEach(function (element) {
+            if (element['nom_tiny'] === tiny['nom_tiny']) {
+                document.getElementById('tarif-'+element['id_nuitee']).checked = true;
+            }
+        })
 
 }

@@ -4,6 +4,7 @@ require_once (__ROOT__.'/facturation-initia/Controller/Controleur.php');
 require_once (__ROOT__.'/facturation-initia/Modele/TinyHouse.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Taxe.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Nuitee.php');
+require_once (__ROOT__.'/facturation-initia/Modele/NuiteeTinyHouse.php');
 require_once (__ROOT__.'/../../wp-config.php');
 
 
@@ -27,6 +28,7 @@ class CtrlTinyHouse extends Controleur
     function insertTinyHouse() {
         $tinyHouse = new TinyHouse();
         $nuitee = new Nuitee();
+        $nth = new NuiteeTinyHouse();
         $nuitee = $nuitee->afficherNuitees();
 
         $values = array($_POST['nom'], $_POST['nombre-places']);
@@ -35,11 +37,53 @@ class CtrlTinyHouse extends Controleur
         foreach ($nuitee as $n) {
             if ($_POST['nuitee-'.$n->id_nuitee]) {
                 $values2 = array ($_POST['nuitee-'.$n->id_nuitee], $idTiny);
-                $tinyHouse->insertNuiteeTinyHouse($values2);
+                $nth->insertNuiteeTinyHouse($values2);
             }
         }
 
         $this->executer('index');
+    }
+
+    function updateTinyHouse () {
+
+        $tinyHouse = new TinyHouse();
+        $nuitee = new Nuitee();
+
+        $idTiny = $_POST['id-modif'];
+
+        $tiny = $tinyHouse->selectByIdTinyHouse($idTiny);
+        $nuitee = $nuitee->afficherNuitees();
+
+        if ($tiny->nom_tiny != $_POST['nom-modif'] || $tiny!= $_POST['nb-places-modif']) {
+            $values = array($_POST['nom-modif'], $_POST['nb-places-modif']);
+            $idTiny = $tinyHouse->insertTinyHouse($values);
+            $tinyHouse->updateTinyHouse($_POST['id-modif']);
+        }
+        $nth = new NuiteeTinyHouse();
+        $nth = $nth->afficherNuiteeTinyHouse($idTiny);
+
+        foreach ($nuitee as $n) {
+            if ($_POST['nuitee-'.$n->id_nuitee]) {
+                $insert = true;
+                $nth = new NuiteeTinyHouse();
+                foreach ($nth as $x) {
+                    if ($x->id_nuitee == $_POST['nuitee-'.$n->id_nuitee]) {
+                        $insert = false;
+                        break;
+                    }
+                }
+                if ($insert == true ) {
+                    $values2 = array ($_POST['nuitee-'.$n->id_nuitee], $idTiny);
+                    $nth->insertNuiteeTinyHouse($values2);
+                }
+
+            }
+
+        }
+
+
+        $this->executer('index');
+
     }
 
     private function countNomsTiny ($tinyHouse) {
