@@ -58,7 +58,8 @@ class Facturation
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_nuitee (id_nuitee INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_nuitee VARCHAR(100) NOT NULL,
                                                                                 nombre_personnes_nuitee INT NOT NULL,
-                                                                                tarif_nuitee FLOAT NOT NULL);");
+                                                                                tarif_nuitee FLOAT NOT NULL,
+                                                                                archive_nuitee BOOLEAN NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_nuitee_tiny_house (id_nth INT AUTO_INCREMENT PRIMARY KEY);");
 
 
