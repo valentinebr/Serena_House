@@ -32,16 +32,22 @@ class TinyHouse extends ModeleDeDonnees
         return $this->executerGetResults($sql, 0);
     }
 
-    function insertNuiteeTinyHouse ($values) {
+    function selectByIdTinyHouse ($id) {
         global $wpdb;
 
-        $table = $wpdb->prefix.'fact_nuitee_tiny_house';
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house WHERE id_tiny=". $id;
 
-        $datas = array(
-            'id_nuitee'     =>      $values[0],
-            'id_tiny'       =>      $values[1]
-        );
-
-        $this->executerInsert($table, $datas);
+        $this->executerGetRow($sql);
     }
+
+    function updateTinyHouse ($id) {
+        global $wpdb;
+
+        $table = $wpdb->prefix.'fact_tiny_house';
+        $datas = array('archive_tiny' => 1);
+        $where = array ('id_tiny' => $id);
+
+        $this->executerUpdate($table, $datas, $where);
+    }
+
 }
