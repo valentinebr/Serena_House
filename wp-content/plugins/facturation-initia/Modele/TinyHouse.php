@@ -32,6 +32,17 @@ class TinyHouse extends ModeleDeDonnees
         return $this->executerGetResults($sql, 0);
     }
 
+    function afficherAllTinyHouse(){
+        global $wpdb;
+
+        $archive_tiny_house = 0;
+
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house WHERE archive_tiny = %d";
+        $datas = $archive_tiny_house;
+
+        return $this->executerGetResults($sql, $datas);
+    }
+
     function selectByIdTinyHouse ($id) {
         global $wpdb;
 
