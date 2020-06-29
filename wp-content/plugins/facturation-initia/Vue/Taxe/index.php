@@ -26,7 +26,7 @@ ob_start();
         <tr id="modifier-<?php echo $t->id_taxe ?>" style="display: none">
             <input type="hidden" value="<?php echo $t->id_taxe?>" name="id-taxe">
             <td><input type="text" value="<?php echo $t->libelle_taxe ?>" name="nom-taxe"></td>
-            <td><input type="number" value="<?php echo $t->taux_taxe ?>" name="taux-taxe"></td>
+            <td><input type="number" step="0.01" min="0" value="<?php echo $t->taux_taxe ?>" name="taux-taxe"></td>
             <td><input type="submit" value="Valider"></td>
             <td><a href="#" onclick="show(<?php echo $t->id_taxe ?>, 'modifier-<?php echo $t->id_taxe ?>', 'block')">Annuler</a></td>
         </tr>
@@ -42,7 +42,7 @@ ob_start();
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom-taxe">
         <label for="taux">Taux :</label>
-        <input type="number" min="0" id="taux" name="taux-taxe">
+        <input type="number" step="0.01" min="0" id="taux" name="taux-taxe">
         <input type="submit" value="Valider">
         <button onclick="show('lien', 'show', 'inline-block');return false;">Annuler</button>
     </form>

@@ -27,8 +27,8 @@ ob_start();
             <tr id="modifier-<?php echo $n->id_nuitee ?>" style="display: none">
                 <input type="hidden" value="<?php echo $n->id_nuitee?>" name="id-nuitee">
                 <td><input type="text" value="<?php echo $n->nom_nuitee ?>" name="nom-nuitee"></td>
-                <td><input type="text" value="<?php echo $n->nombre_personnes_nuitee ?>" name="nombre-personnes-nuitee"></td>
-                <td><input type="text" value="<?php echo $n->tarif_nuitee . '€' ?>" name="tarif-nuitee"></td>
+                <td><input type="number" min="0" value="<?php echo $n->nombre_personnes_nuitee ?>" name="nombre-personnes-nuitee"></td>
+                <td><input type="number" step="0.01" min="0" value="<?php echo $n->tarif_nuitee ?>" name="tarif-nuitee"></td>
                 <td><input type="submit" value="Valider"></td>
                 <td><a href="#" onclick="show(<?php echo $n->id_nuitee ?>, 'modifier-<?php echo $n->id_nuitee ?>', 'block')">Annuler</a></td>
             </tr>
@@ -44,9 +44,9 @@ ob_start();
         <label for="nom-nuitee">Nom :</label>
         <input type="text" id="nom-nuitee" name="nom-nuitee">
         <label for="nombre-personnes-nuitee">Nombre de personne(s) :</label>
-        <input type="text" id="nombre_personnes_nuitee" name="nombre-personnes-nuitee">
+        <input type="number" min="0" id="nombre_personnes_nuitee" name="nombre-personnes-nuitee">
         <label for="tarif-nuitee">Tarif</label>
-        <input type="text" id="tarif-nuitee" name="tarif-nuitee">
+        <input type="number" step="0.01" min="0" id="tarif-nuitee" name="tarif-nuitee">
         <input type="submit" value="Valider">
         <button onclick="show('lien', 'show', 'inline-block');return false;">Annuler</button>
     </form>

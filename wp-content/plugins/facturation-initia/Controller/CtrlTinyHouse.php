@@ -20,6 +20,7 @@ class CtrlTinyHouse extends Controleur
         $nuitee = new Nuitee();
         $nuitee = $nuitee->afficherNuitees();
 
+
         $recurrence = $this->countNomsTiny($tinyHouse);
 
         return ['tinyHouse' => $tinyHouse, 'taxe' => $taxe, 'nuitee' => $nuitee, 'recurrence' => $recurrence];
@@ -53,6 +54,9 @@ class CtrlTinyHouse extends Controleur
 
         $tiny = $tinyHouse->selectByIdTinyHouse($idTiny);
         $nuitee = $nuitee->afficherNuitees();
+
+        echo $tiny->nom_tiny .' = '. $_POST['nom-modif'];
+        echo $tiny->nombre_places_tiny .' = '. $_POST['nb-places-modif'];
 
         if ($tiny->nom_tiny !== $_POST['nom-modif'] || $tiny->nombre_places_tiny !== $_POST['nb-places-modif']) {
             $values = array($_POST['nom-modif'], $_POST['nb-places-modif']);
