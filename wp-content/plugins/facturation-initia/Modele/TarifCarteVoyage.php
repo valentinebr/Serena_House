@@ -15,4 +15,6 @@ class TarifCarteVoyage extends ModeleDeDonnees
         return $this->executerGetResults($sql, $datas);
 
     }
+
+    //TO DO insertTarifCarteVoyage()
 }

@@ -5,7 +5,7 @@
 <div class="container">
     <div id="forms-tcv">
         <div id="tcv-1" style="display:none;">
-            <form action="" method="post">
+            <form action="?ctrl=CarteVoyage&amp;action=insertTarifCarteVoyage" method="post">
                 <th><label for="new-tarif">Tarif : </label></th>
 
                 <tr>
@@ -20,7 +20,7 @@
     </div>
 
     <div style="display: flex;">
-        <a href="#" id="lien-2" onclick="show('tcv-1', 'lien-2', 'block'); return false;">Ajouter une Carte Voyage</a>
+        <a href="#" id="lien-2" onclick="show('tcv-1', 'lien-2', 'block'); return false;">Ajouter un tarif</a>
         <button name="retour">Retour</button>
     </div>
 

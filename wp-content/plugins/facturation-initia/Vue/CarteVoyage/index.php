@@ -30,7 +30,7 @@ ob_start();
     <!-- if le lien est cliqué -->
     <div id="forms">
         <div id="form-1" style="display:none;">
-            <form action="" method="post">
+            <form action="?ctrl=CarteVoyage&amp;action=insertCarteVoyage" method="post">
                 <tr>
                     <td>
                         <select name="price">

@@ -34,7 +34,7 @@ function addLigne(idChamp, tarifCarteVoyage)
     conteneur.id = nomDiv;
 
     var ligne = document.createElement('form');
-        // ligne.setAttribute('action', '?ctrl=CarteVoyage&amp;action=insertCarteVoyage');
+        ligne.setAttribute('action', '?ctrl=CarteVoyage&amp;action=insertCarteVoyage');
         ligne.setAttribute('method', 'post');
 
     var price = document.createElement('select');
@@ -105,7 +105,7 @@ function addLigneTCV(idChamp){
     conteneurTCV.id = nomDivTCV;
 
     var ligneTCV = document.createElement('form');
-    // ligne.setAttribute('action', '?ctrl=CarteVoyage&amp;action=insertTarif   CarteVoyage');
+        // ligne.setAttribute('action', '?ctrl=CarteVoyage&amp;action=insertTarifCarteVoyage');
         ligneTCV.setAttribute('method', 'post');
 
     var labelTCV = document.createElement('label');
