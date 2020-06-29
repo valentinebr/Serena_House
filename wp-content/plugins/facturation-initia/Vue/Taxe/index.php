@@ -15,22 +15,24 @@ ob_start();
         <th>Taux</th>
     </tr>
 
-    <?php foreach ($taxes as $t) { ?>
-        <tr id="<?php echo $t->id_taxe ?>" style="display: block">
-            <td><?php echo $t->libelle_taxe ?></td>
-            <td><?php echo $t->taux_taxe . '%'?></td>
+    <?php if (is_array($taxe) || is_object($taxe)) {
+        foreach ($taxes as $t) { ?>
+            <tr id="<?php echo $t->id_taxe ?>" style="display: block">
+                <td><?php echo $t->libelle_taxe ?></td>
+                <td><?php echo $t->taux_taxe . '%'?></td>
 
-            <td><a href="#" onclick="show('modifier-<?php echo $t->id_taxe ?>', <?php echo $t->id_taxe ?>, 'block')">Modifier</a></td>
-            <td><a href="?ctrl=Taxe&amp;action=deleteTaxe&amp;id=<?php echo $t->id_taxe?>">Supprimer</a></td>
-        </tr>
-        <tr id="modifier-<?php echo $t->id_taxe ?>" style="display: none">
-            <input type="hidden" value="<?php echo $t->id_taxe?>" name="id-taxe">
-            <td><input type="text" value="<?php echo $t->libelle_taxe ?>" name="nom-taxe"></td>
-            <td><input type="number" step="0.01" min="0" value="<?php echo $t->taux_taxe ?>" name="taux-taxe"></td>
-            <td><input type="submit" value="Valider"></td>
-            <td><a href="#" onclick="show(<?php echo $t->id_taxe ?>, 'modifier-<?php echo $t->id_taxe ?>', 'block')">Annuler</a></td>
-        </tr>
-    <?php
+                <td><a href="#" onclick="show('modifier-<?php echo $t->id_taxe ?>', <?php echo $t->id_taxe ?>, 'block')">Modifier</a></td>
+                <td><a href="?ctrl=Taxe&amp;action=deleteTaxe&amp;id=<?php echo $t->id_taxe?>">Supprimer</a></td>
+            </tr>
+            <tr id="modifier-<?php echo $t->id_taxe ?>" style="display: none">
+                <input type="hidden" value="<?php echo $t->id_taxe?>" name="id-taxe">
+                <td><input type="text" value="<?php echo $t->libelle_taxe ?>" name="nom-taxe"></td>
+                <td><input type="number" step="0.01" min="0" value="<?php echo $t->taux_taxe ?>" name="taux-taxe"></td>
+                <td><input type="submit" value="Valider"></td>
+                <td><a href="#" onclick="show(<?php echo $t->id_taxe ?>, 'modifier-<?php echo $t->id_taxe ?>', 'block')">Annuler</a></td>
+            </tr>
+            <?php
+        }
     } ?>
 </table>
 </form>

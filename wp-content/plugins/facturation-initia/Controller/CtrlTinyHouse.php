@@ -20,7 +20,6 @@ class CtrlTinyHouse extends Controleur
         $nuitee = new Nuitee();
         $nuitee = $nuitee->afficherNuitees();
 
-
         $recurrence = $this->countNomsTiny($tinyHouse);
 
         return ['tinyHouse' => $tinyHouse, 'taxe' => $taxe, 'nuitee' => $nuitee, 'recurrence' => $recurrence];

@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="http://localhost/Serena_House/wp-content/plugins/facturation-initia/CSS/app.css">
-    <title><?php echo $titre ?></title>
-</head>
-<body>
+<?php
+
+$root = $_SERVER['DOCUMENT_ROOT'];
+require ($root.'/wp-load.php');
+
+get_header();
+
+?>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="fr">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="stylesheet" href="http://localhost/Serena_House/wp-content/plugins/facturation-initia/CSS/app.css">-->
+<!--    <title>--><?php //echo $titre ?><!--</title>-->
+<!--</head>-->
+<!--<body>-->
 <nav>
     <a href="?ctrl=Accueil">Accueil</a>
     <a href="?ctrl=Service">Services</a>
@@ -20,5 +29,9 @@
 
 <script type="text/javascript" src="http://localhost/Serena_House/wp-content/plugins/facturation-initia/JS/app.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossOrigin="anonymous"></script>
-</body>
-</html>
+
+<?php
+get_footer();
+?>
+<!--</body>-->
+<!--</html>-->

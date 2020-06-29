@@ -34,12 +34,16 @@ ob_start();
 
     <input type="hidden" name="nom-fact" value="<?php echo $societe[0]->tiny_house_ste . '-'. date("d/m/Y") ?>">
 
-    <?php foreach ($services as $s) {?>
+    <?php
+    if (is_array($services) || is_object($services)) {
+        foreach ($services as $s) { ?>
 
-        <label for="<?php echo $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
-        <input type="number" min="0" id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
-
-    <?php } ?>
+            <label for="<?php echo $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
+            <input type="number" min="0" id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
+            <?php
+        }
+    }
+    ?>
     <!-- Fin du foreach -->
 
     <input type="submit" value="Valider">

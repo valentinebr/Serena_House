@@ -18,13 +18,17 @@ ob_start();
 
         <!-- if le + ou le valider est cliqué -->
 
-        <?php foreach($carteVoyage as $cv){ ?>
-            <tr>
-                <td><?php echo $cv->price ?></td>
-                <td><?php echo $cv->code ?></td>
-                <td><?php echo $cv->start_date ?></td>
-            </tr>
-        <?php } ?>
+        <?php
+        if (is_array($carteVoyage) || is_object($carteVoyage)) {
+            foreach ($carteVoyage as $cv) { ?>
+                <tr>
+                    <td><?php echo $cv->price ?></td>
+                    <td><?php echo $cv->code ?></td>
+                    <td><?php echo $cv->start_date ?></td>
+                </tr>
+            <?php
+            }
+        }?>
     </table>
 
     <!-- if le lien est cliqué -->
@@ -34,9 +38,13 @@ ob_start();
                 <tr>
                     <td>
                         <select name="price">
-                            <?php foreach ($tarifCarteVoyage as $tcv){ ?>
-                                <option><?php echo $tcv->tarif_tcv ?></option>
-                            <?php } ?>
+                            <?php
+                            if (is_array($tarifCarteVoyage) || is_object($tarifCarteVoyage)) {
+                                foreach ($tarifCarteVoyage as $tcv) { ?>
+                                    <option><?php echo $tcv->tarif_tcv ?></option>
+                                    <?php
+                                }
+                            }?>
                         </select>
                     </td>
                     <td>
