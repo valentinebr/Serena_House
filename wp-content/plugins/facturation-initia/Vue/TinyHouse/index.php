@@ -18,7 +18,6 @@ ob_start();
 
     <?php   $i=0;
             $j=0;
-    if (is_array($tinyHouse) || is_object($tinyHouse)) {
         foreach ($tinyHouse as $t) { ?>
             <tr>
                 <?php if ($recurrence[$t->nom_tiny] > 1) {
@@ -64,7 +63,7 @@ ob_start();
                 <?php } ?>
             </tr>
         <?php }
-    }?>
+    ?>
 </table>
 
 <div id="modifier" style="display: none">
@@ -78,15 +77,12 @@ ob_start();
             <td><label for="nb-places-modif">Nombre de places :</label></td>
             <td><input id="nb-places-modif" name="nb-places-modif" type="number"></td>
             <td><label for="tarif-modif">Accessible pour :</label></td>
-            <?php
-            if (is_array($nuitee) || is_object($nuitee)) {
-                foreach ($nuitee as $n) {?>
-                    <td>
-                        <input type="checkbox" name="nuitee-<?php echo $n->id_nuitee ?>" class="tarif" id="tarif-<?php echo $n->id_nuitee ?>" value="<?php echo $n->id_nuitee ?>">
-                        <label for="<?php echo $n->id_nuitee ?>"><?php echo $n->nombre_personnes_nuitee.' personnes' ?></label>
-                    </td>
-                <?php }
-            } ?>
+            <?php foreach ($nuitee as $n) {?>
+                <td>
+                    <input type="checkbox" name="nuitee-<?php echo $n->id_nuitee ?>" class="tarif" id="tarif-<?php echo $n->id_nuitee ?>" value="<?php echo $n->id_nuitee ?>">
+                    <label for="<?php echo $n->id_nuitee ?>"><?php echo $n->nombre_personnes_nuitee.' personnes' ?></label>
+                </td>
+            <?php } ?>
             <td><input type="submit" value="Valider"></td>
         </tr>
     </table>
@@ -102,14 +98,10 @@ ob_start();
         <label for="nombre-places">Nombre de places :</label>
         <input type="number" name="nombre-places" id="nombre-places">
         <label for="tarif">Accessible pour :</label>
-            <?php
-            if (is_array($nuitee) || is_object($nuitee)) {
-                foreach ($nuitee as $n) { ?>
-                    <input type="checkbox" name="nuitee-<?php echo $n->id_nuitee ?>" id="tarif"
-                           value="<?php echo $n->id_nuitee ?>">
-                    <label for="<?php echo $n->id_nuitee ?>"><?php echo $n->nombre_personnes_nuitee . ' personnes' ?></label>
-                <?php }
-            }?>
+        <?php foreach ($nuitee as $n) { ?>
+            <input type="checkbox" name="nuitee-<?php echo $n->id_nuitee ?>" id="tarif" value="<?php echo $n->id_nuitee ?>">
+            <label for="<?php echo $n->id_nuitee ?>"><?php echo $n->nombre_personnes_nuitee . ' personnes' ?></label>
+        <?php }?>
         <input type="submit" value="Valider">
         <button onclick="show('lien', 'show', 'block');return false;">Annuler</button>
     </form>

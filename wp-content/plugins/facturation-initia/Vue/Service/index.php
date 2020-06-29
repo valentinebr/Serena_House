@@ -17,9 +17,7 @@ ob_start();
 
 <!-- Foreach pour afficher tous les services liés à un utilisateur -->
 
-<?php
-if (is_array($services) || is_object($services)) {
-    foreach ($services as $s) {
+<?php foreach ($services as $s) {
         if ($s->archive == 0) {
             ?>
             <div id="<?php echo $s->id_tsrv ?>" class="lignes">
@@ -38,9 +36,7 @@ if (is_array($services) || is_object($services)) {
             <input class="column-2" type="text" name="reference" value="<?php echo $s->reference_tsrv ?>" required>
             <input class="column-3" type="text" name="prix-ht" value="<?php echo $s->prix_ht_tsrv ?>" required>
             <select class=column-4" name="taxe" required>
-            <?php
-            if (is_array($taxes) || is_object($taxes)) {
-                foreach ($taxes as $t) { ?>
+            <?php foreach ($taxes as $t) { ?>
                 <option value="<?php echo $t->id_taxe ?>"
                     <?php if ($t->id_taxe == $s->id_taxe) {
                         echo 'selected';
@@ -48,8 +44,7 @@ if (is_array($services) || is_object($services)) {
                 >
                     <?php echo $t->taux_taxe ?>
                 </option>
-                <?php }
-            }?>
+            <?php } ?>
                 </select>
                 <input class="column-5" type="submit" value="Valider">
                 <a class="column-6" href="#"
@@ -57,7 +52,6 @@ if (is_array($services) || is_object($services)) {
             </form>
             <?php
         }
-    }
 }
     ?>
 
@@ -66,12 +60,9 @@ if (is_array($services) || is_object($services)) {
             <input class="column-2" type="text" name="reference" required>
             <input class="column-3" type="number" name="prix-ht" required>
             <select class="column-4" name="taxe" required>
-                <?php
-                if (is_array($taxes) || is_object($taxes)) {
-                    foreach ($taxes as $t) { ?>
-                        <option value="<?php echo $t->id_taxe ?>"><?php echo $t->taux_taxe?></option>
-                    <?php }
-                } ?>
+                <?php foreach ($taxes as $t) { ?>
+                    <option value="<?php echo $t->id_taxe ?>"><?php echo $t->taux_taxe?></option>
+                <?php } ?>
             </select>
             <input class="column-5" type="submit" value="Ajouter" name="ajouter">
             <button  class="column-6" type="reset" name="annuler" onclick="show('lien', 'show', 'block'); return false;">Annuler</button>

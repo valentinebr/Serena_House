@@ -48,18 +48,15 @@ ob_start();
                 <th><label for="tiny_house_ste">Tiny House</label></th>
                 <td>
                     <select name="tiny_house_ste">
-                        <?php
-                        if (is_array($tinyHouse) || is_object($tinyHouse)) {
-                            foreach ($tinyHouse as $t) { ?>
-                                <option value="<?php echo $t->id_tiny ?>"
-                                    <?php if ($t->id_tiny == $societe[0]->id_tiny) {
-                                        echo 'selected';
-                                    } ?>
-                                >
-                                    <?php echo $t->nom_tiny ?>
-                                </option>
-                            <?php }
-                        }?>
+                        <?php foreach ($tinyHouse as $t) { ?>
+                            <option value="<?php echo $t->id_tiny ?>"
+                                <?php if ($t->id_tiny == $societe[0]->id_tiny) {
+                                    echo 'selected';
+                                } ?>
+                            >
+                                <?php echo $t->nom_tiny ?>
+                            </option>
+                        <?php }?>
                     </select>
 
 
@@ -111,12 +108,9 @@ ob_start();
                 <th><label for="tiny_house_ste">Tiny House</label></th>
                 <td>
                     <select name="tiny_house_ste">
-                        <?php
-                        if (is_array($tinyHouse) || is_object($tinyHouse)) {
-                            foreach ($tinyHouse as $t) { ?>
+                        <?php foreach ($tinyHouse as $t) { ?>
                                 <option value="<?php echo $t->id_tiny ?>"><?php echo $t->nom_tiny ?></option>
-                            <?php }
-                        } ?>
+                            <?php } ?>
                     </select>
                 </td>
             </tr>

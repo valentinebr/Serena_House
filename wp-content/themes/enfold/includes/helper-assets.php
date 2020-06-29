@@ -338,25 +338,24 @@ if( ! function_exists( 'av_video_assets_required' ) )
 		
 		$used 	= false;
 		$regex 	= "!\[av_blog|\[av_postslider|\[av_video|\[av_audio|\[av_player|\[audio|<audio|<video|video\=\'http|video\=\"http!";
-		
-		foreach($posts as $post)
-		{
-			preg_match($regex, $post->post_content, $matches);
-			
-			if(isset($matches[0]) )
-			{
-				$used = true;
-				break;
-			}
-			
-			$format = get_post_format( $post->ID );
-			
-			if($format == "audio" || $format == "video")
-			{
-				$used = true;
-				break;
-			}
-		}
+
+        if (is_array($posts) || is_object($posts)) {
+            foreach ($posts as $post) {
+                preg_match($regex, $post->post_content, $matches);
+
+                if (isset($matches[0])) {
+                    $used = true;
+                    break;
+                }
+
+                $format = get_post_format($post->ID);
+
+                if ($format == "audio" || $format == "video") {
+                    $used = true;
+                    break;
+                }
+            }
+        }
 		
 		return $used;
 	}
