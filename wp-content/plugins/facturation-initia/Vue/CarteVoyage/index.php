@@ -6,6 +6,8 @@ $titre = 'Mes cartes voyage';
 ob_start();
 ?>
 
+<h1>Carte Voyage</h1>
+
 <div class="container">
     <table>
         <tr>
@@ -23,8 +25,6 @@ ob_start();
                 <td><?php echo $cv->start_date ?></td>
             </tr>
         <?php } ?>
-
-
     </table>
 
     <!-- if le lien est cliqué -->
@@ -57,4 +57,7 @@ ob_start();
         <button name="retour">Retour</button>
     </div>
 
-</div>
+
+
+    <?php require_once __ROOT__.'/facturation-initia/Vue/CarteVoyage/tarifCarteVoyage.php'; ?>
+</div> <!-- END CONTAINER -->
