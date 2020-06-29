@@ -54,7 +54,7 @@ class CtrlTinyHouse extends Controleur
         $tiny = $tinyHouse->selectByIdTinyHouse($idTiny);
         $nuitee = $nuitee->afficherNuitees();
 
-        if ($tiny->nom_tiny != $_POST['nom-modif'] || $tiny!= $_POST['nb-places-modif']) {
+        if ($tiny->nom_tiny !== $_POST['nom-modif'] || $tiny->nombre_places_tiny !== $_POST['nb-places-modif']) {
             $values = array($_POST['nom-modif'], $_POST['nb-places-modif']);
             $idTiny = $tinyHouse->insertTinyHouse($values);
             $tinyHouse->updateTinyHouse($_POST['id-modif']);
