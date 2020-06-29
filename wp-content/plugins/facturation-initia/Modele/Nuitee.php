@@ -1,7 +1,6 @@
 <?php
 
 require_once (__ROOT__.'/facturation-initia/Modele/ModeleDeDonnees.php');
-require_once __ROOT__.'/../../wp-config.php';
 
 class Nuitee extends ModeleDeDonnees
 {
@@ -9,7 +8,9 @@ class Nuitee extends ModeleDeDonnees
     function afficherNuitees () {
         global $wpdb;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_nuitee WHERE archive_nuitee = %d";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_nuitee tn
+                INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe 
+                WHERE archive_nuitee = %d";
         $datas = 0;
 
         return $this->executerGetResults($sql, $datas);

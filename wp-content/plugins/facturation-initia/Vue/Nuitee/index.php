@@ -14,21 +14,30 @@ ob_start();
             <th>Nom</th>
             <th>Nombre de personnes</th>
             <th>Tarif</th>
+            <th>Taxe</th>
         </tr>
 
         <?php foreach ($nuitees as $n) { ?>
             <tr id="<?php echo $n->id_nuitee ?>" style="display: block">
                 <td><?php echo $n->nom_nuitee ?></td>
-                <td><?php echo $n->nombre_personnes_nuitee ?></td>
-                <td><?php echo $n->tarif_nuitee . '€' ?></td>
+                <td><?php echo $n->nombre_personnes_nuitee.' personnes' ?></td>
+                <td><?php echo $n->tarif_nuitee. '€' ?></td>
+                <td><?php echo $n->taux_taxe.'%' ?></td>
+
                 <td><a href="#" onclick="show('modifier-<?php echo $n->id_nuitee ?>', <?php echo $n->id_nuitee ?>, 'block')">Modifier</a></td>
                 <td><a href="?ctrl=Nuitee&amp;action=deleteNuitee&amp;id=<?php echo $n->id_nuitee?>">Supprimer</a></td>
             </tr>
             <tr id="modifier-<?php echo $n->id_nuitee ?>" style="display: none">
                 <input type="hidden" value="<?php echo $n->id_nuitee?>" name="id-nuitee">
                 <td><input type="text" value="<?php echo $n->nom_nuitee ?>" name="nom-nuitee"></td>
-                <td><input type="number" min="0" value="<?php echo $n->nombre_personnes_nuitee ?>" name="nombre-personnes-nuitee"></td>
-                <td><input type="number" step="0.01" min="0" value="<?php echo $n->tarif_nuitee ?>" name="tarif-nuitee"></td>
+                <td><input type="number" min="0" value="<?php echo $n->nombre_personnes_nuitee.' personnes' ?>" name="nombre-personnes-nuitee"></td>
+                <td><input type="number" step="0.01" min="0" value="<?php echo $n->tarif_nuitee. '€' ?>" name="tarif-nuitee"></td>
+                <td><select name="taxe-nuitee">
+                        <?php foreach ($taxe as $t) { ?>
+                        <option><?php echo $t->taux_taxe.'%' ?></option>
+                        <?php } ?>
+                </select></td>
+
                 <td><input type="submit" value="Valider"></td>
                 <td><a href="#" onclick="show(<?php echo $n->id_nuitee ?>, 'modifier-<?php echo $n->id_nuitee ?>', 'block')">Annuler</a></td>
             </tr>
@@ -47,6 +56,13 @@ ob_start();
         <input type="number" min="0" id="nombre_personnes_nuitee" name="nombre-personnes-nuitee">
         <label for="tarif-nuitee">Tarif</label>
         <input type="number" step="0.01" min="0" id="tarif-nuitee" name="tarif-nuitee">
+        <label for="taxe-nuitee">Taxe</label>
+        <select name="taxe-nuitee" id="taxe-nuitee">
+            <?php foreach ($taxe as $t) { ?>
+            <option><?php echo $t->taux_taxe.'%'  ?></option>
+            <?php } ?>
+        </select>
+
         <input type="submit" value="Valider">
         <button onclick="show('lien', 'show', 'inline-block');return false;">Annuler</button>
     </form>

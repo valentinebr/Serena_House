@@ -1,6 +1,7 @@
 <?php
 require_once (__ROOT__.'/facturation-initia/Controller/Controleur.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Nuitee.php');
+require_once (__ROOT__.'/facturation-initia/Modele/Taxe.php');
 
 class CtrlNuitee extends Controleur
 {
@@ -9,8 +10,10 @@ class CtrlNuitee extends Controleur
     {
         $nuitees = new Nuitee();
         $nuitees = $nuitees->afficherNuitees();
+        $taxe = new Taxe();
+        $taxe = $taxe->afficherTaxes();
 
-        return ['nuitees' => $nuitees];
+        return ['nuitees' => $nuitees, 'taxe' => $taxe];
     }
 
     function insertNuitee(){
