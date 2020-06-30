@@ -17,8 +17,8 @@ class CtrlCarteVoyage extends Controleur
         return ['carteVoyage' => $carteVoyage, 'tarifCarteVoyage' => $tarifCarteVoyage];
     }
 
-    public function insertCarteVoyage(){
-
+    public function insertCarteVoyage()
+    {
         $carteVoyage = new CarteVoyage();
 
         $values = array($_POST['price'], $_POST['reference'], $_POST['start_date']);
@@ -26,6 +26,16 @@ class CtrlCarteVoyage extends Controleur
         echo 'Update !';
 
         $carteVoyage->insertNewCarteVoyage($values);
+        $this->executer('index');
+    }
+
+    public function insertTarifCarteVoyage()
+    {
+        $tarifCarteVoyage = new TarifCarteVoyage();
+
+        $values = array($_POST['new-tarif']);
+
+        $tarifCarteVoyage->insertNewTarifCarteVoyage($values);
         $this->executer('index');
     }
 }
