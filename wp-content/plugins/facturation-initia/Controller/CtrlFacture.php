@@ -3,7 +3,8 @@
 require_once (__ROOT__.'/facturation-initia/Controller/Controleur.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Service.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Facture.php');
-require_once (__ROOT__.'/facturation-initia/Modele/Nuitee.php');
+require_once (__ROOT__.'/facturation-initia/Modele/NuiteeTinyHouse.php');
+require_once (__ROOT__.'/facturation-initia/Modele/CarteVoyage.php');
 
 
 class CtrlFacture extends Controleur
@@ -19,10 +20,12 @@ class CtrlFacture extends Controleur
         $services = $services->afficherServices();
         $societe = new Societe();
         $societe = $societe->afficherSociete();
-        $nuitees = new Nuitee();
-        $nuitees = $nuitees->afficherNuitees();
+        $nth = new NuiteeTinyHouse();
+        $nth = $nth->afficherNuiteeTinyHouse($societe[0]->id_tiny);
+        $carteVoyage = new CarteVoyage();
 
-        return ['services' => $services, 'societe' => $societe, 'nuitees' => $nuitees];
+
+        return ['services' => $services, 'societe' => $societe, 'nth' => $nth];
     }
 
     public function insertService () {
