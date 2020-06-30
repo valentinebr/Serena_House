@@ -7,6 +7,7 @@ class CtrlAccueil extends Controleur
 
     public function index()
     {
+
         // TODO: Implement index() method.
         return ['utilisateur' => 'Valentine'];
     }

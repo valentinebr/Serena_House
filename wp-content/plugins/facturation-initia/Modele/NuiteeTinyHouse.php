@@ -20,7 +20,9 @@ class NuiteeTinyHouse extends ModeleDeDonnees
     function afficherNuiteeTinyHouse ($id) {
         global $wpdb;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_nuitee_tiny_house WHERE (id_tiny=%d AND archive_nth=%d)";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_nuitee_tiny_house nth
+                INNER JOIN {$wpdb->prefix}fact_tarif_nuitee tn ON nth.id_nuitee=tn.id_nuitee
+                WHERE (id_tiny=%d AND archive_nth=%d)";
         $datas = array($id, 0);
 
         return $this->executerGetResults($sql, $datas);

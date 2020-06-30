@@ -172,3 +172,13 @@ function modifierTiny(modifier, tiny, tinyHouses) {
         })
 
 }
+
+
+function affichageFacture(type, tab) {
+    alert(getElementById(tab['id_nuitee']).value);
+        if (type === 'nuitée') {
+
+        } else if (type === 'service') {
+
+        }
+}

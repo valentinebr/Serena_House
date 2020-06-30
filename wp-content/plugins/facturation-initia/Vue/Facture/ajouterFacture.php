@@ -13,30 +13,17 @@ ob_start();
 
 <form method="post" action="?ctrl=Facture&amp;action=insertService">
 
-    <?php switch ($societe[0]->nombre_places_tiny) {
-        case 2 : ?>
-            <label><?php echo $nuitees->nom_nuitee ?> :</label>
-            <input type="number" min="0" name="nb-nuitees-<?php echo $nuitees->id_nuitee ?>"><br>
-    <?php break;
-        case 4 : ?>
-            <label>Nuitées 4 personnes :</label>
-            <input type="number" min="0" name="nb-nuitees"><br>
-    <?php break;
-        case 6 : ?>
-            <label>Nuitées 4 personnes :</label>
-            <input type="number" min="0" name="nb-nuitees"><br>
-            <label>Nuitées 6 personnes :</label>
-            <input type="number" min="0" name="nb-nuitees"><br>
-    <?php break;
-    }
+    <?php foreach ( $nth as $n) { ?>
+            <label><?php echo $n->nom_nuitee ?> :</label>
+            <input type="number" min="0" onchange="affichageFacture('nuitée', <?php echo htmlspecialchars(json_encode($n))?>);" id="<?php echo $n->id_nuitee?>" name="nb-nuitees-<?php echo $n->id_nuitee ?>"><br>
 
-    ?>
+    <?php } ?>
 
     <input type="hidden" name="nom-fact" value="<?php echo $societe[0]->tiny_house_ste . '-'. date("d/m/Y") ?>">
 
     <?php foreach ($services as $s) { ?>
         <label for="<?php echo $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
-        <input type="number" min="0" id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
+        <input type="number" min="0" onchange="affichageFacture('service', <?php echo htmlspecialchars(json_encode($s)) ?>);"  id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
     <?php } ?>
     <!-- Fin du foreach -->
 
@@ -55,19 +42,31 @@ ob_start();
         <th>Montant TVA</th>
         <th>Prix TTC</th>
     </tr>
+
+    <?php foreach ($nth as $n) {?>
+        <tr>
+            <td><?php echo $n->nom_nuitee?></td>
+            <td><?php echo $n->reference_nuitee?></td>
+            <td><?php echo $n->tarif_nuitee?></td>
+            <td id="quantite-nuitee-<?php echo $n->id_nuitee ?>"> </td>
+            <td>600</td>
+            <td>20%</td>
+            <td>120</td>
+            <td>720</td>
+        </tr>
+    <?php } ?>
     <!-- Foreach pour recenser tous les services -->
+    <?php foreach ($services as $s) {?>
     <tr>
-        <td>Nuitées</td>
-        <td>XXXXXXXX</td>
-        <td>40</td>
-        <td>15</td>
+        <td><?php echo $s->nom_tsrv?></td>
+        <td><?php echo $s->reference_tsrv?></td>
+        <td><?php echo $s->prix_ht_tsrv?></td>
+        <td id="quantite-nuitee-<?php echo $n->id_nuitee ?>"> </td>
         <td>600</td>
         <td>20%</td>
         <td>120</td>
         <td>720</td>
     </tr>
+    <?php } ?>
     <!-- Fin du foreach -->
 </table>
-
-</body>
-</html>
