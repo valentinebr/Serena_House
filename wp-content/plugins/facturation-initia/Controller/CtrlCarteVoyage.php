@@ -2,6 +2,7 @@
 require_once (__ROOT__.'/facturation-initia/Controller/Controleur.php');
 require_once (__ROOT__.'/facturation-initia/Modele/CarteVoyage.php');
 require_once (__ROOT__.'/facturation-initia/Modele/TarifCarteVoyage.php');
+require_once (__ROOT__.'/facturation-initia/Modele/Taxe.php');
 
 class CtrlCarteVoyage extends Controleur
 {
@@ -15,6 +16,17 @@ class CtrlCarteVoyage extends Controleur
         $tarifCarteVoyage = $tarifCarteVoyage->afficherTarifCarteVoyage();
 
         return ['carteVoyage' => $carteVoyage, 'tarifCarteVoyage' => $tarifCarteVoyage];
+    }
+
+    public function tarifCarteVoyage()
+    {
+        $tarifCarteVoyage = new TarifCarteVoyage();
+        $tarifCarteVoyage = $tarifCarteVoyage->afficherTarifCarteVoyage();
+
+        $taxe = new Taxe();
+        $taxe = $taxe->afficherTaxes();
+
+        return ['tarifCarteVoyage' => $tarifCarteVoyage, 'taxe' => $taxe];
     }
 
     public function insertCarteVoyage()
@@ -33,7 +45,7 @@ class CtrlCarteVoyage extends Controleur
     {
         $tarifCarteVoyage = new TarifCarteVoyage();
 
-        $values = array($_POST['new-tarif']);
+        $values = array($_POST['new-tarif-tcv']);
 
         $tarifCarteVoyage->insertNewTarifCarteVoyage($values);
         $this->executer('index');

@@ -8,7 +8,9 @@ class TarifCarteVoyage extends ModeleDeDonnees
     function afficherTarifCarteVoyage(){
         global $wpdb;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_carte_voyage WHERE archive_tcv = %d";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_carte_voyage tcv
+                INNER JOIN {$wpdb->prefix}fact_taxe t ON tcv.id_taxe = t.id_taxe
+                WHERE archive_tcv = %d";
         $datas = 0;
 
         return $this->executerGetResults($sql, $datas);

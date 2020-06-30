@@ -20,6 +20,7 @@ get_header();
     <a href="?ctrl=Service">Services</a>
     <a href="?ctrl=Societe">Société</a>
     <a href="?ctrl=CarteVoyage">Carte Voyage</a>
+    <a href="?ctrl=CarteVoyage&amp;action=tarifCarteVoyage">Tarif Carte Voyage</a>
     <a href="?ctrl=Facture">Factures</a>
     <a href="?ctrl=Taxe">Taxes</a>
     <a href="?ctrl=TinyHouse">Tiny houses</a>

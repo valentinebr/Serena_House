@@ -15,7 +15,6 @@ function show(indice, indice2, display)
 }
 
 
-
 function addLigne(idChamp, tarifCarteVoyage)
 {
     var tarifs;
@@ -93,50 +92,6 @@ function addLigne(idChamp, tarifCarteVoyage)
     forms.appendChild(conteneur);
 }
 
-function addLigneTCV(idChamp){
-    var formsTCV = document.getElementById('forms-tcv');
-
-    var divTCV = idChamp.split('-');
-    var numTCV = parseInt(divTCV[1]) + 1;
-    var nomDivTCV = divTCV[0] + '-' + numTCV;
-    var showPlusTCV = parseInt(divTCV[1]);
-
-    var conteneurTCV = document.createElement('div');
-    conteneurTCV.id = nomDivTCV;
-
-    var ligneTCV = document.createElement('form');
-        // ligne.setAttribute('action', '?ctrl=CarteVoyage&amp;action=insertTarifCarteVoyage');
-        ligneTCV.setAttribute('method', 'post');
-
-    var labelTCV = document.createElement('label');
-        labelTCV.setAttribute('for', 'label');
-        labelTCV.innerHTML = 'Tarif : '
-
-    var tarifTCV = document.createElement('input');
-        tarifTCV.setAttribute('type', 'number');
-        tarifTCV.setAttribute('name', 'tarifTCV');
-
-    var plusTCV = document.createElement('a');
-        plusTCV.textContent = '+';
-        plusTCV.setAttribute('href', '#');
-        plusTCV.setAttribute('id', 'plus-tcv-' + numTCV);
-        plusTCV.setAttribute('style', 'display:inline-block;');
-        plusTCV.setAttribute('onClick', 'addLigneTCV(\'' + nomDivTCV + '\'); hide(\'plus-tcv-' + numTCV +'\')');
-
-    var annulerTCV = document.createElement('button');
-        annulerTCV.setAttribute('name', 'annulerTCV');
-        annulerTCV.setAttribute('class', 'annuler');
-        annulerTCV.innerHTML = 'Annuler';
-        annulerTCV.setAttribute('onClick', 'deleteLigne(\''+ nomDivTCV + '\', \'plus-tcv-' + showPlusTCV +'\'); return false;');
-
-
-    ligneTCV.appendChild(labelTCV);
-    ligneTCV.appendChild(tarifTCV);
-    ligneTCV.appendChild(plusTCV);
-    ligneTCV.appendChild(annulerTCV);
-    conteneurTCV.appendChild(ligneTCV);
-    formsTCV.appendChild(conteneurTCV);
-}
 
 function hide(indice)
 {
@@ -145,6 +100,7 @@ function hide(indice)
     }
 }
 
+
 function deleteLigne(indice, indice2)
 {
         document.getElementById(indice).remove();
@@ -152,6 +108,7 @@ function deleteLigne(indice, indice2)
         document.getElementById(indice2).style.display = "inline-block";
     }
 }
+
 
 function modifierTiny(modifier, tiny, tinyHouses) {
     /* Efface l'attribut checked des checkboxs */
@@ -170,5 +127,4 @@ function modifierTiny(modifier, tiny, tinyHouses) {
                 document.getElementById('tarif-'+element['id_nuitee']).checked = true;
             }
         })
-
 }

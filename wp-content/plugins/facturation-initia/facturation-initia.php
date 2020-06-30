@@ -51,7 +51,8 @@ class Facturation
                                                                                 reference_tsrv VARCHAR(10) NOT NULL,
                                                                                 prix_ht_tsrv FLOAT NOT NULL,
                                                                                 archive_tsrv BOOLEAN NOT NULL);");
-        $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_carte_voyage (id_tcv INT AUTO_INCREMENT PRIMARY KEY, 
+        $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_carte_voyage (id_tcv INT AUTO_INCREMENT PRIMARY KEY,
+                                                                                nom_tcv VARCHAR(100) NOT NULL, 
                                                                                 tarif_tcv FLOAT NOT NULL,
                                                                                 archive_tcv BOOLEAN NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_nuitee (id_nuitee INT AUTO_INCREMENT PRIMARY KEY, 
@@ -111,6 +112,10 @@ class Facturation
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_nuitee_tiny_house
                         ADD (id_tiny INT NOT NULL,
                         FOREIGN KEY (id_tiny) REFERENCES {$wpdb->prefix}fact_tiny_house(id_tiny));");
+
+        $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_tarif_carte_voyage
+                        ADD (id_taxe INT NOT NULL,
+                        FOREIGN KEY (id_taxe) REFERENCES {$wpdb->prefix}fact_taxe(id_taxe));");
     }
 
     //////////SUPPRESSION DES TABLES A LA SUPPRESSION DU PLUGIN//////////

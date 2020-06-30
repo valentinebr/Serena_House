@@ -56,8 +56,4 @@ ob_start();
         <a href="#" id="lien" onclick="show('form-1', 'lien', 'block'); return false;">Ajouter une carte voyage</a>
         <button name="retour">Retour</button>
     </div>
-
-
-
-    <?php require_once __ROOT__.'/facturation-initia/Vue/CarteVoyage/tarifCarteVoyage.php'; ?>
 </div> <!-- END CONTAINER -->
