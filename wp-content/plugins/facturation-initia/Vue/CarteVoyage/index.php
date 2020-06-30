@@ -31,20 +31,22 @@ ob_start();
     <div id="forms">
         <div id="form-1" style="display:none;">
             <form action="?ctrl=CarteVoyage&amp;action=insertCarteVoyage" method="post">
-                <tr>
-                    <td>
-                        <select name="price">
-                            <?php foreach ($tarifCarteVoyage as $tcv) { ?>
-                                <option><?php echo $tcv->tarif_tcv ?></option>
-                            <?php }?>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" name="reference">
-                    </td>
-                    <td><input type="date" name="start_date"></td>
-                    <td><a href="#" id="plus-1" style="display:inline-block;" onclick="addLigne('form-1', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage));?>); hide('plus-1');">+</a></td>
-                </tr>
+
+                    <label for="price">Tarif :</label>
+                    <select name="price">
+                        <?php foreach ($tarifCarteVoyage as $tcv) { ?>
+                            <option><?php echo $tcv->tarif_tcv ?></option>
+                        <?php }?>
+                    </select>
+
+                    <label for="reference">Référence :</label>
+                    <input type="text" name="reference">
+
+                    <label for="start_date">Date : </label>
+                    <input type="date" name="start_date">
+
+                    <a href="#" id="plus-1" style="display:inline-block;" onclick="addLigne('form-1', <?php echo htmlspecialchars(json_encode($tarifCarteVoyage));?>); hide('plus-1');">+</a>
+
 
                 <input type="submit" value="Valider">
                 <button name="annuler" class="annuler" onclick="show('lien', 'form-1', 'block'); return false;">Annuler</button>
