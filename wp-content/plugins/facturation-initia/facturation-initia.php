@@ -39,8 +39,7 @@ class Facturation
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tiny_house (id_tiny INT AUTO_INCREMENT PRIMARY KEY,
                                                                                 nom_tiny VARCHAR(50) NOT NULL,
                                                                                 nombre_places_tiny INT NOT NULL,
-                                                                                archive_tiny BOOLEAN NOT NULL,
-                                                                                CONSTRAINT tiny_house_unique UNIQUE (nom_tiny))");
+                                                                                archive_tiny BOOLEAN NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_facture (id_fact INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_fact VARCHAR(100) NOT NULL,
                                                                                  date_fact DATETIME NOT NULL,
@@ -60,7 +59,8 @@ class Facturation
                                                                                 nombre_personnes_nuitee INT NOT NULL,
                                                                                 tarif_nuitee FLOAT NOT NULL,
                                                                                 archive_nuitee BOOLEAN NOT NULL);");
-        $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_nuitee_tiny_house (id_nth INT AUTO_INCREMENT PRIMARY KEY);");
+        $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_nuitee_tiny_house (id_nth INT AUTO_INCREMENT PRIMARY KEY,
+                                                                                archive_nth BOOLEAN NOT NULL);");
 
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_tarif_service 

@@ -20,9 +20,20 @@ class NuiteeTinyHouse extends ModeleDeDonnees
     function afficherNuiteeTinyHouse ($id) {
         global $wpdb;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_nuitee_tiny_house WHERE id_tiny=%d";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_nuitee_tiny_house WHERE (id_tiny=%d AND archive_nth=%d)";
+        $datas = array($id, 0);
 
-        $this->executerGetResults($sql, $id);
+        return $this->executerGetResults($sql, $datas);
+    }
+
+    function updateNuiteeTinyHouse ($id) {
+        global $wpdb;
+
+        $table = $wpdb->prefix.'fact_nuitee_tiny_house';
+        $datas = array('archive_nth' => 1);
+        $where = array('id_nth' => $id);
+
+        $this->executerUpdate($table,$datas,$where);
     }
 
 }

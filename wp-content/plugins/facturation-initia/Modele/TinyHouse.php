@@ -27,9 +27,10 @@ class TinyHouse extends ModeleDeDonnees
                 INNER JOIN {$wpdb->prefix}fact_nuitee_tiny_house n ON t.id_tiny=n.id_tiny
                 INNER JOIN {$wpdb->prefix}fact_tarif_nuitee tn ON n.id_nuitee=tn.id_nuitee
                 INNER JOIN {$wpdb->prefix}fact_taxe ta ON tn.id_taxe=ta.id_taxe
-                WHERE archive_tiny=%d";
+                WHERE archive_tiny=%d AND archive_nth=%d";
+        $datas = array(0,0);
 
-        return $this->executerGetResults($sql, 0);
+        return $this->executerGetResults($sql, $datas);
     }
 
     function afficherAllTinyHouse(){
@@ -46,9 +47,10 @@ class TinyHouse extends ModeleDeDonnees
     function selectByIdTinyHouse ($id) {
         global $wpdb;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house WHERE id_tiny= %d";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house WHERE (id_tiny= %d AND archive_tiny = %d)";
+        $datas = array ($id, 0);
 
-        $this->executerGetResults($sql, $id);
+        return $this->executerGetResults($sql, $datas);
     }
 
     function updateTinyHouse ($id) {

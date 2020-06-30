@@ -54,21 +54,18 @@ class CtrlTinyHouse extends Controleur
         $tiny = $tinyHouse->selectByIdTinyHouse($idTiny);
         $nuitee = $nuitee->afficherNuitees();
 
-        echo $tiny->nom_tiny .' = '. $_POST['nom-modif'];
-        echo $tiny->nombre_places_tiny .' = '. $_POST['nb-places-modif'];
-
-        if ($tiny->nom_tiny !== $_POST['nom-modif'] || $tiny->nombre_places_tiny !== $_POST['nb-places-modif']) {
+        if ($tiny[0]->nom_tiny !== $_POST['nom-modif'] || $tiny[0]->nombre_places_tiny !== $_POST['nb-places-modif']) {
             $values = array($_POST['nom-modif'], $_POST['nb-places-modif']);
             $idTiny = $tinyHouse->insertTinyHouse($values);
             $tinyHouse->updateTinyHouse($_POST['id-modif']);
         }
-        $nth = new NuiteeTinyHouse();
-        $nth = $nth->afficherNuiteeTinyHouse($idTiny);
 
         foreach ($nuitee as $n) {
             if ($_POST['nuitee-'.$n->id_nuitee]) {
                 $insert = true;
                 $nth = new NuiteeTinyHouse();
+                $nth = $nth->afficherNuiteeTinyHouse($idTiny);
+
                 foreach ($nth as $x) {
                     if ($x->id_nuitee == $_POST['nuitee-'.$n->id_nuitee]) {
                         $insert = false;
@@ -77,8 +74,22 @@ class CtrlTinyHouse extends Controleur
                 }
                 if ($insert == true ) {
                     $values2 = array ($_POST['nuitee-'.$n->id_nuitee], $idTiny);
+                    $nth = new NuiteeTinyHouse();
                     $nth->insertNuiteeTinyHouse($values2);
                 }
+
+            } else {
+                $nth = new NuiteeTinyHouse();
+                $nth = $nth->afficherNuiteeTinyHouse($idTiny);
+
+                foreach ($nth as $x) {
+                    if ($x->id_nuitee == $n->id_nuitee) {
+                        echo 'else + if';
+                        echo $x->id_nth;
+                        $nth = new NuiteeTinyHouse();
+                        $nth->updateNuiteeTinyHouse($x->id_nth);
+                    }
+                    }
 
             }
 
