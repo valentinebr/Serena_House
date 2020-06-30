@@ -84,8 +84,6 @@ class CtrlTinyHouse extends Controleur
 
                 foreach ($nth as $x) {
                     if ($x->id_nuitee == $n->id_nuitee) {
-                        echo 'else + if';
-                        echo $x->id_nth;
                         $nth = new NuiteeTinyHouse();
                         $nth->updateNuiteeTinyHouse($x->id_nth);
                     }

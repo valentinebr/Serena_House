@@ -54,7 +54,7 @@ ob_start();
                     } ?>
                 <?php } else {
                     $j = 0; ?>
-                    <td><a href="#"
+                    <td><a href="#" id="btn-modifier"
                            onclick="modifierTiny('modifier', <?php echo htmlspecialchars(json_encode($t)) . ',' . htmlspecialchars(json_encode($tinyHouse)) ?>)">Modifier</a>
                     </td>
                     <td>
@@ -84,6 +84,9 @@ ob_start();
                 </td>
             <?php } ?>
             <td><input type="submit" value="Valider"></td>
+            <td><button onclick="function f() {
+              getElementById('modifier').style.display === 'none';
+            }">Annuler</button></td>
         </tr>
     </table>
 </form>
