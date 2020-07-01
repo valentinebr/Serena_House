@@ -12,19 +12,11 @@ ob_start();
     <table>
         <tr style="display: block">
             <th>Nom</th>
-            <th>Nombre de personnes</th>
             <th>Tarif</th>
             <th>Taxe</th>
         </tr>
 
         <?php foreach ($nuitees as $n) { ?>
-            <tr id="<?php echo $n->id_nuitee ?>" style="display: block">
-                <td><?php echo $n->nom_nuitee ?></td>
-                <td><?php echo $n->nombre_personnes_nuitee ?></td>
-                <td><?php echo $n->tarif_nuitee . '€' ?></td>
-                <td><a href="#" onclick="show('modifier-<?php echo $n->id_nuitee ?>', <?php echo $n->id_nuitee ?>, 'block')">Modifier</a></td>
-                <td><a href="?ctrl=Nuitee&amp;action=deleteNuitee&amp;id=<?php echo $n->id_nuitee ?>">Supprimer</a></td>
-            </tr>
             <tr id="modifier-<?php echo $n->id_nuitee ?>" style="display: none">
                 <input type="hidden" value="<?php echo $n->id_nuitee ?>" name="id-nuitee">
                 <td><input type="text" value="<?php echo $n->nom_nuitee ?>" name="nom-nuitee"></td>
@@ -37,7 +29,6 @@ ob_start();
         <?php foreach ($nuitees as $n) { ?>
             <tr id="<?php echo $n->id_nuitee ?>" style="display: block">
                 <td><?php echo $n->nom_nuitee ?></td>
-                <td><?php echo $n->nombre_personnes_nuitee.' personnes' ?></td>
                 <td><?php echo $n->tarif_nuitee. '€' ?></td>
                 <td><?php echo $n->taux_taxe.'%' ?></td>
 
