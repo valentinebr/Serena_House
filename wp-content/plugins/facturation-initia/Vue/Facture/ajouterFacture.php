@@ -15,7 +15,7 @@ ob_start();
 
     <?php foreach ( $nth as $n) { ?>
             <label><?php echo $n->nom_nuitee ?> :</label>
-            <input type="number" min="0" onchange="affichageFacture('nuitée', <?php echo htmlspecialchars(json_encode($n))?>);" id="<?php echo $n->id_nuitee?>" name="nb-nuitees-<?php echo $n->id_nuitee ?>"><br>
+            <input type="number" min="0" onchange="affichageFacture('nuitée', <?php echo htmlspecialchars(json_encode($n))?>, this.value);" id="<?php echo $n->id_nuitee?>" name="nb-nuitees-<?php echo $n->id_nuitee ?>"><br>
 
     <?php } ?>
 
@@ -23,7 +23,7 @@ ob_start();
 
     <?php foreach ($services as $s) { ?>
         <label for="<?php echo $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
-        <input type="number" min="0" onchange="affichageFacture('service', <?php echo htmlspecialchars(json_encode($s)) ?>);"  id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
+        <input type="number" min="0" onchange="affichageFacture('service', <?php echo htmlspecialchars(json_encode($s)) ?>, this.value);"  id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
     <?php } ?>
     <!-- Fin du foreach -->
 
@@ -48,25 +48,42 @@ ob_start();
             <td><?php echo $n->nom_nuitee?></td>
             <td><?php echo $n->reference_nuitee?></td>
             <td><?php echo $n->tarif_nuitee?></td>
-            <td id="quantite-nuitee-<?php echo $n->id_nuitee ?>"> </td>
-            <td>600</td>
-            <td>20%</td>
-            <td>120</td>
-            <td>720</td>
+            <td id="quantite-nuitee-<?php echo $n->id_nuitee ?>">0</td>
+            <td id="tarif-ht-nuitee-<?php echo $n->id_nuitee ?>">0</td>
+            <td><?php echo $n->taux_taxe .'%' ?></td>
+            <td id="tarif-taxe-nuitee-<?php echo $n->id_nuitee ?>">0</td>
+            <td id="tarif-ttc-nuitee-<?php echo $n->id_nuitee ?>">0</td>
         </tr>
     <?php } ?>
-    <!-- Foreach pour recenser tous les services -->
+
     <?php foreach ($services as $s) {?>
     <tr>
         <td><?php echo $s->nom_tsrv?></td>
         <td><?php echo $s->reference_tsrv?></td>
         <td><?php echo $s->prix_ht_tsrv?></td>
-        <td id="quantite-nuitee-<?php echo $n->id_nuitee ?>"> </td>
-        <td>600</td>
-        <td>20%</td>
-        <td>120</td>
-        <td>720</td>
+        <td id="quantite-service-<?php echo $s->id_tsrv ?>">0</td>
+        <td id="tarif-ht-service-<?php echo $s->id_tsrv ?>">0</td>
+        <td><?php echo $s->taux_taxe.'%' ?></td>
+        <td id="tarif-taxe-service-<?php echo $s->id_tsrv ?>">0</td>
+        <td id="tarif-ttc-service-<?php echo $s->id_tsrv ?>">0</td>
     </tr>
     <?php } ?>
-    <!-- Fin du foreach -->
+
+
+    <tr style="font-weight: bolder">
+        <td style="border: none"> </td>
+        <td style="border-left: none; border-bottom: none"> </td>
+        <td>Total :</td>
+        <td id="total-quantite">0</td>
+        <td id="total-unitaire-ht">0</td>
+        <td> </td>
+        <td id="total-tva">0</td>
+        <td id="total-prix-ttc">0</td>
+    </tr>
 </table>
+
+<script type="text/javascript">
+
+    document.getElementsByTagName("input").onChange =
+        calculTotal(<?php htmlspecialchars(json_encode($nth)).','. htmlspecialchars(json_encode($services))?>);
+</script>

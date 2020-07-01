@@ -72,7 +72,6 @@ function addLigne(idChamp, tarifCarteVoyage)
         plus.setAttribute('style', 'display:inline-block;');
         plus.setAttribute('onClick', 'addLigne(\'' + nomDiv + '\', \'' + tarifsString + '\'); hide(\'plus-' + num +'\')');
 
-
     var annuler = document.createElement('button');
         annuler.setAttribute('name', 'annuler');
         annuler.setAttribute('class', 'annuler');
@@ -174,11 +173,43 @@ function modifierTiny(modifier, tiny, tinyHouses) {
 }
 
 
-function affichageFacture(type, tab) {
-    alert(getElementById(tab['id_nuitee']).value);
+function affichageFacture(type, tab, value) {
+
         if (type === 'nuitée') {
+            document.getElementById('quantite-nuitee-'+tab['id_nuitee']).textContent = value;
+
+            var prixHT = tab['tarif_nuitee'] * value;
+            document.getElementById('tarif-ht-nuitee-'+tab['id_nuitee']).textContent = prixHT;
+
+            var prixTaxe = tab['taux_taxe']*prixHT/100;
+            document.getElementById('tarif-taxe-nuitee-'+tab['id_nuitee']).textContent = prixTaxe;            var prixTaxe = tab['taux_taxe']*prixHT/100;
+
+            var prixTTC = prixHT + prixTaxe;
+            document.getElementById('tarif-ttc-nuitee-'+tab['id_nuitee']).textContent = prixTTC;
 
         } else if (type === 'service') {
+            document.getElementById('quantite-service-'+tab['id_tsrv']).textContent = value;
+
+            var prixHT = tab['prix_ht_tsrv'] * value;
+            document.getElementById('tarif-ht-service-'+tab['id_tsrv']).textContent = prixHT;
+
+            var prixTaxe = tab['taux_taxe']*prixHT/100;
+            document.getElementById('tarif-taxe-service-'+tab['id_tsrv']).textContent = prixTaxe;
+
+            var prixTTC = prixHT + prixTaxe;
+            document.getElementById('tarif-ttc-service-'+tab['id_tsrv']).textContent = prixTTC;
 
         }
+}
+
+
+function calculTotal(nth, services) {
+        var totalQuantite = 0;
+        var totalPrixUnitaireHT = 0;
+        var totalTVA = 0;
+        var totalPrixTTC = 0;
+        nth.foreach(function (element) {
+            totalQuantite += document.getElementById('quantite-nuitee-' + element['id_nuitee']).textContent;
+            alert(totalQuantite);
+        });
 }

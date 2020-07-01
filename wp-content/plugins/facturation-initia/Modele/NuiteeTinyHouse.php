@@ -22,6 +22,7 @@ class NuiteeTinyHouse extends ModeleDeDonnees
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_nuitee_tiny_house nth
                 INNER JOIN {$wpdb->prefix}fact_tarif_nuitee tn ON nth.id_nuitee=tn.id_nuitee
+                INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe
                 WHERE (id_tiny=%d AND archive_nth=%d)";
         $datas = array($id, 0);
 
