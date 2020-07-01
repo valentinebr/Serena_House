@@ -3,6 +3,13 @@ require_once __ROOT__.'/facturation-initia/Controller/CtrlSociete.php';
 
 $titre = 'Ma société';
 
+$current_user = get_current_user_id();
+if ($current_user == 0){
+    echo 'Pas connecté';
+} else {
+    echo 'Connecté en tant que '.$current_user;
+}
+
 ob_start();
 ?>
 

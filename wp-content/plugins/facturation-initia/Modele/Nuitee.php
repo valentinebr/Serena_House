@@ -7,11 +7,12 @@ class Nuitee extends ModeleDeDonnees
 
     function afficherNuitees () {
         global $wpdb;
+        $current_user = wp_get_current_user();
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_nuitee tn
                 INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe 
                 WHERE archive_nuitee = %d";
-        $datas = 0;
+        $datas = $current_user->ID;
 
         return $this->executerGetResults($sql, $datas);
     }

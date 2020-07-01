@@ -9,18 +9,20 @@ class Service extends ModeleDeDonnees
 
     function afficherServices() {
         global $wpdb;
-        $id = 3; //temporaire
+        $current_user = wp_get_current_user();
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_service s
                                             INNER JOIN {$wpdb->prefix}fact_taxe t ON s.id_taxe=t.id_taxe
                                             WHERE s.id_user = %d AND s.archive_tsrv = %d";
-        $datas = array($id, 0);
+        $datas = array($current_user->ID, 0);
 
         return $this->executerGetResults($sql, $datas);
     }
 
     function insertTarifService ($values) {
         global $wpdb;
+        $current_user = wp_get_current_user();
+
         $table = $wpdb->prefix . "fact_tarif_service";
         $datas = array(
             'nom_tsrv'          =>      $values[0],
@@ -28,7 +30,8 @@ class Service extends ModeleDeDonnees
             'prix_ht_tsrv'      =>      $values[2],
             'archive_tsrv'      =>      0,
             'id_taxe'           =>      $values[3],
-            'id_user'           =>      3); //A remplacer par get_current_user
+            'id_user'           =>      $current_user->ID
+        );
 
         $this->executerInsert($table, $datas);
     }

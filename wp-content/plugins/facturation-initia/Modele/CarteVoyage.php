@@ -7,11 +7,10 @@ class CarteVoyage extends ModeleDeDonnees
 
     function afficherCarteVoyage(){
         global $wpdb;
-
-        $id = 0;
+        $current_user = wp_get_current_user();
 
         $sql = "SELECT * FROM {$wpdb->prefix}dopbsp_coupons WHERE user_id = %d";
-        $datas = array($id);
+        $datas = array($current_user->ID);
 
         return $this->executerGetResults($sql, $datas);
     }
