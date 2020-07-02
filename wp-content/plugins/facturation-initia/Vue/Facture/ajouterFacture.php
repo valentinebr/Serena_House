@@ -15,15 +15,15 @@ ob_start();
 
     <?php foreach ( $nth as $n) { ?>
             <label><?php echo $n->nom_nuitee ?> :</label>
-            <input type="number" min="0" onchange="affichageFacture('nuitée', <?php echo htmlspecialchars(json_encode($n))?>, this.value);" id="<?php echo $n->id_nuitee?>" name="nb-nuitees-<?php echo $n->id_nuitee ?>"><br>
-
+            <input class="input" type="number" min="0" onchange="affichageFacture('nuitée', <?php echo htmlspecialchars(json_encode($n))?>, this.value);calculTotal(<?php echo htmlspecialchars(json_encode($nth)).','. htmlspecialchars(json_encode($services))?>);" id="<?php echo $n->id_nuitee?>" name="nb-nuitees-<?php echo $n->id_nuitee ?>"><br>
     <?php } ?>
+
 
     <input type="hidden" name="nom-fact" value="<?php echo $societe[0]->tiny_house_ste . '-'. date("d/m/Y") ?>">
 
     <?php foreach ($services as $s) { ?>
         <label for="<?php echo $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
-        <input type="number" min="0" onchange="affichageFacture('service', <?php echo htmlspecialchars(json_encode($s)) ?>, this.value);"  id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
+        <input class="input" type="number" min="0" onchange="affichageFacture('service', <?php echo htmlspecialchars(json_encode($s)) ?>, this.value);calculTotal(<?php echo htmlspecialchars(json_encode($nth)).','. htmlspecialchars(json_encode($services))?>);"  id="<?php echo $s->id_tsrv ?>" name="nb-service-<?php echo $s->id_tsrv ?>"><br>
     <?php } ?>
     <!-- Fin du foreach -->
 
@@ -81,9 +81,3 @@ ob_start();
         <td id="total-prix-ttc">0</td>
     </tr>
 </table>
-
-<script type="text/javascript">
-
-    document.getElementsByTagName("input").onChange =
-        calculTotal(<?php htmlspecialchars(json_encode($nth)).','. htmlspecialchars(json_encode($services))?>);
-</script>
