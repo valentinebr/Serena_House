@@ -3,19 +3,21 @@ require_once __ROOT__.'/facturation-initia/Controller/CtrlSociete.php';
 
 $titre = 'Ma société';
 
-$current_user = get_current_user_id();
+echo '<h1>'.$titre.'</h1>';
+
+$current_user = wp_get_current_user();
 if ($current_user == 0){
     echo 'Pas connecté';
 } else {
-    echo 'Connecté en tant que '.$current_user;
+    echo 'Connecté en tant que : '.$current_user->display_name .' qui a pour ID : '. $current_user->ID;
 }
 
 ob_start();
+
+if ($societe[0] != 0){
 ?>
 
-<h1>Gestion de la société</h1>
-
-    <h2>Informations</h2>
+    <h2>Informations de la société</h2>
 
     <p>Veuillez renseigner les informations sur votre société</p>
 
@@ -65,8 +67,6 @@ ob_start();
                             </option>
                         <?php }?>
                     </select>
-
-
                 </td>
             </tr>
         </table>
@@ -74,7 +74,9 @@ ob_start();
         <input type="submit" name="modifier" value="Enregistrer les modifications">
     </form>
 
-
+<?php
+    } else {
+?>
     <h2>Ajouter une société</h2>
 
     <p>Veuillez renseigner les informations sur votre société</p>
@@ -126,3 +128,4 @@ ob_start();
         <input type="submit" name="ajouter" value="Ajouter la société">
     </form>
 
+<?php }
