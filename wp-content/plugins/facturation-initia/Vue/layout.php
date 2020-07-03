@@ -1,7 +1,7 @@
 <?php
 
 $root = $_SERVER['DOCUMENT_ROOT'];
-require ($root.'/wp-load.php');
+require ($root.'/Serena_House/wp-load.php');
 
 get_header();
 
