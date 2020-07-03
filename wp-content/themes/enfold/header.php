@@ -112,7 +112,7 @@ wp_head();
 	?>
 
 	<div id='wrap_all'>
-
+        <a href="http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Accueil">Accueil</a>
 	<?php 
 	if(!$blank) //blank templates dont display header nor footer
 	{ 

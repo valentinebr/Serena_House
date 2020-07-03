@@ -185,8 +185,10 @@ function facturation_initia_menu(){
         );
 }
 
-function indexSociete(){
-    include('Vue/Societe/index.php');
+function indexSociete()
+{
+//    $fichier = file_get_contents('http://localhost:63342/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe');
+    include 'http://localhost:63342/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Accueil';
 }
 
 function indexCarteVoyage(){
@@ -201,6 +203,6 @@ add_action('admin_menu', 'facturation_initia_menu');
 //require_once (__ROOT__.'/facturation-initia/Modele/Societe.php');
 
 
-function facturation_initia_page(){
+    function facturation_initia_page(){
     echo '<h1>'.get_admin_page_title().'</h1>';
 }
