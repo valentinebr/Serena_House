@@ -5,6 +5,9 @@ require_once (__ROOT__.'/facturation-initia/Modele/Service.php');
 require_once (__ROOT__.'/facturation-initia/Modele/Facture.php');
 require_once (__ROOT__.'/facturation-initia/Modele/NuiteeTinyHouse.php');
 require_once (__ROOT__.'/facturation-initia/Modele/CarteVoyage.php');
+require_once (__ROOT__.'/facturation-initia/Modele/Societe.php');
+require_once (__ROOT__.'/facturation-initia/fpdf182/fpdf.php');
+require_once(__ROOT__ . '/facturation-initia/tfpdf/PDF.php');
 
 
 class CtrlFacture extends Controleur
@@ -28,7 +31,7 @@ class CtrlFacture extends Controleur
         return ['services' => $services, 'societe' => $societe, 'nth' => $nth];
     }
 
-    public function insertService () {
+    public function insertFacture () {
         $facture = new Facture();
         $service = new Service();
         $services = $service->afficherServices();
@@ -41,7 +44,23 @@ class CtrlFacture extends Controleur
             $service->insertService($values);
         }
 
+        $this->creerPDF();
+
         $this->executer('ajouterFacture');
+    }
+
+    function creerPDF() {
+
+        $pdf = new PDF();
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        // Ajoute une police Unicode (utilise UTF-8)
+        $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
+        $pdf->SetFont('DejaVu','',12);
+        for($i=1;$i<=40;$i++) {
+            $pdf->Cell(0,10,'Impression de la ligne numéro '.$i,0,1);
+        }
+        $pdf->Output();
     }
 
 }

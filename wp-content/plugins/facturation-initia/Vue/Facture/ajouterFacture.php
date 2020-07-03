@@ -11,7 +11,7 @@ ob_start();
 
 <h3>Les services</h3>
 
-<form method="post" action="?ctrl=Facture&amp;action=insertService">
+<form method="post" action="?ctrl=Facture&amp;action=insertFacture">
 
     <?php foreach ( $nth as $n) { ?>
             <label><?php echo $n->nom_nuitee ?> :</label>
@@ -47,12 +47,12 @@ ob_start();
         <tr>
             <td><?php echo $n->nom_nuitee?></td>
             <td><?php echo $n->reference_nuitee?></td>
-            <td><?php echo $n->tarif_nuitee?></td>
+            <td><?php echo $n->tarif_nuitee.'€'?></td>
             <td id="quantite-nuitee-<?php echo $n->id_nuitee ?>">0</td>
-            <td id="tarif-ht-nuitee-<?php echo $n->id_nuitee ?>">0</td>
+            <td id="tarif-ht-nuitee-<?php echo $n->id_nuitee ?>">0 €</td>
             <td><?php echo $n->taux_taxe .'%' ?></td>
-            <td id="tarif-taxe-nuitee-<?php echo $n->id_nuitee ?>">0</td>
-            <td id="tarif-ttc-nuitee-<?php echo $n->id_nuitee ?>">0</td>
+            <td id="tarif-taxe-nuitee-<?php echo $n->id_nuitee ?>">0 €</td>
+            <td id="tarif-ttc-nuitee-<?php echo $n->id_nuitee ?>">0 €</td>
         </tr>
     <?php } ?>
 
@@ -62,10 +62,10 @@ ob_start();
         <td><?php echo $s->reference_tsrv?></td>
         <td><?php echo $s->prix_ht_tsrv?></td>
         <td id="quantite-service-<?php echo $s->id_tsrv ?>">0</td>
-        <td id="tarif-ht-service-<?php echo $s->id_tsrv ?>">0</td>
+        <td id="tarif-ht-service-<?php echo $s->id_tsrv ?>">0 €</td>
         <td><?php echo $s->taux_taxe.'%' ?></td>
-        <td id="tarif-taxe-service-<?php echo $s->id_tsrv ?>">0</td>
-        <td id="tarif-ttc-service-<?php echo $s->id_tsrv ?>">0</td>
+        <td id="tarif-taxe-service-<?php echo $s->id_tsrv ?>">0 €</td>
+        <td id="tarif-ttc-service-<?php echo $s->id_tsrv ?>">0 €</td>
     </tr>
     <?php } ?>
 
@@ -75,9 +75,9 @@ ob_start();
         <td style="border-left: none; border-bottom: none"> </td>
         <td>Total :</td>
         <td id="total-quantite">0</td>
-        <td id="total-unitaire-ht">0</td>
+        <td id="total-unitaire-ht">0 €</td>
         <td> </td>
-        <td id="total-tva">0</td>
-        <td id="total-prix-ttc">0</td>
+        <td id="total-tva">0 €</td>
+        <td id="total-prix-ttc">0 €</td>
     </tr>
 </table>

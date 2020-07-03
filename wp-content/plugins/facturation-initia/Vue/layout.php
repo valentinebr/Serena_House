@@ -7,14 +7,6 @@ get_header();
 
 ?>
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="fr">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <link rel="stylesheet" href="http://localhost/Serena_House/wp-content/plugins/facturation-initia/CSS/app.css">-->
-<!--    <title>--><?php //echo $titre ?><!--</title>-->
-<!--</head>-->
-<!--<body>-->
 <nav>
     <a href="?ctrl=Accueil">Accueil</a>
     <a href="?ctrl=Service">Services</a>
@@ -34,5 +26,3 @@ get_header();
 <?php
 get_footer();
 ?>
-<!--</body>-->
-<!--</html>-->

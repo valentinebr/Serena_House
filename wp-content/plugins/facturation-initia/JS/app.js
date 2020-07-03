@@ -179,56 +179,54 @@ function affichageFacture(type, tab, value) {
             document.getElementById('quantite-nuitee-'+tab['id_nuitee']).textContent = value;
 
             var prixHT = tab['tarif_nuitee'] * value;
-            document.getElementById('tarif-ht-nuitee-'+tab['id_nuitee']).textContent = prixHT;
+            document.getElementById('tarif-ht-nuitee-'+tab['id_nuitee']).textContent = prixHT + '€';
 
             var prixTaxe = tab['taux_taxe']*prixHT/100;
-            document.getElementById('tarif-taxe-nuitee-'+tab['id_nuitee']).textContent = prixTaxe;            var prixTaxe = tab['taux_taxe']*prixHT/100;
+            document.getElementById('tarif-taxe-nuitee-'+tab['id_nuitee']).textContent = prixTaxe + '€';            var prixTaxe = tab['taux_taxe']*prixHT/100;
 
             var prixTTC = prixHT + prixTaxe;
-            document.getElementById('tarif-ttc-nuitee-'+tab['id_nuitee']).textContent = prixTTC;
+            document.getElementById('tarif-ttc-nuitee-'+tab['id_nuitee']).textContent = prixTTC + '€';
 
         } else if (type === 'service') {
             document.getElementById('quantite-service-'+tab['id_tsrv']).textContent = value;
 
             var prixHT = tab['prix_ht_tsrv'] * value;
-            document.getElementById('tarif-ht-service-'+tab['id_tsrv']).textContent = prixHT;
+            document.getElementById('tarif-ht-service-'+tab['id_tsrv']).textContent = prixHT + '€';
 
             var prixTaxe = tab['taux_taxe']*prixHT/100;
-            document.getElementById('tarif-taxe-service-'+tab['id_tsrv']).textContent = prixTaxe;
+            document.getElementById('tarif-taxe-service-'+tab['id_tsrv']).textContent = prixTaxe + '€';
 
             var prixTTC = prixHT + prixTaxe;
-            document.getElementById('tarif-ttc-service-'+tab['id_tsrv']).textContent = prixTTC;
+            document.getElementById('tarif-ttc-service-'+tab['id_tsrv']).textContent = prixTTC + '€';
         }
 }
 
 
 function calculTotal(nth, services) {
-    alert('hello !');
-    alert(nth);
-    alert(services);
+
         var totalQuantite = 0;
         var totalPrixUnitaireHT = 0;
         var totalTVA = 0;
         var totalPrixTTC = 0;
-        nth.foreach(function (element) {
-            alert('nth');
-            totalQuantite += document.getElementById('quantite-nuitee-' + element['id_nuitee']).textContent;
-            totalPrixUnitaireHT += document.getElementById('tarif-ht-nuitee-'+element['id_nuitee']).textContent;
-            totalTVA += document.getElementById('tarif-taxe-nuitee-'+element['id_nuitee']).textContent;
-            totalPrixTTC += document.getElementById('tarif-ttc-nuitee-'+element['id_nuitee']).textContent;
-        });
 
-        services.foreach(function (element) {
+        for ( var i=0; i<nth.length; i++) {
+            totalQuantite += parseInt(document.getElementById('quantite-nuitee-' + nth[i]['id_nuitee']).textContent);
+            totalPrixUnitaireHT += parseFloat(document.getElementById('tarif-ht-nuitee-'+ nth[i]['id_nuitee']).textContent);
+            totalTVA += parseFloat(document.getElementById('tarif-taxe-nuitee-'+ nth[i]['id_nuitee']).textContent);
+            totalPrixTTC += parseFloat(document.getElementById('tarif-ttc-nuitee-'+nth[i]['id_nuitee']).textContent);
+        }
 
-            totalQuantite += document.getElementById('quantite-service-' + element['id_tsrv']).textContent;
-            totalPrixUnitaireHT += document.getElementById('tarif-ht-service-'+element['id_tsrv']).textContent;
-            totalTVA += document.getElementById('tarif-taxe-service-'+element['id_tsrv']).textContent;
-            totalPrixTTC += document.getElementById('tarif-ttc-service-'+element['id_tsrv']).textContent;
-        })
+        for (var i=0; i<services.length; i++) {
+
+            totalQuantite += parseInt(document.getElementById('quantite-service-' + services[i]['id_tsrv']).textContent);
+            totalPrixUnitaireHT += parseFloat(document.getElementById('tarif-ht-service-'+services[i]['id_tsrv']).textContent);
+            totalTVA += parseFloat(document.getElementById('tarif-taxe-service-'+services[i]['id_tsrv']).textContent);
+            totalPrixTTC += parseFloat(document.getElementById('tarif-ttc-service-'+services[i]['id_tsrv']).textContent);
+        }
 
         document.getElementById('total-quantite').textContent = totalQuantite;
-        document.getElementById('total-unitaire-ht').textContent = totalPrixUnitaireHT;
-        document.getElementById('total-tva').textContent = totalTVA;
-        document.getElementById('total-prix-ttc').textContent = totalPrixTTC;
+        document.getElementById('total-unitaire-ht').textContent = totalPrixUnitaireHT + '€';
+        document.getElementById('total-tva').textContent = totalTVA + '€';
+        document.getElementById('total-prix-ttc').textContent = totalPrixTTC + '€';
 
 }
