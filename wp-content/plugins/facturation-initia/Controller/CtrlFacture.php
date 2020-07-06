@@ -54,12 +54,6 @@ class CtrlFacture extends Controleur
         $pdf = new PDF();
         $pdf->AliasNbPages();
         $pdf->AddPage();
-        // Ajoute une police Unicode (utilise UTF-8)
-        $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
-        $pdf->SetFont('DejaVu','',12);
-        for($i=1;$i<=40;$i++) {
-            $pdf->Cell(0,10,'Impression de la ligne numéro '.$i,0,1);
-        }
         $pdf->Output();
     }
 
