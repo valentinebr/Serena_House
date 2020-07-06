@@ -16,8 +16,6 @@ ob_start();
             <th>Taxe</th>
         </tr>
 
-
-
         <?php foreach ($nuitees as $n) { ?>
             <tr id="<?php echo $n->id_nuitee ?>" style="display: block">
                 <td><?php echo $n->nom_nuitee ?></td>
@@ -31,10 +29,11 @@ ob_start();
             <tr id="modifier-<?php echo $n->id_nuitee ?>" style="display: none">
                 <input type="hidden" value="<?php echo $n->id_nuitee?>" name="id-nuitee">
 
-                <td><label for="id-nuitee">Nom : </label><input type="text" value="<?php echo $n->nom_nuitee ?>" name="nom-nuitee"></td>
-                <td><label for="nombre-personnes-nuitee">Nombre de personnes : </label>
-                    <input type="number" min="0" value="<?php echo $n->nombre_personnes_nuitee ?>" name="nombre-personnes-nuitee"></td>
-                <td><label for="tarif-nuitee">Tarif : </label><input type="number" step="0.01" min="0" value="<?php echo $n->tarif_nuitee ?>" name="tarif-nuitee"></td>
+                <td><label for="nom-nuitee">Nom : </label><input type="text" value="<?php echo $n->nom_nuitee ?>" name="nom-nuitee"></td>
+                <td><label for="nombre-personnes-nuitee">Nombre de personnes : </label><input type="number" min="0" value="<?php echo $n->nombre_personnes_nuitee ?>" name="nombre-personnes-nuitee"></td>
+                <td><label for="tarif-nuitee">Tarif : </label>
+                    <input type="number" step="0.01" min="0" value="<?php echo $n->tarif_nuitee ?>" name="tarif-nuitee">
+                </td>
                 <td><label for="taxe-nuitee">Taxe : </label>
                     <select name="taxe-nuitee">
                         <?php foreach ($taxe as $t) { ?>
@@ -68,7 +67,7 @@ ob_start();
         <label for="taxe-nuitee">Taxe</label>
         <select name="taxe-nuitee" id="taxe-nuitee">
             <?php foreach ($taxe as $t) { ?>
-            <option><?php echo $t->taux_taxe.'%'  ?></option>
+            <option value="<?php echo $t->id_taxe ?>"><?php echo $t->taux_taxe.'%'  ?></option>
             <?php } ?>
         </select>
 

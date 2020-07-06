@@ -45,9 +45,19 @@ class CtrlCarteVoyage extends Controleur
     {
         $tarifCarteVoyage = new TarifCarteVoyage();
 
-        $values = array($_POST['new-tarif-tcv']);
+        $values = array($_POST['nom-tcv'], $_POST['tarif-tcv'], $_POST['taxe-tcv']);
 
         $tarifCarteVoyage->insertNewTarifCarteVoyage($values);
-        $this->executer('index');
+        $this->executer('tarifCarteVoyage');
+    }
+
+    public function updateTarifCarteVoyage()
+    {
+        $values = array($_POST['nom-tcv'], $_POST['tarif-tcv'], $_POST['taxe-tcv']);
+
+        $tarifCarteVoyage = new TarifCarteVoyage();
+        $tarifCarteVoyage->updateFieldTarifCarteVoyage($_POST['id-tcv']);
+        $tarifCarteVoyage->insertNewTarifCarteVoyage($values);
+        $this->executer('tarifCarteVoyage');
     }
 }

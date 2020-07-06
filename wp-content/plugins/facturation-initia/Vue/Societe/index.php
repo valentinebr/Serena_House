@@ -5,14 +5,12 @@ $titre = 'Ma société';
 
 echo '<h1>'.$titre.'</h1>';
 
-if (is_user_logged_in()){
 $current_user = wp_get_current_user();
+if (is_user_logged_in()){
     echo 'Connecté en tant que : '.$current_user->display_name .' qui a pour ID : '. $current_user->ID;
 } else {
     echo 'Pas connecté';
 }
-
-print_r($current_user);
 
 ob_start();
 
