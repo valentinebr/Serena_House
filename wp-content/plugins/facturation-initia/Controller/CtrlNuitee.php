@@ -25,12 +25,11 @@ class CtrlNuitee extends Controleur
     }
 
     function updateNuitee(){
+        $values = array($_POST['nom-nuitee'], $_POST['nombre-personnes-nuitee'], $_POST['tarif-nuitee'], $_POST['taxe-nuitee']);
+
         $nuitee = new Nuitee();
-
-        $values = array($_POST['nom-nuitee'], $_POST['nombre-personnes-nuitee'], $_POST['tarif-nuitee']);
-
-        $nuitee->insertNewNuitee($values);
         $nuitee->updateFieldNuitee($_POST['id-nuitee']);
+        $nuitee->insertNewNuitee($values);
         $this->executer('index');
     }
 }

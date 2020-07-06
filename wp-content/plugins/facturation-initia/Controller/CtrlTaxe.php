@@ -27,8 +27,8 @@ class CtrlTaxe extends Controleur
         $values = array($_POST['nom-taxe'], $_POST['taux-taxe']);
 
         $taxe = new Taxe();
-        $taxe->insererTaxe($values);
         $taxe->updateTaxe($_POST['id-taxe']);
+        $taxe->insererTaxe($values);
         $this->executer('index');
     }
 
