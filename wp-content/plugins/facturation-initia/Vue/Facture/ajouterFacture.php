@@ -19,7 +19,7 @@ ob_start();
     <?php } ?>
 
 
-    <input type="hidden" name="nom-fact" value="<?php echo $societe[0]->tiny_house_ste . '-'. date("d/m/Y") ?>">
+    <input type="hidden" name="nom-fact" value="<?php echo $societe[0]->nom_tiny . '-'. date("d/m/Y") ?>">
 
     <?php foreach ($services as $s) { ?>
         <label for="<?php echo $s->id_tsrv ?>"><?php echo $s->nom_tsrv ?> :</label>
@@ -47,7 +47,7 @@ ob_start();
         <tr>
             <td><?php echo $n->nom_nuitee?></td>
             <td><?php echo $n->reference_nuitee?></td>
-            <td><?php echo $n->tarif_nuitee.'€'?></td>
+            <td><?php echo $n->tarif_nuitee.' €'?></td>
             <td id="quantite-nuitee-<?php echo $n->id_nuitee ?>">0</td>
             <td id="tarif-ht-nuitee-<?php echo $n->id_nuitee ?>">0 €</td>
             <td><?php echo $n->taux_taxe .'%' ?></td>
@@ -60,7 +60,7 @@ ob_start();
     <tr>
         <td><?php echo $s->nom_tsrv?></td>
         <td><?php echo $s->reference_tsrv?></td>
-        <td><?php echo $s->prix_ht_tsrv?></td>
+        <td><?php echo $s->prix_ht_tsrv.' €'?></td>
         <td id="quantite-service-<?php echo $s->id_tsrv ?>">0</td>
         <td id="tarif-ht-service-<?php echo $s->id_tsrv ?>">0 €</td>
         <td><?php echo $s->taux_taxe.'%' ?></td>

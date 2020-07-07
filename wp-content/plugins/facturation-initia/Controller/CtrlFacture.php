@@ -51,11 +51,19 @@ class CtrlFacture extends Controleur
 
     function creerPDF() {
 
+        $societe = new Societe();
+        $nth = new NuiteeTinyHouse();
+        $services = new Service();
+
+        $societe = $societe->afficherSociete();
+        $nth= $nth->afficherNuiteeTinyHouse($societe[0]->id_tiny);
+        $services = $services->afficherServices();
+
         $pdf = new PDF();
         $pdf->AliasNbPages();
         $pdf->AddPage();
-        $pdf->header();
-        $pdf->tableArticles();
+        $pdf->enTete($societe, $_POST['nom-fact']);
+        $pdf->tableArticles($_POST, $nth, $services);
         $pdf->Output();
     }
 

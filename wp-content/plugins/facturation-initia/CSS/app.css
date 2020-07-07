@@ -1,0 +1,33 @@
+/* CSS page Service/index.php */
+
+.titres {
+    display: flex;
+}
+
+.lignes {
+    display: flex;
+}
+
+.column-1 {
+    width: 16.6%;
+}
+
+.column-2 {
+    width: 16.6%;
+}
+
+.column-3 {
+    width: 16.6%;
+}
+
+.column-4 {
+    width: 16.6%;
+}
+
+.column-5 {
+    width: 16.6%;
+}
+
+.column-6 {
+    width: 16.6%;
+}

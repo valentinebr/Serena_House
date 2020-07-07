@@ -22,9 +22,10 @@ class Nuitee extends ModeleDeDonnees
         $table = $wpdb->prefix.'fact_tarif_nuitee';
         $datas = array(
             'nom_nuitee'                =>      $values[0],
-            'nombre_personnes_nuitee'   =>      $values[1],
-            'tarif_nuitee'              =>      $values[2],
-            'id_taxe'                   =>      $values[3]
+            'reference_nuitee'          =>      $values[1],
+            'nombre_personnes_nuitee'   =>      $values[2],
+            'tarif_nuitee'              =>      $values[3],
+            'id_taxe'                   =>      $values[4]
         );
 
         $this->executerInsert($table, $datas);

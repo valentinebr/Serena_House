@@ -42,7 +42,7 @@ ob_start();
                     <label for="price">Tarif :</label>
                     <select name="price">
                         <?php foreach ($tarifCarteVoyage as $tcv) { ?>
-                            <option><?php echo $tcv->tarif_tcv ?></option>
+                            <option value="<?php echo $tcv->id_tcv ?>"><?php echo $tcv->tarif_tcv ?></option>
                         <?php }?>
                     </select>
 

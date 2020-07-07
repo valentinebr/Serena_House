@@ -17,7 +17,7 @@ class CtrlNuitee extends Controleur
     }
 
     function insertNuitee(){
-        $values = array($_POST['nom-nuitee'], $_POST['nombre-personnes-nuitee'], $_POST['tarif-nuitee'], $_POST['taxe-nuitee']);
+        $values = array($_POST['nom-nuitee'], $_POST['reference-nuitee'], $_POST['nombre-personnes-nuitee'], $_POST['tarif-nuitee'], $_POST['taxe-nuitee']);
 
         $nuitee = new Nuitee();
         $nuitee->insertNewNuitee($values);
@@ -25,7 +25,7 @@ class CtrlNuitee extends Controleur
     }
 
     function updateNuitee(){
-        $values = array($_POST['nom-nuitee'], $_POST['nombre-personnes-nuitee'], $_POST['tarif-nuitee'], $_POST['taxe-nuitee']);
+        $values = array($_POST['nom-nuitee'], $_POST['reference-nuitee'], $_POST['nombre-personnes-nuitee'], $_POST['tarif-nuitee'], $_POST['taxe-nuitee']);
 
         $nuitee = new Nuitee();
         $nuitee->updateFieldNuitee($_POST['id-nuitee']);

@@ -25,7 +25,8 @@ class CarteVoyage extends ModeleDeDonnees
             'price'         =>      $values[0],
             'code'          =>      $values[1],
             'start_date'    =>      $values[2],
-            'user_id'       =>      $current_user->ID
+            'user_id'       =>      $current_user->ID,
+            'id_tcv'        =>      $values[3]
         );
 
         return $this->executerInsert($table, $datas);

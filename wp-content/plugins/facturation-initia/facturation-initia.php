@@ -57,6 +57,7 @@ class Facturation
                                                                                 archive_tcv BOOLEAN NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_nuitee (id_nuitee INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_nuitee VARCHAR(100) NOT NULL,
+                                                                                reference_nuitee VARCHAR(10) NOT NULL,
                                                                                 nombre_personnes_nuitee INT NOT NULL,
                                                                                 tarif_nuitee FLOAT NOT NULL,
                                                                                 archive_nuitee BOOLEAN NOT NULL);");
@@ -98,8 +99,8 @@ class Facturation
                         FOREIGN KEY (id_tiny) REFERENCES {$wpdb->prefix}fact_tiny_house(id_tiny));");
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}dopbsp_coupons 
-                        ADD (id_taxe INT NOT NULL,
-                        CONSTRAINT fk_coupons_taxe FOREIGN KEY (id_taxe) REFERENCES {$wpdb->prefix}fact_taxe(id_taxe));");
+                        ADD (id_tcv INT NOT NULL,
+                        CONSTRAINT fk_coupons_carte_voyage FOREIGN KEY (id_tcv) REFERENCES {$wpdb->prefix}fact_tarif_carte_voyage(id_tcv));");
 
         $wpdb->query("ALTER TABLE {$wpdb->prefix}fact_tarif_nuitee
                         ADD (id_taxe INT NOT NULL,
