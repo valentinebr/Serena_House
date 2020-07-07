@@ -12,6 +12,7 @@ ob_start();
     <table>
         <tr style="display: block">
             <th>Nom</th>
+            <th>Référence</th>
             <th>Tarif</th>
             <th>Taxe</th>
         </tr>
@@ -19,6 +20,7 @@ ob_start();
         <?php foreach ($nuitees as $n) { ?>
             <tr id="<?php echo $n->id_nuitee ?>" style="display: block">
                 <td><?php echo $n->nom_nuitee ?></td>
+                <td><?php echo $n->reference_nuitee ?></td>
                 <td><?php echo $n->tarif_nuitee. '€' ?></td>
                 <td><?php echo $n->taux_taxe.'%' ?></td>
 
@@ -30,6 +32,7 @@ ob_start();
                 <input type="hidden" value="<?php echo $n->id_nuitee?>" name="id-nuitee">
 
                 <td><label for="nom-nuitee">Nom : </label><input type="text" value="<?php echo $n->nom_nuitee ?>" name="nom-nuitee"></td>
+                <td><label for="reference-nuitee">Référence : </label><input type="text" value="<?php echo $n->reference_nuitee ?>" name="reference-nuitee"></td>
                 <td><label for="nombre-personnes-nuitee">Nombre de personnes : </label><input type="number" min="0" value="<?php echo $n->nombre_personnes_nuitee ?>" name="nombre-personnes-nuitee"></td>
                 <td><label for="tarif-nuitee">Tarif : </label>
                     <input type="number" step="0.01" min="0" value="<?php echo $n->tarif_nuitee ?>" name="tarif-nuitee">
@@ -60,6 +63,8 @@ ob_start();
     <form method="post" action="?ctrl=Nuitee&amp;action=insertNuitee">
         <label for="nom-nuitee">Nom :</label>
         <input type="text" id="nom-nuitee" name="nom-nuitee">
+        <label for="reference-nuitee">Référence :</label>
+        <input type="text" id="reference-nuitee" name="reference-nuitee">
         <label for="nombre-personnes-nuitee">Nombre de personne(s) :</label>
         <input type="number" min="0" id="nombre_personnes_nuitee" name="nombre-personnes-nuitee">
         <label for="tarif-nuitee">Tarif</label>

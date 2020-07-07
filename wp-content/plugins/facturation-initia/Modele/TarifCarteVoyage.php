@@ -16,6 +16,17 @@ class TarifCarteVoyage extends ModeleDeDonnees
         return $this->executerGetResults($sql, $datas);
     }
 
+    function afficherTarifCarteVoyageById($id){
+        global $wpdb;
+
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_carte_voyage tcv
+                INNER JOIN {$wpdb->prefix}fact_taxe t ON tcv.id_taxe = t.id_taxe
+                WHERE id_tcv=%d AND archive_tcv = %d";
+        $datas = array($id,0);
+
+        return $this->executerGetResults($sql, $datas);
+    }
+
     function insertNewTarifCarteVoyage($values){
         global $wpdb;
 

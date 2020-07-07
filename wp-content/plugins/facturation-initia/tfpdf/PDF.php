@@ -6,7 +6,7 @@ class PDF extends tFPDF
 {
 
     //En-tête
-    function Header()
+    function enTete($societe, $nomFact)
     {
         $position = 0;
         $this->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
@@ -15,7 +15,7 @@ class PDF extends tFPDF
         //Adresse
         $this->SetXY(10,15);
         $this->SetFont('DejaVu','', 12);
-        $this->MultiCell(70,5,"Kenzy\n20 avenue du général de Gaulle\n44600 SAINT NAZAIRE\n0657849159",0,'L', false);
+        $this->MultiCell(70,5,$societe[0]->nom_ste."\n".$societe[0]->adresse_ste."\n".$societe[0]->code_postal_ste.' '. $societe[0]->ville_ste."\n".$societe[0]->telephone_ste,0,'L', false);
 
         //Adresse de facturation
         $this->SetXY(100,40);
@@ -27,7 +27,7 @@ class PDF extends tFPDF
         //Informations facture
         $this->SetFont('DejaVu','', 12);
         $this->SetXY(10,75);
-        $this->MultiCell(130,5,"Facture : Peruchette - 06/07/2020");
+        $this->MultiCell(130,5,"Facture : ". $nomFact);
         $this->SetTitle("Facture n° 54");
 
         $position= $this->getY();
@@ -35,7 +35,7 @@ class PDF extends tFPDF
     }
 
     //Préparation de la génération de la table
-    function tableArticles() {
+    function tableArticles($post, $nth, $services) {
         $position = 0;
         $prixTotal=0;
         $prixTotalHorsTaxes=0;
@@ -44,9 +44,17 @@ class PDF extends tFPDF
 
         //Création des données qui seront contenues dans la table
         $datas = array();
-        for($ij=0;$ij<50;$ij++) {
-            $datas[]= array("ABCD", "Désignation de l'article $ij", "10€","2","20€");
-            $prixTotalHorsTaxes+=20;
+
+        foreach($nth as $n) {
+            $TotalHT = $n->tarif_nuitee*$post['nb-nuitees-'.$n->id_nuitee];
+            $datas[] = array($n->nom_nuitee, '', $n->tarif_nuitee, $post['nb-nuitees-'.$n->id_nuitee], $TotalHT);
+            $prixTotalHorsTaxes+=$TotalHT;
+        }
+
+        foreach ($services as $s) {
+            $totalHT = $s->prix_ht_tsrv * $post['nb-service-'.$s->id_tsrv];
+            $datas[]=array($s->nom_tsrv, $s->reference_tsrv, $s->prix_ht_tsrv, $post['nb-service-'.$s->id_tsrv], $totalHT);
+            $prixTotalHorsTaxes+=$totalHT;
         }
 
         //Tableau contenant les titres des colonnes
@@ -62,17 +70,17 @@ class PDF extends tFPDF
         //On se positionne en dessous de la table pour écrire le total
         $this->setY($this->GetY()+5);
 
-        $this->SetX(108);
-        $this->Cell(74,6,"Total Hors Taxes", 1,0,'L');
+        $this->SetX(135);
+        $this->Cell(44,6,"Total Hors Taxes", 1,0,'L');
         $this->Cell(19,6,$prixTotalHorsTaxes.'€',1,2,'C');
 
-        $this->SetX(108);
-        $this->Cell(74,6,"TVA à 20%",1,0,'L');
+        $this->SetX(135);
+        $this->Cell(44,6,"TVA à 20%",1,0,'L');
         $totalTVA = $prixTotalHorsTaxes*0.2;
         $this->Cell(19,6,$totalTVA.'€',1,2,'C');
         $totalTTC = $prixTotalHorsTaxes + $totalTVA;
-        $this->SetX(108);
-        $this->Cell(74,6,"Total TTC", 1,0,'L');
+        $this->SetX(135);
+        $this->Cell(44,6,"Total TTC", 1,0,'L');
         $this->Cell(19,6,$totalTTC.'€',1,2,'C');
     }
 

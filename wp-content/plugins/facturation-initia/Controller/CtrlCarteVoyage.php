@@ -32,8 +32,10 @@ class CtrlCarteVoyage extends Controleur
     public function insertCarteVoyage()
     {
         $carteVoyage = new CarteVoyage();
+        $tcv = new TarifCarteVoyage();
+        $tcv = $tcv->afficherTarifCarteVoyageById($_POST['price']);
 
-        $values = array($_POST['price'], $_POST['reference'], $_POST['start_date']);
+        $values = array($tcv[0]->tarif_tcv, $_POST['reference'], $_POST['start_date'], $_POST['price']);
 
         $carteVoyage->insertNewCarteVoyage($values);
         $this->executer('index');
