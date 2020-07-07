@@ -11,10 +11,14 @@ class CtrlSociete extends Controleur
     {
         $societe = new Societe();
         $societe = $societe->afficherSociete();
+
         $tinyHouse = new TinyHouse();
         $tinyHouse = $tinyHouse->afficherAllTinyHouse();
 
-        return ['societe' => $societe, 'tinyHouse' => $tinyHouse];
+        $allSociete = new Societe();
+        $allSociete = $allSociete->afficherAllSociete();
+
+        return ['societe' => $societe, 'tinyHouse' => $tinyHouse, 'allSociete' => $allSociete];
 
     }
 

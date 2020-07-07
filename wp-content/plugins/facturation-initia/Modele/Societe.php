@@ -10,11 +10,20 @@ class Societe extends ModeleDeDonnees
         $current_user = wp_get_current_user();
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_societe s
-                INNER JOIN {$wpdb->prefix}fact_tiny_house t ON s.id_tiny=t.id_tiny
+                INNER JOIN {$wpdb->prefix}fact_tiny_house t ON s.id_tiny = t.id_tiny
                 WHERE id_user = %d";
         $datas = $current_user->ID;
 
         return $this->executerGetResults($sql,$datas);
+    }
+
+    function afficherAllSociete(){
+        global $wpdb;
+
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_societe s
+                INNER JOIN {$wpdb->prefix}fact_tiny_house t ON s.id_tiny = t.id_tiny";
+
+        return $this->executerGetResults($sql, null);
     }
 
     function updateFieldSociete($values){

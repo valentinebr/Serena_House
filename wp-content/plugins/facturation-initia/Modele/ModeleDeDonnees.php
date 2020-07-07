@@ -19,7 +19,7 @@ class ModeleDeDonnees
 
     return $wpdb->get_results($req);
 
-}
+    }
 
     protected function executerGetRow ($sql) {
         global $wpdb;

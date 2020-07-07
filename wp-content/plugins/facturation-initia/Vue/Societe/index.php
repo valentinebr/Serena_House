@@ -13,7 +13,25 @@ if (is_user_logged_in()){
 }
 
 ob_start();
+?>
+<form action="">
 
+    <h2>Choisissez la société</h2>
+
+    <table>
+        <tr>
+            <th><label for="nom_ste">Société</label></th>
+            <td>
+                <select name="nom_ste" id="nom_ste">
+                    <?php foreach ($allSociete as $as) { ?>
+                        <option value="<?php echo $as->nom_ste ?>"><?php echo $as->nom_ste ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+    </table>
+</form>
+<?php
 if ($societe[0] != 0){
 ?>
 
@@ -118,8 +136,8 @@ if ($societe[0] != 0){
                 <td>
                     <select name="tiny_house_ste">
                         <?php foreach ($tinyHouse as $t) { ?>
-                                <option value="<?php echo $t->id_tiny ?>"><?php echo $t->nom_tiny ?></option>
-                            <?php } ?>
+                            <option value="<?php echo $t->id_tiny ?>"><?php echo $t->nom_tiny ?></option>
+                        <?php } ?>
                     </select>
                 </td>
             </tr>
@@ -128,4 +146,6 @@ if ($societe[0] != 0){
         <input type="submit" name="ajouter" value="Ajouter la société">
     </form>
 
-<?php }
+<?php } ?>
+
+
