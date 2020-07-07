@@ -5,21 +5,6 @@ require_once (__ROOT__.'/facturation-initia/Modele/ModeleDeDonnees.php');
 
 class TinyHouse extends ModeleDeDonnees
 {
-
-    function insertTinyHouse($values) {
-        global $wpdb;
-
-        $table = $wpdb->prefix.'fact_tiny_house';
-
-        $datas = array(
-            'nom_tiny'              =>      $values[0],
-            'nombre_places_tiny'    =>      $values[1],
-            'archive_tiny'          =>      0
-        );
-
-        return $this->executerInsert($table, $datas);
-    }
-
     function afficherTinyHouse () {
         global $wpdb;
 
@@ -51,6 +36,20 @@ class TinyHouse extends ModeleDeDonnees
         $datas = array ($id, 0);
 
         return $this->executerGetResults($sql, $datas);
+    }
+
+    function insertTinyHouse($values) {
+        global $wpdb;
+
+        $table = $wpdb->prefix.'fact_tiny_house';
+
+        $datas = array(
+            'nom_tiny'              =>      $values[0],
+            'nombre_places_tiny'    =>      $values[1],
+            'archive_tiny'          =>      0
+        );
+
+        return $this->executerInsert($table, $datas);
     }
 
     function updateTinyHouse ($id) {

@@ -35,8 +35,6 @@ class CtrlCarteVoyage extends Controleur
 
         $values = array($_POST['price'], $_POST['reference'], $_POST['start_date']);
 
-        echo 'Update !';
-
         $carteVoyage->insertNewCarteVoyage($values);
         $this->executer('index');
     }

@@ -3,6 +3,13 @@ require_once __ROOT__.'/facturation-initia/Controller/CtrlCarteVoyage.php';
 
 $titre = 'Mes cartes voyage';
 
+$current_user = wp_get_current_user();
+if (is_user_logged_in()){
+    echo 'Connecté en tant que : '.$current_user->display_name .' qui a pour ID : '. $current_user->ID;
+} else {
+    echo 'Pas connecté';
+}
+
 ob_start();
 ?>
 
