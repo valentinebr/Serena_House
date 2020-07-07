@@ -54,6 +54,8 @@ class CtrlFacture extends Controleur
         $pdf = new PDF();
         $pdf->AliasNbPages();
         $pdf->AddPage();
+        $pdf->header();
+        $pdf->tableArticles();
         $pdf->Output();
     }
 

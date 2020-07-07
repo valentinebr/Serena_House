@@ -12,18 +12,13 @@ class PDF extends tFPDF
         $this->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
         $this->AddFont('DejaVu','B','DejaVuSansCondensed-Bold.ttf',true);
 
-        $this->SetFont('DejaVu', 'B', 15);
-        $this->Cell(190,10,"Facture",1,2,'C', false);
-
-        //Logo
-
         //Adresse
-        $this->SetXY(10,30);
+        $this->SetXY(10,15);
         $this->SetFont('DejaVu','', 12);
         $this->MultiCell(70,5,"Kenzy\n20 avenue du général de Gaulle\n44600 SAINT NAZAIRE\n0657849159",0,'L', false);
 
         //Adresse de facturation
-        $this->SetXY(100,55);
+        $this->SetXY(100,40);
         $this->SetFont('DejaVu', 'B', 12);
         $this->Cell(90,6,"Adresse de facturation",1,2,'C', false);
         $this->SetFont('DejaVu', '',12);
@@ -31,7 +26,7 @@ class PDF extends tFPDF
 
         //Informations facture
         $this->SetFont('DejaVu','', 12);
-        $this->SetXY(10,85);
+        $this->SetXY(10,75);
         $this->MultiCell(130,5,"Facture : Peruchette - 06/07/2020");
         $this->SetTitle("Facture n° 54");
 
@@ -45,17 +40,19 @@ class PDF extends tFPDF
         $prixTotal=0;
         $prixTotalHorsTaxes=0;
 
+        $this->SetY(95);
+
         //Création des données qui seront contenues dans la table
         $datas = array();
         for($ij=0;$ij<50;$ij++) {
-            $datas[]= array("ABCD", "Désignation de l'article $ij", "10".chr(128),"2","20".chr(128));
+            $datas[]= array("ABCD", "Désignation de l'article $ij", "10€","2","20€");
             $prixTotalHorsTaxes+=20;
         }
 
         //Tableau contenant les titres des colonnes
         $header = array('Service', 'Réf.', 'Prix unitaire HT', 'Qté', 'Prix total HT');
         //Tableau contenant la largeur des colonnes
-        $w = array(102,20,25,20,23);
+        $w = array(85,30,30,20,23);
         //Tableau contenant le centrage des colonnes
         $al = array('C', 'L', 'C', 'C', 'C', 'C');
 
@@ -67,12 +64,16 @@ class PDF extends tFPDF
 
         $this->SetX(108);
         $this->Cell(74,6,"Total Hors Taxes", 1,0,'L');
-        $this->Cell(19,6,$prixTotalHorsTaxes.chr(128),1,2,'C');
+        $this->Cell(19,6,$prixTotalHorsTaxes.'€',1,2,'C');
 
         $this->SetX(108);
         $this->Cell(74,6,"TVA à 20%",1,0,'L');
-        $totalTVA = $prixTotalHorsTaxes*0.2.chr(128);
-        $this->Cell(19,6,$prixTotalHorsTaxes+$totalTVA.chr(128),1,2,'C');
+        $totalTVA = $prixTotalHorsTaxes*0.2;
+        $this->Cell(19,6,$totalTVA.'€',1,2,'C');
+        $totalTTC = $prixTotalHorsTaxes + $totalTVA;
+        $this->SetX(108);
+        $this->Cell(74,6,"Total TTC", 1,0,'L');
+        $this->Cell(19,6,$totalTTC.'€',1,2,'C');
     }
 
 
@@ -98,11 +99,10 @@ class PDF extends tFPDF
         $this->SetFont('DejaVu', 'B', 9);
         for($i=0;$i<count($header);$i++) {
             $this->Cell($w[$i], 7, $header[$i], 1,0,'C', 1);
-            $this->Ln();
         }
+        $this->Ln();
 
         //Restauration des couleurs et de la police pour les données du tableau
-        $this->SetlFillColor(245,245,245);
         $this->SetTextColor(0);
         $this->SetFont('DejaVu');
     }
@@ -217,6 +217,27 @@ function NbLines($w ,$txt) {
                 $nl++;
                 continue;
             }
+            if ($c==' ') {
+                $sep=$i;
+            }
+//            $l+= $cw[$c];
+            $l +=1;
+            if($l>$wmax) {
+                if ($sep==-1) {
+                    if($i == $j) {
+                        $i++;
+                    }
+                } else {
+                    $i = $sep+1;
+                }
+                $sep=-1;
+                $j=$i;
+                $l=0;
+                $nl++;
+            } else {
+                $i++;
+            }
+            return $nl;
         }
 }
 }
