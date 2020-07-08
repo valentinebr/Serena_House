@@ -27,11 +27,10 @@ ob_start();
                 <td><?php echo $s->reference_tsrv ?></td>
                 <td><?php echo $s->prix_ht_tsrv . ' €' ?></td>
                 <td><?php echo $s->taux_taxe . '%' ?></td>
-                <td><a href="#" onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>, 'block')">Modifier</a></td>
+                <td><a href="#" onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>, 'table-row')">Modifier</a></td>
                 <td><a class="column-6" href="?ctrl=Service&amp;action=deleteTService&amp;id=<?php echo $s->id_tsrv ?>">Supprimer</a></td>
             </tr>
                 <tr id="modifier-<?php echo $s->id_tsrv ?>" style="display: none">
-                    <td><input type="hidden" name="id" value="<?php echo $s->id_tsrv ?>" required></td>
                     <td><input class="column-1" type="text" name="service" value="<?php echo $s->nom_tsrv ?>" required></td>
                     <td><input class="column-2" type="text" name="reference" value="<?php echo $s->reference_tsrv ?>" required></td>
                     <td><input class="column-3" type="text" name="prix-ht" value="<?php echo $s->prix_ht_tsrv ?>" required></td>
@@ -46,9 +45,10 @@ ob_start();
                 </option>
             <?php } ?>
                         </select></td>
+                    <input type="hidden" name="id" value="<?php echo $s->id_tsrv ?>" required>
                     <td><input class="column-5" type="submit" value="Valider"></td>
                 <td><a class="column-6" href="#"
-                       onclick="show(<?php echo $s->id_tsrv ?>, 'modifier-<?php echo $s->id_tsrv ?>', 'flex')">Annuler</a></td>
+                       onclick="show(<?php echo $s->id_tsrv ?>, 'modifier-<?php echo $s->id_tsrv ?>', 'table-row')">Annuler</a></td>
                 </tr>
             <?php
         }

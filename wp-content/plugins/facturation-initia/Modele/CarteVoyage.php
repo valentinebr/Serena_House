@@ -9,8 +9,22 @@ class CarteVoyage extends ModeleDeDonnees
         global $wpdb;
         $current_user = wp_get_current_user();
 
-        $sql = "SELECT * FROM {$wpdb->prefix}dopbsp_coupons WHERE user_id = %d";
+        $sql = "SELECT * FROM {$wpdb->prefix}dopbsp_coupons c
+                WHERE user_id = %d";
         $datas = array($current_user->ID);
+
+        return $this->executerGetResults($sql, $datas);
+    }
+
+    function afficherCarteVoyageParMois($mois){
+        global $wpdb;
+        $current_user = wp_get_current_user();
+
+        $sql = "SELECT * FROM {$wpdb->prefix}dopbsp_coupons c
+                INNER JOIN {$wpdb->prefix}fact_tarif_carte_voyage tcv ON c.id_tcv=tcv.id_tcv
+                INNER JOIN {$wpdb->prefix}fact_taxe t ON tcv.id_taxe = t.id_taxe
+                WHERE user_id = %d AND MONTH(start_date) = %d";
+        $datas = array($current_user->ID, $mois);
 
         return $this->executerGetResults($sql, $datas);
     }
