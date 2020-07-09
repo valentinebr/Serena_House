@@ -10,7 +10,7 @@ ob_start();
 
 <form method="post" action="?ctrl=Nuitee&amp;action=updateNuitee">
     <table>
-        <tr style="display: block">
+        <tr>
             <th>Nom</th>
             <th>Référence</th>
             <th>Tarif</th>
@@ -18,13 +18,13 @@ ob_start();
         </tr>
 
         <?php foreach ($nuitees as $n) { ?>
-            <tr id="<?php echo $n->id_nuitee ?>" style="display: block">
+            <tr id="<?php echo $n->id_nuitee ?>">
                 <td><?php echo $n->nom_nuitee ?></td>
                 <td><?php echo $n->reference_nuitee ?></td>
                 <td><?php echo $n->tarif_nuitee. '€' ?></td>
                 <td><?php echo $n->taux_taxe.'%' ?></td>
 
-                <td><a href="#" onclick="show('modifier-<?php echo $n->id_nuitee ?>', <?php echo $n->id_nuitee ?>, 'block')">Modifier</a></td>
+                <td><a href="#" onclick="show('modifier-<?php echo $n->id_nuitee ?>', <?php echo $n->id_nuitee ?>, 'table-row')">Modifier</a></td>
                 <td><a href="?ctrl=Nuitee&amp;action=deleteNuitee&amp;id=<?php echo $n->id_nuitee?>">Supprimer</a></td>
             </tr>
 
@@ -50,7 +50,7 @@ ob_start();
                 </td>
 
                 <td><input type="submit" value="Valider"></td>
-                <td><a href="#" onclick="show(<?php echo $n->id_nuitee ?>, 'modifier-<?php echo $n->id_nuitee ?>', 'block')">Annuler</a></td>
+                <td><a href="#" onclick="show(<?php echo $n->id_nuitee ?>, 'modifier-<?php echo $n->id_nuitee ?>', 'table-row')">Annuler</a></td>
             </tr>
             <?php
         } ?>

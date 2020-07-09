@@ -25,10 +25,18 @@ class CtrlFacture extends Controleur
         $societe = $societe->afficherSociete();
         $nth = new NuiteeTinyHouse();
         $nth = $nth->afficherNuiteeTinyHouse($societe[0]->id_tiny);
-        $carteVoyage = new CarteVoyage();
+
+        if(date("d")>=1 AND date("d")<=15) {
+            $mois = date("m", strtotime('-1month'));
+        } else {
+            $mois = date("m");
+        }
+
+        $cartesVoyage = new CarteVoyage();
+        $cartesVoyage = $cartesVoyage->afficherCarteVoyageParMois($mois);
 
 
-        return ['services' => $services, 'societe' => $societe, 'nth' => $nth];
+        return ['services' => $services, 'societe' => $societe, 'nth' => $nth, 'cartesVoyage' => $cartesVoyage];
     }
 
     public function insertFacture () {
@@ -44,7 +52,7 @@ class CtrlFacture extends Controleur
             $service->insertService($values);
         }
 
-        $this->creerPDF();
+        echo '<script>window.open('.$this->creerPDF().',\'_blank\')</script>';
 
         $this->executer('ajouterFacture');
     }
@@ -59,11 +67,20 @@ class CtrlFacture extends Controleur
         $nth= $nth->afficherNuiteeTinyHouse($societe[0]->id_tiny);
         $services = $services->afficherServices();
 
+        if(date("d")>=1 AND date("d")<=15) {
+            $mois = date("m", strtotime('-1month'));
+        } else {
+            $mois = date("m");
+        }
+
+        $cartesVoyage = new CarteVoyage();
+        $cartesVoyage = $cartesVoyage->afficherCarteVoyageParMois($mois);
+
         $pdf = new PDF();
         $pdf->AliasNbPages();
         $pdf->AddPage();
         $pdf->enTete($societe, $_POST['nom-fact']);
-        $pdf->tableArticles($_POST, $nth, $services);
+        $pdf->tableArticles($_POST, $nth, $services, $cartesVoyage);
         $pdf->Output();
     }
 

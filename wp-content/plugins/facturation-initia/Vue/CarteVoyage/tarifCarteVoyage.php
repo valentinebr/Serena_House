@@ -18,17 +18,16 @@ ob_start();
             </tr>
 
             <?php foreach($tarifCarteVoyage as $tcv) { ?>
-                <tr id="<?php echo $tcv->id_tcv ?>" style="display: block">
+                <tr id="<?php echo $tcv->id_tcv ?>">
                     <td><?php echo $tcv->nom_tcv ?></td>
                     <td><?php echo $tcv->tarif_tcv.'€' ?></td>
                     <td><?php echo $tcv->taux_taxe.'%' ?></td>
 
-                    <td><a href="#" onclick="show('modifier-<?php echo $tcv->id_tcv ?>', <?php echo $tcv->id_tcv ?>, 'block')">Modifier</a></td>
+                    <td><a href="#" onclick="show('modifier-<?php echo $tcv->id_tcv ?>', <?php echo $tcv->id_tcv ?>, 'table-row')">Modifier</a></td>
                     <td><a href="?ctrl=CarteVoyage&amp;action=deleteCarteVoyage&amp;id=<?php echo $tcv->id_tcv?>">Supprimer</a></td>
                 </tr>
 
                 <tr id="modifier-<?php echo $tcv->id_tcv ?>" style="display: none">
-                    <input type="hidden" value="<?php echo $tcv->id_tcv?>" name="id-tcv">
 
                     <td><label for="nom-tcv">Nom : </label><input type="text" value="<?php echo $tcv->nom_tcv ?>" name="nom-tcv"></td>
                     <td><label for="tarif-tcv">Tarif : </label>
@@ -45,9 +44,10 @@ ob_start();
                             <?php }?>
                         </select>
                     </td>
+                    <input type="hidden" value="<?php echo $tcv->id_tcv?>" name="id-tcv">
 
                     <td><input type="submit" value="Valider"></td>
-                    <td><a href="#" onclick="show(<?php echo $tcv->id_tcv ?>, 'modifier-<?php echo $tcv->id_tcv ?>', 'block')">Annuler</a></td>
+                    <td><a href="#" onclick="show(<?php echo $tcv->id_tcv ?>, 'modifier-<?php echo $tcv->id_tcv ?>', 'table-row')">Annuler</a></td>
                 </tr>
             <?php } ?>
         </table>

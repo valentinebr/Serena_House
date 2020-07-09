@@ -7,6 +7,8 @@ function show(indice, indice2, display)
             document.getElementById(indice).style.display = "flex"; // On l'affiche
         } else if (display === "inline-block") {
             document.getElementById(indice).style.display = "inline-block"; //On l'affiche
+        }  else if (display === "table-row") {
+            document.getElementById(indice).style.display = "table-row"; //On l'affiche
         }
         document.getElementById(indice2).style.display = "none"; //On efface le lien
     }
@@ -92,51 +94,6 @@ function addLigne(idChamp, tarifCarteVoyage)
     forms.appendChild(conteneur);
 }
 
-function addLigneTCV(idChamp){
-    var formsTCV = document.getElementById('forms-tcv');
-
-    var divTCV = idChamp.split('-');
-    var numTCV = parseInt(divTCV[1]) + 1;
-    var nomDivTCV = divTCV[0] + '-' + numTCV;
-    var showPlusTCV = parseInt(divTCV[1]);
-
-    var conteneurTCV = document.createElement('div');
-    conteneurTCV.id = nomDivTCV;
-
-    var ligneTCV = document.createElement('form');
-        // ligne.setAttribute('action', '?ctrl=CarteVoyage&amp;action=insertTarifCarteVoyage');
-        ligneTCV.setAttribute('method', 'post');
-
-    var labelTCV = document.createElement('label');
-        labelTCV.setAttribute('for', 'label');
-        labelTCV.innerHTML = 'Tarif : '
-
-    var tarifTCV = document.createElement('input');
-        tarifTCV.setAttribute('type', 'number');
-        tarifTCV.setAttribute('name', 'tarifTCV');
-
-    var plusTCV = document.createElement('a');
-        plusTCV.textContent = '+';
-        plusTCV.setAttribute('href', '#');
-        plusTCV.setAttribute('id', 'plus-tcv-' + numTCV);
-        plusTCV.setAttribute('style', 'display:inline-block;');
-        plusTCV.setAttribute('onClick', 'addLigneTCV(\'' + nomDivTCV + '\'); hide(\'plus-tcv-' + numTCV +'\')');
-
-    var annulerTCV = document.createElement('button');
-        annulerTCV.setAttribute('name', 'annulerTCV');
-        annulerTCV.setAttribute('class', 'annuler');
-        annulerTCV.innerHTML = 'Annuler';
-        annulerTCV.setAttribute('onClick', 'deleteLigne(\''+ nomDivTCV + '\', \'plus-tcv-' + showPlusTCV +'\'); return false;');
-
-
-    ligneTCV.appendChild(labelTCV);
-    ligneTCV.appendChild(tarifTCV);
-    ligneTCV.appendChild(plusTCV);
-    ligneTCV.appendChild(annulerTCV);
-    conteneurTCV.appendChild(ligneTCV);
-    formsTCV.appendChild(conteneurTCV);
-}
-
 function hide(indice)
 {
     if (document.getElementById(indice).style.display==="inline-block") {
@@ -172,48 +129,55 @@ function modifierTiny(modifier, tiny, tinyHouses) {
 
 }
 
-
 function affichageFacture(type, tab, value) {
+
+    var numberFormat = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
 
         if (type === 'nuitée') {
             document.getElementById('quantite-nuitee-'+tab['id_nuitee']).textContent = value;
 
             var prixHT = tab['tarif_nuitee'] * value;
-            document.getElementById('tarif-ht-nuitee-'+tab['id_nuitee']).textContent = prixHT + '€';
+            document.getElementById('tarif-ht-nuitee-'+tab['id_nuitee']).textContent = numberFormat.format(prixHT);
 
             var prixTaxe = tab['taux_taxe']*prixHT/100;
-            document.getElementById('tarif-taxe-nuitee-'+tab['id_nuitee']).textContent = prixTaxe + '€';            var prixTaxe = tab['taux_taxe']*prixHT/100;
+            document.getElementById('tarif-taxe-nuitee-'+tab['id_nuitee']).textContent = numberFormat.format(prixTaxe);
 
             var prixTTC = prixHT + prixTaxe;
-            document.getElementById('tarif-ttc-nuitee-'+tab['id_nuitee']).textContent = prixTTC + '€';
+            document.getElementById('tarif-ttc-nuitee-'+tab['id_nuitee']).textContent = numberFormat.format(prixTTC);
+
+            document.getElementById('commission-nuitee-'+tab['id_nuitee']).textContent = numberFormat.format(prixHT);
 
         } else if (type === 'service') {
             document.getElementById('quantite-service-'+tab['id_tsrv']).textContent = value;
 
             var prixHT = tab['prix_ht_tsrv'] * value;
-            document.getElementById('tarif-ht-service-'+tab['id_tsrv']).textContent = prixHT + '€';
+            document.getElementById('tarif-ht-service-'+tab['id_tsrv']).textContent = numberFormat.format(prixHT);
 
             var prixTaxe = tab['taux_taxe']*prixHT/100;
-            document.getElementById('tarif-taxe-service-'+tab['id_tsrv']).textContent = prixTaxe + '€';
+            document.getElementById('tarif-taxe-service-'+tab['id_tsrv']).textContent = numberFormat.format(prixTaxe);
 
             var prixTTC = prixHT + prixTaxe;
-            document.getElementById('tarif-ttc-service-'+tab['id_tsrv']).textContent = prixTTC + '€';
+            document.getElementById('tarif-ttc-service-'+tab['id_tsrv']).textContent = numberFormat.format(prixTTC);
+
+            document.getElementById('commission-service-'+tab['id_tsrv']).textContent = numberFormat.format(prixHT*0.91);
         }
 }
 
 
-function calculTotal(nth, services) {
+function calculTotal(nth, services, cartesVoyage) {
 
         var totalQuantite = 0;
         var totalPrixUnitaireHT = 0;
         var totalTVA = 0;
         var totalPrixTTC = 0;
+        var totalCommission = 0;
 
         for ( var i=0; i<nth.length; i++) {
             totalQuantite += parseInt(document.getElementById('quantite-nuitee-' + nth[i]['id_nuitee']).textContent);
             totalPrixUnitaireHT += parseFloat(document.getElementById('tarif-ht-nuitee-'+ nth[i]['id_nuitee']).textContent);
             totalTVA += parseFloat(document.getElementById('tarif-taxe-nuitee-'+ nth[i]['id_nuitee']).textContent);
             totalPrixTTC += parseFloat(document.getElementById('tarif-ttc-nuitee-'+nth[i]['id_nuitee']).textContent);
+            totalCommission += parseFloat(document.getElementById('commission-nuitee-'+nth[i]['id_nuitee']).textContent);
         }
 
         for (var i=0; i<services.length; i++) {
@@ -222,11 +186,23 @@ function calculTotal(nth, services) {
             totalPrixUnitaireHT += parseFloat(document.getElementById('tarif-ht-service-'+services[i]['id_tsrv']).textContent);
             totalTVA += parseFloat(document.getElementById('tarif-taxe-service-'+services[i]['id_tsrv']).textContent);
             totalPrixTTC += parseFloat(document.getElementById('tarif-ttc-service-'+services[i]['id_tsrv']).textContent);
+            totalCommission += parseFloat(document.getElementById('commission-service-'+services[i]['id_tsrv']).textContent);
         }
 
+        for (var i=0; i<cartesVoyage.length; i++) {
+            totalQuantite+=1;
+            totalPrixUnitaireHT+=parseFloat(cartesVoyage[i]['tarif_tcv']);
+            totalTVA+=parseFloat(cartesVoyage[i]['taux_taxe'])*parseFloat(cartesVoyage[i]['tarif_tcv'])/100;
+            totalPrixTTC+=parseFloat(cartesVoyage[i]['tarif_tcv'])+(parseFloat(cartesVoyage[i]['tarif_tcv'])*parseFloat(cartesVoyage[i]['taux_taxe'])/100);
+            totalCommission += parseFloat(cartesVoyage[i]['tarif_tcv']*0.09);
+        }
+
+        var numberFormat = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
+
         document.getElementById('total-quantite').textContent = totalQuantite;
-        document.getElementById('total-unitaire-ht').textContent = totalPrixUnitaireHT + '€';
-        document.getElementById('total-tva').textContent = totalTVA + '€';
-        document.getElementById('total-prix-ttc').textContent = totalPrixTTC + '€';
+        document.getElementById('total-unitaire-ht').textContent = numberFormat.format(totalPrixUnitaireHT);
+        document.getElementById('total-tva').textContent = numberFormat.format(totalTVA);
+        document.getElementById('total-prix-ttc').textContent = numberFormat.format(totalPrixTTC);
+        document.getElementById('total-commission').textContent = numberFormat.format(totalCommission);
 
 }

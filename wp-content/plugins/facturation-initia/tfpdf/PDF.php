@@ -35,10 +35,11 @@ class PDF extends tFPDF
     }
 
     //Préparation de la génération de la table
-    function tableArticles($post, $nth, $services) {
+    function tableArticles($post, $nth, $services, $cartesVoyage) {
         $position = 0;
-        $prixTotal=0;
+        $prixTotalTaxe=0;
         $prixTotalHorsTaxes=0;
+        $totalCommission = 0;
 
         $this->SetY(95);
 
@@ -46,21 +47,39 @@ class PDF extends tFPDF
         $datas = array();
 
         foreach($nth as $n) {
-            $TotalHT = $n->tarif_nuitee*$post['nb-nuitees-'.$n->id_nuitee];
-            $datas[] = array($n->nom_nuitee, '', $n->tarif_nuitee, $post['nb-nuitees-'.$n->id_nuitee], $TotalHT);
-            $prixTotalHorsTaxes+=$TotalHT;
+            if ($post['nb-nuitees-'.$n->id_nuitee]) {
+                $totalHT = $n->tarif_nuitee * floatval($post['nb-nuitees-' . $n->id_nuitee]);
+                $datas[] = array($n->nom_nuitee, $n->reference_nuitee, number_format($n->tarif_nuitee,2,","," ").'€', $post['nb-nuitees-' . $n->id_nuitee], number_format($totalHT,2,","," ").'€', number_format($totalHT,2,","," ").'€');
+                $prixTotalHorsTaxes += $totalHT;
+                $prixTotalTaxe += $totalHT*$n->taux_taxe/100;
+                $totalCommission += $totalHT;
+            }
         }
 
         foreach ($services as $s) {
-            $totalHT = $s->prix_ht_tsrv * $post['nb-service-'.$s->id_tsrv];
-            $datas[]=array($s->nom_tsrv, $s->reference_tsrv, $s->prix_ht_tsrv, $post['nb-service-'.$s->id_tsrv], $totalHT);
+            if ($post['nb-service-'.$s->id_tsrv]) {
+                $totalHT = $s->prix_ht_tsrv * floatval($post['nb-service-' . $s->id_tsrv]);
+                $commission = $totalHT * 0.91;
+                $datas[] = array($s->nom_tsrv, $s->reference_tsrv, number_format($s->prix_ht_tsrv,2,","," ").'€', $post['nb-service-' . $s->id_tsrv], number_format($totalHT,2,","," ").'€', number_format($commission,2,","," ").'€');
+                $prixTotalHorsTaxes += $totalHT;
+                $prixTotalTaxe+=$totalHT*$s->taux_taxe/100;
+                $totalCommission += $commission;
+            }
+        }
+
+        foreach($cartesVoyage as $cv) {
+            $totalHT = $cv->tarif_tcv;
+            $commission = $totalHT*0.09;
+            $datas[]=array($cv->nom_tcv, $cv->code, number_format($cv->tarif_tcv,2,","," ").'€', 1, number_format($totalHT,2,","," ").'€', number_format($commission,2,","," ").'€');
             $prixTotalHorsTaxes+=$totalHT;
+            $prixTotalTaxe+=$totalHT*$cv->taux_taxe/100;
+            $totalCommission += $commission;
         }
 
         //Tableau contenant les titres des colonnes
-        $header = array('Service', 'Réf.', 'Prix unitaire HT', 'Qté', 'Prix total HT');
+        $header = array('Service', 'Réf.', 'Prix unitaire HT', 'Qté', 'Prix total HT', 'Commission');
         //Tableau contenant la largeur des colonnes
-        $w = array(85,30,30,20,23);
+        $w = array(65,30,30,20,23,23);
         //Tableau contenant le centrage des colonnes
         $al = array('C', 'L', 'C', 'C', 'C', 'C');
 
@@ -70,18 +89,20 @@ class PDF extends tFPDF
         //On se positionne en dessous de la table pour écrire le total
         $this->setY($this->GetY()+5);
 
-        $this->SetX(135);
+        $this->SetX(138);
         $this->Cell(44,6,"Total Hors Taxes", 1,0,'L');
-        $this->Cell(19,6,$prixTotalHorsTaxes.'€',1,2,'C');
+        $this->Cell(19,6,number_format($prixTotalHorsTaxes,2,","," ").'€',1,2,'C');
 
-        $this->SetX(135);
-        $this->Cell(44,6,"TVA à 20%",1,0,'L');
-        $totalTVA = $prixTotalHorsTaxes*0.2;
-        $this->Cell(19,6,$totalTVA.'€',1,2,'C');
-        $totalTTC = $prixTotalHorsTaxes + $totalTVA;
-        $this->SetX(135);
+        $this->SetX(138);
+        $this->Cell(44,6,"TVA",1,0,'L');
+        $this->Cell(19,6,number_format($prixTotalTaxe,2,","," ").'€',1,2,'C');
+        $totalTTC = $prixTotalHorsTaxes + $prixTotalTaxe;
+        $this->SetX(138);
         $this->Cell(44,6,"Total TTC", 1,0,'L');
-        $this->Cell(19,6,$totalTTC.'€',1,2,'C');
+        $this->Cell(19,6,number_format($totalTTC,2,","," ").'€',1,2,'C');
+        $this->SetX(138);
+        $this->Cell(44,6,"Total commission", 1,0,'L');
+        $this->Cell(19,6,number_format($totalCommission,2,","," ").'€',1,2,'C');
     }
 
 
