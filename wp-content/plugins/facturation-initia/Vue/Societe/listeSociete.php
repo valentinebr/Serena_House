@@ -55,7 +55,9 @@ print_r($allSociete[0]);
                     <th><label for="tiny_house_ste">Tiny House</label></th>
                     <td>
                         <select name="tiny_house_ste" id="tiny_house_ste">
-                                <option></option>
+                            <?php foreach ($tinyHouse as $th){ ?>
+                                <option id="<?php $th->id_tiny ?>" value="<?php $th->id_tiny ?>"><?php echo $th->nom_tiny ?></option>
+                            <?php } ?>
                         </select>
                     </td>
                 </tr>
@@ -83,7 +85,7 @@ print_r($allSociete[0]);
                     document.getElementById('code_postal_ste').value = data.code_postal_ste;
                     document.getElementById('ville_ste').value = data.ville_ste;
                     document.getElementById('telephone_ste').value = data.telephone_ste;
-                    document.getElementById('tiny_house_ste').value = data.tiny_house_ste;
+                    document.getElementById(data.tiny_house_ste).prop('selected', true);
                 })
                 .fail(function(){
                     alert("Not working...");

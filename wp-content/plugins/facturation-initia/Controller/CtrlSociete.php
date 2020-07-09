@@ -21,7 +21,10 @@ class CtrlSociete extends Controleur
         $allSociete = new Societe();
         $allSociete = $allSociete->afficherAllSociete();
 
-        return ['allSociete' => $allSociete];
+        $tinyHouse = new TinyHouse();
+        $tinyHouse = $tinyHouse->afficherAllTinyHouse();
+
+        return ['allSociete' => $allSociete, 'tinyHouse' => $tinyHouse];
     }
 
     public function societeById()
@@ -37,8 +40,7 @@ class CtrlSociete extends Controleur
             'code_postal_ste'       =>      $societeById[0]->code_postal_ste,
             'ville_ste'             =>      $societeById[0]->ville_ste,
             'telephone_ste'         =>      $societeById[0]->telephone_ste,
-            'tiny_house_ste'        =>      $societeById[0]->nom_tiny
-//            'societe' => $societeById
+            'tiny_house_ste'        =>      $societeById[0]->id_tiny
         ));
 
 
