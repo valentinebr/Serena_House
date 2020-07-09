@@ -44,17 +44,33 @@ class Societe extends ModeleDeDonnees
         $table = $wpdb->prefix . 'fact_societe';
         $datas = array(
             'nom_ste'           =>      $values[0],
-            'adresse_ste'       =>      $values[1],
-            'code_postal_ste'   =>      $values[2],
-            'ville_ste'         =>      $values[3],
-            'telephone_ste'     =>      $values[4],
-            'numero_ste'        =>      $values[5],
+            'numero_ste'        =>      $values[1],
+            'adresse_ste'       =>      $values[2],
+            'code_postal_ste'   =>      $values[3],
+            'ville_ste'         =>      $values[4],
+            'telephone_ste'     =>      $values[5],
             'id_tiny'           =>      $values[6]
         );
         $where = array('id_user' => $current_user->ID);
 
         return $this->executerUpdate($table, $datas, $where);
+    }
 
+    function updateFieldSocieteAdmin($values){
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'fact_societe';
+        $datas = array(
+            'numero_ste'        =>      $values[0],
+            'adresse_ste'       =>      $values[1],
+            'code_postal_ste'   =>      $values[2],
+            'ville_ste'         =>      $values[3],
+            'telephone_ste'     =>      $values[4],
+            'id_tiny'           =>      $values[5]
+        );
+        $where = array('id_ste' => $values[6]);
+
+        return $this->executerUpdate($table, $datas, $where);
     }
 
     function insertNewSociete($values){

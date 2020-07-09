@@ -42,20 +42,28 @@ class CtrlSociete extends Controleur
             'telephone_ste'         =>      $societeById[0]->telephone_ste,
             'tiny_house_ste'        =>      $societeById[0]->id_tiny
         ));
-
-
     }
 
     public function updateSociete()
     {
         $societe = new Societe();
 
-        $values = array($_POST['nom_ste'], $_POST['adresse_societe'], $_POST['code_postal_ste'], $_POST['ville_ste'], $_POST['telephone_ste'],
-            $_POST['numero_ste'], $_POST['tiny_house_ste']);
+        $values = array($_POST['nom_ste'], $_POST['numero_ste'], $_POST['adresse_ste'], $_POST['code_postal_ste'], $_POST['ville_ste'],
+            $_POST['telephone_ste'], $_POST['tiny_house_ste']);
 
         $societe->updateFieldSociete($values);
         $this->executer('index');
+    }
 
+    public function updateSocieteAdmin()
+    {
+        $societe = new Societe();
+
+        $values = array($_POST['numero_ste'], $_POST['adresse_ste'], $_POST['code_postal_ste'], $_POST['ville_ste'],
+            $_POST['telephone_ste'], $_POST['tiny_house_ste'], $_POST['nom_ste']);
+
+        $societe->updateFieldSocieteAdmin($values);
+        $this->executer('listeSociete');
     }
 
     public function insertSociete()

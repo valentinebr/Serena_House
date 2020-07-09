@@ -4,14 +4,13 @@ require_once __ROOT__.'/facturation-initia/Controller/CtrlSociete.php';
 $titre = 'Liste des sociétés';
 
 ob_start();
-
-print_r($allSociete[0]);
 ?>
 
 <h2>Choisissez la société</h2>
 
 <div class="container">
-    <form action="?ctrl=Societe&amp;action=societeById" method="get">
+    <form action="?ctrl=Societe&amp;action=updateSocieteAdmin" method="post">
+        <table>
             <tr>
                 <th><label for="nom_ste">Société</label></th>
                 <td>
@@ -24,8 +23,7 @@ print_r($allSociete[0]);
                 </td>
             </tr>
 
-        <div id="infos-societe" style="display: none">
-            <table>
+            <tbody id="infos-societe" style="visibility: hidden">
                 <tr>
                     <th><label for="numero_ste">Numéro Société</label></th>
                     <td><input type="text" name="numero_ste" id="numero_ste"></td>
@@ -56,13 +54,15 @@ print_r($allSociete[0]);
                     <td>
                         <select name="tiny_house_ste" id="tiny_house_ste">
                             <?php foreach ($tinyHouse as $th){ ?>
-                                <option id="<?php $th->id_tiny ?>" value="<?php $th->id_tiny ?>"><?php echo $th->nom_tiny ?></option>
+                                <option id="<?php echo $th->id_tiny ?>" value="<?php echo $th->id_tiny ?>"><?php echo $th->nom_tiny ?></option>
                             <?php } ?>
                         </select>
                     </td>
                 </tr>
-            </table>
-        </div>
+            </tbody>
+        </table>
+
+        <input type="submit" id="modifier" name="modifier" value="Enregistrer les modifications" style="visibility: hidden">
     </form>
 </div>
 
@@ -79,13 +79,14 @@ print_r($allSociete[0]);
                 data: {id: select.value}
             })
                 .done(function (data){
-                    document.getElementById('infos-societe').style.display = "block";
+                    document.getElementById('infos-societe').style.visibility = "visible";
+                    document.getElementById('modifier').style.visibility = "visible";
                     document.getElementById('numero_ste').value = data.numero_ste;
                     document.getElementById('adresse_ste').value = data.adresse_ste;
                     document.getElementById('code_postal_ste').value = data.code_postal_ste;
                     document.getElementById('ville_ste').value = data.ville_ste;
                     document.getElementById('telephone_ste').value = data.telephone_ste;
-                    document.getElementById(data.tiny_house_ste).prop('selected', true);
+                    document.getElementById(data.tiny_house_ste).selected = true;
                 })
                 .fail(function(){
                     alert("Not working...");
