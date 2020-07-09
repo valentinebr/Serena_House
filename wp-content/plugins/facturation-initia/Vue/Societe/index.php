@@ -13,25 +13,7 @@ if (is_user_logged_in()){
 }
 
 ob_start();
-?>
-<form action="">
 
-    <h2>Choisissez la société</h2>
-
-    <table>
-        <tr>
-            <th><label for="nom_ste">Société</label></th>
-            <td>
-                <select name="nom_ste" id="nom_ste">
-                    <?php foreach ($allSociete as $as) { ?>
-                        <option value="<?php echo $as->nom_ste ?>"><?php echo $as->nom_ste ?></option>
-                    <?php } ?>
-                </select>
-            </td>
-        </tr>
-    </table>
-</form>
-<?php
 if ($societe[0] != 0){
 ?>
 
@@ -52,8 +34,8 @@ if ($societe[0] != 0){
             </tr>
 
             <tr>
-                <th><label for="adresse_societe">Adresse société</label></th>
-                <td><input type="text" name="adresse_societe" id="adresse_societe" value="<?php echo $societe[0]->adresse_ste; ?>"></td>
+                <th><label for="adresse_ste">Adresse société</label></th>
+                <td><input type="text" name="adresse_ste" id="adresse_ste" value="<?php echo $societe[0]->adresse_ste; ?>"></td>
             </tr>
 
             <tr>
@@ -75,13 +57,13 @@ if ($societe[0] != 0){
                 <th><label for="tiny_house_ste">Tiny House</label></th>
                 <td>
                     <select name="tiny_house_ste">
-                        <?php foreach ($tinyHouse as $t) { ?>
-                            <option value="<?php echo $t->id_tiny ?>"
-                                <?php if ($t->id_tiny == $societe[0]->id_tiny) {
+                        <?php foreach ($societe as $s) { ?>
+                            <option value="<?php echo $s->id_tiny ?>"
+                                <?php if ($s->id_tiny == $societe[0]->id_tiny) {
                                     echo 'selected';
                                 } ?>
                             >
-                                <?php echo $t->nom_tiny ?>
+                                <?php echo $s->nom_tiny ?>
                             </option>
                         <?php }?>
                     </select>
@@ -135,8 +117,8 @@ if ($societe[0] != 0){
                 <th><label for="tiny_house_ste">Tiny House</label></th>
                 <td>
                     <select name="tiny_house_ste">
-                        <?php foreach ($tinyHouse as $t) { ?>
-                            <option value="<?php echo $t->id_tiny ?>"><?php echo $t->nom_tiny ?></option>
+                        <?php foreach ($societe as $s) { ?>
+                            <option value="<?php echo $s->id_tiny ?>"><?php echo $s->nom_tiny ?></option>
                         <?php } ?>
                     </select>
                 </td>

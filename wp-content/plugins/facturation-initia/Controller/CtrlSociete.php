@@ -12,13 +12,35 @@ class CtrlSociete extends Controleur
         $societe = new Societe();
         $societe = $societe->afficherSociete();
 
-        $tinyHouse = new TinyHouse();
-        $tinyHouse = $tinyHouse->afficherAllTinyHouse();
+        return ['societe' => $societe];
 
+    }
+
+    public function listeSociete()
+    {
         $allSociete = new Societe();
         $allSociete = $allSociete->afficherAllSociete();
 
-        return ['societe' => $societe, 'tinyHouse' => $tinyHouse, 'allSociete' => $allSociete];
+        return ['allSociete' => $allSociete];
+    }
+
+    public function societeById()
+    {
+        $societeById = new Societe();
+        $idSociete = $_GET['id'];
+        $societeById = $societeById->afficherSocieteById($idSociete);
+
+        echo json_encode(array(
+            'nom_ste'               =>      $societeById[0]->nom_ste,
+            'numero_ste'            =>      $societeById[0]->numero_ste,
+            'adresse_ste'           =>      $societeById[0]->adresse_ste,
+            'code_postal_ste'       =>      $societeById[0]->code_postal_ste,
+            'ville_ste'             =>      $societeById[0]->ville_ste,
+            'telephone_ste'         =>      $societeById[0]->telephone_ste,
+            'tiny_house_ste'        =>      $societeById[0]->nom_tiny
+//            'societe' => $societeById
+        ));
+
 
     }
 

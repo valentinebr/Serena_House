@@ -1,5 +1,5 @@
 <?php
-require_once __ROOT__ . '/facturation-initia/Vue/CarteVoyage/tarifCarteVoyage.php';
+require_once __ROOT__ . '/facturation-initia/Controller/CtrlCarteVoyage.php';
 
 $titre = 'Tarif Carte Voyage';
 

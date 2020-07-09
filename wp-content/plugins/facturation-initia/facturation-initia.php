@@ -162,6 +162,14 @@ function facturation_initia_menu(){
         );
         add_submenu_page(
             'menu-principal',
+            'Liste des Sociétés',
+            'Admin Sociétés',
+            'administrator',
+            'administration-societe',
+            'indexAdminSociete'
+        );
+        add_submenu_page(
+            'menu-principal',
             'Gestion de la Société',
             'Société',
             'manage_options',
@@ -184,6 +192,11 @@ function facturation_initia_menu(){
             'facture',
             'indexFacture'
         );
+}
+
+function indexAdminSociete()
+{
+    include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe&amp;action=listeSociete';
 }
 
 function indexSociete()

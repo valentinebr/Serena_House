@@ -26,6 +26,17 @@ class Societe extends ModeleDeDonnees
         return $this->executerGetResults($sql, null);
     }
 
+    function afficherSocieteById($id){
+        global $wpdb;
+
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_societe s
+                INNER JOIN {$wpdb->prefix}fact_tiny_house t ON s.id_tiny = t.id_tiny
+                WHERE id_ste = %d";
+        $datas = $id;
+
+        return $this->executerGetResults($sql, $datas);
+    }
+
     function updateFieldSociete($values){
         global $wpdb;
         $current_user = wp_get_current_user();
