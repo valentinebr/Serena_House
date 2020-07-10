@@ -9,11 +9,9 @@ class Nuitee extends ModeleDeDonnees
         global $wpdb;
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_nuitee tn
-                INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe 
-                WHERE archive_nuitee = %d";
-        $datas = 0;
+                INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe ";
 
-        return $this->executerGetResults($sql, $datas);
+        return $this->executerGetResults($sql, null);
     }
 
     function insertNewNuitee($values){
@@ -31,14 +29,28 @@ class Nuitee extends ModeleDeDonnees
         $this->executerInsert($table, $datas);
     }
 
-    function updateFieldNuitee($id){
+    function updateNuitee($id, $values){
         global $wpdb;
 
         $table = $wpdb->prefix.'fact_tarif_nuitee';
-        $datas = array('archive_nuitee' => 1);
+        $datas = array(
+            'nom_nuitee'                =>      $values[0],
+            'reference_nuitee'          =>      $values[1],
+            'nombre_personnes_nuitee'   =>      $values[2],
+            'tarif_nuitee'              =>      $values[3],
+            'id_taxe'                   =>      $values[4]);
         $where = array('id_nuitee' => $id);
 
         $this->executerUpdate($table, $datas, $where);
+    }
+
+    function deleteNuitee($id) {
+        global $wpdb;
+
+        $table = $wpdb->prefix.'fact_tarif_nuitee';
+        $where = array('id_nuitee' => $id);
+
+        $this->executerDelete($table,$where);
     }
 
 }

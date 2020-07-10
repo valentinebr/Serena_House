@@ -27,7 +27,7 @@ ob_start();
     <?php } ?>
     <!-- Fin du foreach -->
 
-    <input type="submit" value="Valider">
+    <input type="submit" formtarget="_blank" value="Valider">
     <input type="button" value="Annuler">
 </form>
 

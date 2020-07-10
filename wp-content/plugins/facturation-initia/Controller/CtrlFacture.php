@@ -15,7 +15,34 @@ class CtrlFacture extends Controleur
     public function index()
     {
 
-        return [];
+        $facture = new Facture();
+        $facture = $facture->selectYearFactures();
+        $annees = array();
+
+        foreach ($facture as $f) {
+            $insert = true;
+            $date = explode('-', $f->date_fact);
+            foreach ($annees as $a) {
+                if($a == $date[0]) {
+                    $insert=false;
+                    break;
+                }
+            }
+            if($insert == true) {
+                array_push($annees, $date[0]);
+            }
+        }
+
+        return ['annees' => $annees];
+    }
+
+    public function historique() {
+        $annee = $_GET['annee'];
+
+        $facture = new Facture();
+        $facture = $facture->afficherFactures($annee);
+
+        return ['factures' => $facture, 'annee' => $annee];
     }
 
     public function ajouterFacture() {
@@ -44,28 +71,28 @@ class CtrlFacture extends Controleur
         $service = new Service();
         $services = $service->afficherServices();
 
+        $pdf = $this->creerPDF($services);
+        $pdf = substr_replace($pdf, '', 0,65 );
+
         $nomFact = $_POST['nom-fact'];
-        $idFact = $facture->insertFacture($nomFact);
+        $idFact = $facture->insertFacture($nomFact, $pdf);
 
         foreach ($services as $s) {
             $values = array($_POST['nb-service-'.$s->id_tsrv], $s->id_tsrv, $idFact);
             $service->insertService($values);
         }
 
-        echo '<script>window.open('.$this->creerPDF().',\'_blank\')</script>';
 
         $this->executer('ajouterFacture');
     }
 
-    function creerPDF() {
+    function creerPDF($services) {
 
         $societe = new Societe();
         $nth = new NuiteeTinyHouse();
-        $services = new Service();
 
         $societe = $societe->afficherSociete();
         $nth= $nth->afficherNuiteeTinyHouse($societe[0]->id_tiny);
-        $services = $services->afficherServices();
 
         if(date("d")>=1 AND date("d")<=15) {
             $mois = date("m", strtotime('-1month'));
@@ -81,7 +108,14 @@ class CtrlFacture extends Controleur
         $pdf->AddPage();
         $pdf->enTete($societe, $_POST['nom-fact']);
         $pdf->tableArticles($_POST, $nth, $services, $cartesVoyage);
-        $pdf->Output();
+
+        $pdf->Output('I', $_POST['nom-fact'].'.pdf');
+        $nomFact = str_replace('/', '_', $_POST['nom-fact']);
+        $nomFact = str_replace('-','_', $nomFact);
+        $path = __ROOT__.'/facturation-initia/FacturesPDF/'.$nomFact.'.pdf';
+        $pdf->Output('F', $path, true);
+
+        return $path;
     }
 
 }

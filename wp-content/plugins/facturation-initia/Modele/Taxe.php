@@ -9,10 +9,9 @@ class Taxe extends ModeleDeDonnees
     function afficherTaxes () {
         global $wpdb;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_taxe WHERE archive_taxe = %d";
-        $datas = 0;
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_taxe";
 
-        return $this->executerGetResults($sql, $datas);
+        return $this->executerGetResults($sql, null);
     }
 
     function insererTaxe($values) {
@@ -22,19 +21,30 @@ class Taxe extends ModeleDeDonnees
         $datas = array(
             'libelle_taxe'      => $values[0],
             'taux_taxe'         =>$values[1],
-            'archive_taxe'      =>0
         );
 
         $this->executerInsert($table, $datas);
     }
 
-    function updateTaxe($id) {
+    function updateTaxe($id, $values) {
         global $wpdb;
 
         $table = $wpdb->prefix.'fact_taxe';
-        $datas = array('archive_taxe' => 1);
+        $datas = array(
+            'libelle_taxe'      =>  $values[0],
+            'taux_taxe'         =>  $values[1],
+        );
         $where = array('id_taxe' => $id);
 
         $this->executerUpdate($table, $datas, $where);
+    }
+
+    function deleteTaxe($id) {
+        global $wpdb;
+
+        $table = $wpdb->prefix.'fact_taxe';
+        $where = array('id_taxe' => $id);
+
+        $this->executerDelete($table, $where);
     }
 }

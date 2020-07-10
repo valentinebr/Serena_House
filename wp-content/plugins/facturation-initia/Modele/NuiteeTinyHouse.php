@@ -23,20 +23,18 @@ class NuiteeTinyHouse extends ModeleDeDonnees
         $sql = "SELECT * FROM {$wpdb->prefix}fact_nuitee_tiny_house nth
                 INNER JOIN {$wpdb->prefix}fact_tarif_nuitee tn ON nth.id_nuitee=tn.id_nuitee
                 INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe
-                WHERE (id_tiny=%d AND archive_nth=%d)";
-        $datas = array($id, 0);
+                WHERE id_tiny=%d";
 
-        return $this->executerGetResults($sql, $datas);
+        return $this->executerGetResults($sql, $id);
     }
 
-    function updateNuiteeTinyHouse ($id) {
+    function deleteNuiteeTinyHouse ($id) {
         global $wpdb;
 
         $table = $wpdb->prefix.'fact_nuitee_tiny_house';
-        $datas = array('archive_nth' => 1);
         $where = array('id_nth' => $id);
 
-        $this->executerUpdate($table,$datas,$where);
+        $this->executerDelete($table,$where);
     }
 
 }

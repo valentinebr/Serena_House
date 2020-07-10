@@ -27,14 +27,13 @@ class CtrlTaxe extends Controleur
         $values = array($_POST['nom-taxe'], $_POST['taux-taxe']);
 
         $taxe = new Taxe();
-        $taxe->updateTaxe($_POST['id-taxe']);
-        $taxe->insererTaxe($values);
+        $taxe->updateTaxe($_POST['id-taxe'], $values);
         $this->executer('index');
     }
 
     function deleteTaxe() {
         $taxe = new Taxe();
-        $taxe->updateTaxe($_GET['id']);
+        $taxe->deleteTaxe($_GET['id']);
 
         $this->executer('index');
     }

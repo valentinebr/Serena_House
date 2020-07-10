@@ -8,13 +8,12 @@ ob_start();
 
 <h1>Mes services</h1>
 
-<form action="?ctrl=Service&amp;action=updateTService" method="post" class="lignes">
 <table>
 <tr>
-    <th class="column-1">Service</th>
-    <th class="column-2">Référence</th>
-    <th class="column-3">Prix HT</th>
-    <th class="column-4">Taxe</th>
+    <th>Service</th>
+    <th>Référence</th>
+    <th>Prix HT</th>
+    <th>Taxe</th>
 </tr>
 
 <!-- Foreach pour afficher tous les services liés à un utilisateur -->
@@ -28,13 +27,14 @@ ob_start();
                 <td><?php echo $s->prix_ht_tsrv . ' €' ?></td>
                 <td><?php echo $s->taux_taxe . '%' ?></td>
                 <td><a href="#" onclick="show('modifier-<?php echo $s->id_tsrv ?>', <?php echo $s->id_tsrv ?>, 'table-row')">Modifier</a></td>
-                <td><a class="column-6" href="?ctrl=Service&amp;action=deleteTService&amp;id=<?php echo $s->id_tsrv ?>">Supprimer</a></td>
+                <td><a href="?ctrl=Service&amp;action=deleteTService&amp;id=<?php echo $s->id_tsrv ?>">Supprimer</a></td>
             </tr>
+            <form action="?ctrl=Service&amp;action=updateTService" method="post" class="lignes">
                 <tr id="modifier-<?php echo $s->id_tsrv ?>" style="display: none">
-                    <td><input class="column-1" type="text" name="service" value="<?php echo $s->nom_tsrv ?>" required></td>
-                    <td><input class="column-2" type="text" name="reference" value="<?php echo $s->reference_tsrv ?>" required></td>
-                    <td><input class="column-3" type="text" name="prix-ht" value="<?php echo $s->prix_ht_tsrv ?>" required></td>
-                    <td><select class=column-4" name="taxe" required>
+                    <td><input type="text" name="service" value="<?php echo $s->nom_tsrv ?>" required></td>
+                    <td><input type="text" name="reference" value="<?php echo $s->reference_tsrv ?>" required></td>
+                    <td><input type="text" name="prix-ht" value="<?php echo $s->prix_ht_tsrv ?>" required></td>
+                    <td><select name="taxe" required>
             <?php foreach ($taxes as $t) { ?>
                 <option value="<?php echo $t->id_taxe ?>"
                     <?php if ($t->id_taxe == $s->id_taxe) {
@@ -46,29 +46,36 @@ ob_start();
             <?php } ?>
                         </select></td>
                     <input type="hidden" name="id" value="<?php echo $s->id_tsrv ?>" required>
-                    <td><input class="column-5" type="submit" value="Valider"></td>
-                <td><a class="column-6" href="#"
+                    <td><input type="submit" value="Valider"></td>
+                <td><a href="#"
                        onclick="show(<?php echo $s->id_tsrv ?>, 'modifier-<?php echo $s->id_tsrv ?>', 'table-row')">Annuler</a></td>
                 </tr>
+            </form>
             <?php
         }
 }
     ?>
 </table>
-</form>
-
-        <form action="?ctrl=Service&amp;action=insertTService" method="post" class="lignes" id="show" style="display:none;">
-            <input class="column-1" type="text" name="service" required>
-            <input class="column-2" type="text" name="reference" required>
-            <input class="column-3" type="number" name="prix-ht" required>
-            <select class="column-4" name="taxe" required>
+<div  id="show" style="display:none;">
+        <form action="?ctrl=Service&amp;action=insertTService" method="post">
+            <h2>Ajouter un service</h2>
+            <label for="nom">Nom :</label>
+            <input id="nom" type="text" name="service" required>
+            <label for="reference">Référence :</label>
+            <input id="reference" type="text" name="reference" required>
+            <label for="prixHT">Prix HT :</label>
+            <input id="prixHT" type="number" name="prix-ht" required>
+            <label for="taxe">Taxe :</label>
+            <select id="taxe" name="taxe" required>
                 <?php foreach ($taxes as $t) { ?>
                     <option value="<?php echo $t->id_taxe ?>"><?php echo $t->taux_taxe?></option>
                 <?php } ?>
             </select>
-            <input class="column-5" type="submit" value="Ajouter" name="ajouter">
-            <button  class="column-6" type="reset" name="annuler" onclick="show('lien', 'show', 'block'); return false;">Annuler</button>
+            <input type="submit" value="Ajouter" name="ajouter">
+            <button type="reset" name="annuler" onclick="show('lien', 'show', 'block'); return false;">Annuler</button>
         </form>
+</div>
+
 
 <!-- fonction JS pour afficher les champs pour ajouter le service -->
 <a href="#" id="lien" onclick="show('show', 'lien', 'flex'); return false;">Ajouter un service</a>

@@ -21,15 +21,6 @@ class ModeleDeDonnees
 
     }
 
-    protected function executerGetRow ($sql) {
-        global $wpdb;
-
-        $req = $wpdb->prepare($sql);
-
-        return $wpdb->get_row($req);
-
-    }
-
     protected function executerUpdate($table, $datas, $where){
         global $wpdb;
 
@@ -37,6 +28,12 @@ class ModeleDeDonnees
 
         return $wpdb->update_id;
 
+    }
+
+    protected function executerDelete($table, $where) {
+        global $wpdb;
+
+        $wpdb->delete($table, $where);
     }
 
 

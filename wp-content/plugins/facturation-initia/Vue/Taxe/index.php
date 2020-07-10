@@ -8,7 +8,7 @@ ob_start();
 
 <h1>Gestion des taxes</h1>
 
-<form method="post" action="?ctrl=Taxe&amp;action=updateTaxe">
+
 <table>
     <tr>
         <th>Nom</th>
@@ -23,6 +23,7 @@ ob_start();
             <td><a href="#" onclick="show('modifier-<?php echo $t->id_taxe ?>', <?php echo $t->id_taxe ?>, 'table-row')">Modifier</a></td>
             <td><a href="?ctrl=Taxe&amp;action=deleteTaxe&amp;id=<?php echo $t->id_taxe?>">Supprimer</a></td>
         </tr>
+    <form method="post" action="?ctrl=Taxe&amp;action=updateTaxe">
         <tr id="modifier-<?php echo $t->id_taxe ?>" style="display: none">
             <input type="hidden" value="<?php echo $t->id_taxe?>" name="id-taxe">
             <td><input type="text" value="<?php echo $t->libelle_taxe ?>" name="nom-taxe"></td>
@@ -30,9 +31,9 @@ ob_start();
             <td><input type="submit" value="Valider"></td>
             <td><a href="#" onclick="show(<?php echo $t->id_taxe ?>, 'modifier-<?php echo $t->id_taxe ?>', 'table-row')">Annuler</a></td>
         </tr>
+    </form>
     <?php } ?>
 </table>
-</form>
 
 <a href="#" id="lien" onclick="show('show', 'lien', 'inline-block');return false;">Ajouter une taxe</a>
 

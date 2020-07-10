@@ -28,7 +28,7 @@ class PDF extends tFPDF
         $this->SetFont('DejaVu','', 12);
         $this->SetXY(10,75);
         $this->MultiCell(130,5,"Facture : ". $nomFact);
-        $this->SetTitle("Facture n° 54");
+        $this->SetTitle($nomFact);
 
         $position= $this->getY();
 

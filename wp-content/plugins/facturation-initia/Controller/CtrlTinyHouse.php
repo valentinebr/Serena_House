@@ -54,38 +54,46 @@ class CtrlTinyHouse extends Controleur
         $tiny = $tinyHouse->selectByIdTinyHouse($idTiny);
         $nuitee = $nuitee->afficherNuitees();
 
+        //On vérifie que le nom et le nombre de place de la tiny house à été modifié
         if ($tiny[0]->nom_tiny !== $_POST['nom-modif'] || $tiny[0]->nombre_places_tiny !== $_POST['nb-places-modif']) {
+            //Si c'est le cas on update les infos dans la table tiny house
             $values = array($_POST['nom-modif'], $_POST['nb-places-modif']);
-            $idTiny = $tinyHouse->insertTinyHouse($values);
-            $tinyHouse->updateTinyHouse($_POST['id-modif']);
+            $tinyHouse->updateTinyHouse($_POST['id-modif'], $values);
         }
 
+        //On passe en revue toutes les checkboxs du formulaire
         foreach ($nuitee as $n) {
+            //Si la checkbox est cochée
             if ($_POST['nuitee-'.$n->id_nuitee]) {
                 $insert = true;
                 $nth = new NuiteeTinyHouse();
                 $nth = $nth->afficherNuiteeTinyHouse($idTiny);
 
+                //On vérifie si elle était déjà cochée avant
                 foreach ($nth as $x) {
+                    //Si elle était déjà cochée on ne fait rien
                     if ($x->id_nuitee == $_POST['nuitee-'.$n->id_nuitee]) {
                         $insert = false;
                         break;
                     }
                 }
+                //Si elle n'était pas déjà cochée on insère la ligne dans nuitée tiny house
                 if ($insert == true ) {
                     $values2 = array ($_POST['nuitee-'.$n->id_nuitee], $idTiny);
                     $nth = new NuiteeTinyHouse();
                     $nth->insertNuiteeTinyHouse($values2);
                 }
 
+                //Si la checkbox n'est pas cochée
             } else {
                 $nth = new NuiteeTinyHouse();
                 $nth = $nth->afficherNuiteeTinyHouse($idTiny);
 
                 foreach ($nth as $x) {
+                    //On vérifie si elle était cochée avant la modification, si c'est le cas on supprime la ligne
                     if ($x->id_nuitee == $n->id_nuitee) {
                         $nth = new NuiteeTinyHouse();
-                        $nth->updateNuiteeTinyHouse($x->id_nth);
+                        $nth->deleteNuiteeTinyHouse($x->id_nth);
                     }
                     }
 
@@ -96,6 +104,15 @@ class CtrlTinyHouse extends Controleur
 
         $this->executer('index');
 
+    }
+
+    function deleteTinyHouse() {
+        $id = $_GET['id'];
+
+        $tinyHouse = new TinyHouse();
+        $tinyHouse->deleteTinyHouse($id);
+
+        $this->executer('index');
     }
 
     private function countNomsTiny ($tinyHouse) {
