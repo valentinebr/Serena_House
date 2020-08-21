@@ -8,27 +8,17 @@ Author: Valentine Brunet & Fabien Monnet
 
 define('__ROOT__', dirname(dirname(__FILE__)));
 
-class Facturation
-{
-    /**
-     * Facturation constructor.
-     */
-    public function __construct()
-    {
-        register_activation_hook(__FILE__, array('Facturation', 'install'));
-        register_uninstall_hook(__FILE__, array('Facturation', 'uninstall'));
-        add_action('admin_menu', array($this, 'facturation_initia_menu'));
-        add_action('admin_menu', array($this, 'facturation_initia_submenu'));
-    }
+        register_activation_hook(__FILE__,'install');
+        register_uninstall_hook(__FILE__, 'uninstall');
 
     //////////CREATION DES TABLES A L'ACTIVATION DU PLUGIN//////////
 
-    public static function install()
+    function install()
     {
         global $wpdb;
 
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_taxe (id_taxe INT AUTO_INCREMENT PRIMARY KEY, 
-                                                                                libelle_taxe VARCHAR(50) NOT NULL,
+                                                                                libelle_taxe VARCHAR(50) NOT NULL UNIQUE,
                                                                                 taux_taxe FLOAT NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_societe (id_ste INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_ste VARCHAR(50) NOT NULL,
@@ -36,27 +26,27 @@ class Facturation
                                                                                 code_postal_ste CHAR(5) NOT NULL,
                                                                                 ville_ste VARCHAR(20) NOT NULL,
                                                                                 telephone_ste CHAR(10) NOT NULL,
-                                                                                numero_ste CHAR(14) NOT NULL);");
+                                                                                numero_ste CHAR(14) NOT NULL UNIQUE);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tiny_house (id_tiny INT AUTO_INCREMENT PRIMARY KEY,
-                                                                                nom_tiny VARCHAR(50) NOT NULL,
+                                                                                nom_tiny VARCHAR(50) NOT NULL UNIQUE,
                                                                                 nombre_places_tiny INT NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_facture (id_fact INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_fact VARCHAR(100) NOT NULL,
-                                                                                 date_fact DATETIME NOT NULL,   
-                                                                                 pdf_fact BLOB NOT NULL,
-                                                                                 statut_fact VARCHAR(30));");
+                                                                                 date_fact DATETIME NOT NULL,
+                                                                                 statut_fact VARCHAR(30) NOT NULL,
+                                                                                 pdf_fact VARCHAR(50) NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_service (id_srv INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nombre_srv INT NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_service (id_tsrv INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_tsrv VARCHAR(100) NOT NULL,
-                                                                                reference_tsrv VARCHAR(10) NOT NULL,
+                                                                                reference_tsrv VARCHAR(10) NOT NULL UNIQUE,
                                                                                 prix_ht_tsrv FLOAT NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_carte_voyage (id_tcv INT AUTO_INCREMENT PRIMARY KEY,
-                                                                                nom_tcv VARCHAR(100) NOT NULL, 
+                                                                                nom_tcv VARCHAR(100) NOT NULL UNIQUE, 
                                                                                 tarif_tcv FLOAT NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_tarif_nuitee (id_nuitee INT AUTO_INCREMENT PRIMARY KEY, 
                                                                                 nom_nuitee VARCHAR(100) NOT NULL,
-                                                                                reference_nuitee VARCHAR(10) NOT NULL,
+                                                                                reference_nuitee VARCHAR(10) NOT NULL UNIQUE,
                                                                                 nombre_personnes_nuitee INT NOT NULL,
                                                                                 tarif_nuitee FLOAT NOT NULL);");
         $wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fact_nuitee_tiny_house (id_nth INT AUTO_INCREMENT PRIMARY KEY);");
@@ -118,114 +108,98 @@ class Facturation
 
     //////////SUPPRESSION DES TABLES A LA SUPPRESSION DU PLUGIN//////////
 
-    public static function uninstall() {
+    function uninstall() {
         global $wpdb;
 
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_facture;");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_service;");
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_service;");
-        $wpdb->query("ALTER TABLE {$wpdb->prefix}dopbsp_coupons DROP COLUMN id_user");
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_taxe;");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_facture;");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_nuitee_tiny_house;");
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tiny_house;");
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_societe");
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_carte_voyage");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_service;");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_nuitee;");
+        $wpdb->query("ALTER TABLE {$wpdb->prefix}dopbsp_coupons DROP COLUMN id_user");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tarif_carte_voyage");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_societe");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_tiny_house;");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}fact_taxe;");
+
+
     }
 
-
-    //MENU PLUGIN
-    public function facturation_initia_menu(){
-        array(
-            $page_title = 'Facturation Initia',
-            $menu_title = 'Facturation Initia',
-            $capability = 'manage_options',
-            $menu_slug = 'menu-principal',
-            $function = 'facturation_initia_page',
-            $icon = 'dashicons-building',
-            $position = '3',
-            $hookname = add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon, $position)
+//MENU PLUGIN
+function facturation_initia_menu(){
+        add_menu_page(
+            'Facturation Initia',
+            'Facturation Initia',
+            'manage_options',
+            'menu-principal',
+            'facturation_initia_page',
+            'dashicons-building',
+            '3'
         );
-
-        $sub_menu_items = $this->facturation_initia_submenu();
-
-        foreach ($sub_menu_items as $menu_item) {
-            if ($menu_item['create_submenu']) add_submenu_page('menu-principal', $menu_item['page_title'],
-                $menu_item['menu_title'], $menu_item['capability'], $menu_item['menu_slug'], $menu_item['function']);
-        }
-    }
-
-    public function facturation_initia_submenu(){
-        $sub_menu_items = array(
-            array(
-                'parent_slug'    => 'menu-principal',
-                'page_title'     => 'Liste des Sociétés',
-                'menu_title'     => 'Admin Sociétés',
-                'capability'     => 'administrator',
-                'menu_slug'      => 'administration-societe',
-                'function'       => array($this, 'indexAdminSociete'),
-                'create_submenu' => true,
-            ),
-            array(
-                'parent_slug'    => 'menu-principal',
-                'page_title'     => 'Gestion de la Société',
-                'menu_title'     => 'Société',
-                'capability'     => 'manage_options',
-                'menu_slug'      => 'societe',
-                'function'       => array($this, 'indexSociete'),
-                'create_submenu' => true,
-            ),
-            array(
-                'parent_slug'    => 'menu-principal',
-                'page_title'     => 'Carte Voyage',
-                'menu_title'     => 'Carte Voyage',
-                'capability'     => 'manage_options',
-                'menu_slug'      => 'carte-voyage',
-                'function'       => array($this, 'indexCarteVoyage'),
-                'create_submenu' => true,
-            ),
-            array(
-                'parent_slug'    => 'menu-principal',
-                'page_title'     => 'Facture',
-                'menu_title'     => 'Facture',
-                'capability'     => 'manage_options',
-                'menu_slug'      => 'facture',
-                'function'       => array($this, 'indexFacture'),
-                'create_submenu' => true,
-            ),
+        add_submenu_page(
+            'menu-principal',
+            'Accueil',
+            'Accueil',
+            'manage_options',
+            'menu-principal'
         );
-
-        return $sub_menu_items;
-    }
-
-    function indexAdminSociete(){
-        echo '<h1>'.get_admin_page_title().'</h1>';
-        echo 'Username : '.wp_get_current_user()->display_name.' | User ID : '.get_current_user_id();
-
-        include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe&amp;action=listeSociete';
-    }
-
-    function indexSociete(){
-        //    $fichier = file_get_contents('http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe');
-        include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe';
-    }
-
-    function indexCarteVoyage(){
-        include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=CarteVoyage';
-    }
-
-    function indexFacture(){
-        include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Facture';
-    }
-
-
-    //require_once (__ROOT__.'/facturation-initia/Modele/Societe.php');
-
-    function facturation_initia_page(){
-        echo '<h1>'.get_admin_page_title().'</h1>';
-    }
-
+        add_submenu_page(
+            'menu-principal',
+            'Liste des Sociétés',
+            'Admin Sociétés',
+            'administrator',
+            'administration-societe',
+            'indexAdminSociete'
+        );
+        add_submenu_page(
+            'menu-principal',
+            'Gestion de la Société',
+            'Société',
+            'manage_options',
+            'societe',
+            'indexSociete'
+        );
+        add_submenu_page(
+            'menu-principal',
+            'Carte Voyage',
+            'Carte Voyage',
+            'manage_options',
+            'carte-voyage',
+            'indexCarteVoyage'
+        );
+        add_submenu_page(
+            'menu-principal',
+            'Facture',
+            'Facture',
+            'manage_options',
+            'facture',
+            'indexFacture'
+        );
 }
 
-new Facturation();
+function indexAdminSociete()
+{
+    include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe&amp;action=listeSociete';
+}
 
+function indexSociete()
+{
+//    $fichier = file_get_contents('http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe');
+    include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Societe';
+}
+
+function indexCarteVoyage(){
+    include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=CarteVoyage';
+}
+
+function indexFacture(){
+    include 'http://localhost/Serena_House/wp-content/plugins/facturation-initia/index.php?ctrl=Facture';
+}
+
+add_action('admin_menu', 'facturation_initia_menu');
+//require_once (__ROOT__.'/facturation-initia/Modele/Societe.php');
+
+
+function facturation_initia_page(){
+    echo '<h1>'.get_admin_page_title().'</h1>';
+}

@@ -9,7 +9,8 @@ class Nuitee extends ModeleDeDonnees
         global $wpdb;
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_tarif_nuitee tn
-                INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe ";
+                INNER JOIN {$wpdb->prefix}fact_taxe t ON tn.id_taxe = t.id_taxe
+                ORDER BY nombre_personnes_nuitee ASC ";
 
         return $this->executerGetResults($sql, null);
     }
