@@ -4,20 +4,22 @@ require_once (__ROOT__.'/facturation-initia/Modele/ModeleDeDonnees.php');
 
 class NuiteeTinyHouse extends ModeleDeDonnees
 {
-    function insertNuiteeTinyHouse ($values) {
+    function insertNuiteeTinyHouse($values)
+    {
         global $wpdb;
 
-        $table = $wpdb->prefix.'fact_nuitee_tiny_house';
+        $table = $wpdb->prefix . 'fact_nuitee_tiny_house';
 
         $datas = array(
-            'id_nuitee'     =>      $values[0],
-            'id_tiny'       =>      $values[1]
+            'id_nuitee' => $values[0],
+            'id_tiny' => $values[1]
         );
 
         $this->executerInsert($table, $datas);
     }
 
-    function afficherNuiteeTinyHouse ($id) {
+    function afficherNuiteeTinyHouse($id)
+    {
         global $wpdb;
 
         $sql = "SELECT * FROM {$wpdb->prefix}fact_nuitee_tiny_house nth
@@ -28,13 +30,14 @@ class NuiteeTinyHouse extends ModeleDeDonnees
         return $this->executerGetResults($sql, $id);
     }
 
-    function deleteNuiteeTinyHouse ($id) {
+    function deleteNuiteeTinyHouse($id)
+    {
         global $wpdb;
 
-        $table = $wpdb->prefix.'fact_nuitee_tiny_house';
+        $table = $wpdb->prefix . 'fact_nuitee_tiny_house';
         $where = array('id_nth' => $id);
 
-        $this->executerDelete($table,$where);
+        $this->executerDelete($table, $where);
     }
 
 }
