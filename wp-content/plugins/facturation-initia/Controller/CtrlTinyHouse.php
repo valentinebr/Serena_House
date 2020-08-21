@@ -25,6 +25,7 @@ class CtrlTinyHouse extends Controleur
         return ['tinyHouse' => $tinyHouse, 'taxe' => $taxe, 'nuitee' => $nuitee, 'recurrence' => $recurrence];
     }
 
+
     function insertTinyHouse() {
         $tinyHouse = new TinyHouse();
         $nuitee = new Nuitee();

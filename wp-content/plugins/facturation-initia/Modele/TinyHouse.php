@@ -11,7 +11,8 @@ class TinyHouse extends ModeleDeDonnees
         $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house t
                 INNER JOIN {$wpdb->prefix}fact_nuitee_tiny_house n ON t.id_tiny=n.id_tiny
                 INNER JOIN {$wpdb->prefix}fact_tarif_nuitee tn ON n.id_nuitee=tn.id_nuitee
-                INNER JOIN {$wpdb->prefix}fact_taxe ta ON tn.id_taxe=ta.id_taxe";
+                INNER JOIN {$wpdb->prefix}fact_taxe ta ON tn.id_taxe=ta.id_taxe
+                ORDER BY nom_tiny ASC, nombre_personnes_nuitee ASC";
 
         return $this->executerGetResults($sql, null);
     }
@@ -21,7 +22,7 @@ class TinyHouse extends ModeleDeDonnees
 
         $archive_tiny_house = 0;
 
-        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house";
+        $sql = "SELECT * FROM {$wpdb->prefix}fact_tiny_house ORDER BY nom_tiny ASC";
 
         return $this->executerGetResults($sql, null);
     }
